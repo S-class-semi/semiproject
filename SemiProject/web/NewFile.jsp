@@ -7,6 +7,6 @@
 <title>Index page</title>
 </head>
 <body>
-<h1>잘나오니?</h1>
+<h1>나는마왕이다</h1>
 </body>
 </html>
