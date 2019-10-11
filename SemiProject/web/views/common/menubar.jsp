@@ -36,6 +36,8 @@
 			<div class = "menu" onclick ="goNotich()">공지사항</div>
 			<div class = "menu" onclick ="goProduct()">상품카테고리</div>
 			<div class = "menu" onclick ="goBoard();">자유게시판</div>
+			
+			
 		</div>
 	</div>
 	
