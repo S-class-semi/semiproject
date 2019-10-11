@@ -12,7 +12,7 @@
 	<script>
 		location.href = "<%=request.getContextPath() %>/views/common/menubar.jsp";
 	</script>
-
+ 
 
 	<%--
 	 
