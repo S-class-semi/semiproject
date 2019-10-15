@@ -27,10 +27,52 @@
 		font-wight: bold;
 		cursor:pointer;
 	}
+	#loginBtn input, #memberJoinBtn, #logoutBtn, #myPage{
+		display: inline-block;
+		vertical-align: middle;
+		text-align: center;
+		background: hotpink;
+		color: white;
+		height: 25px;
+		width: 100px;
+		border-radius: 5px;
+	}
+	#memberJoinBtn{
+		background: rgb(160, 200, 220);
+	}
+	#loginBtn input:hover, #changeInfo:hover, #logoutBtn:hover, #memberJoinBtn:hover, #myPage:hover{
+		cursor: pointer;
+	}
+	.loginArea > form, #userInfo{
+		float: right;
+	}
 </style>
 </head>
 <body>
-	<a href = "<%=request.getContextPath() %>/NewFile.jsp"><h1">난 혼자 산다</h1></a><br>
+	<a href = "<%=request.getContextPath() %>/index.jsp"><h1">난 혼자 산다</h1></a><br>
+
+	<div class="loginArea">
+		<form id=loginForm " action="<%=request.getContextPath()%>/login.me"
+			onsubmit="return validate();" method="post">
+			<table>
+				<tr>
+					<td><label>ID : </label></td>
+					<td><input type="text" name="userId" id="userId"></td>
+				</tr>
+				<tr>
+					<td><label>PWD : </label></td>
+					<td><input type="password" name="userPwd" id="userPwd"></td>
+				</tr>
+			</table>
+
+			<div class="btns" align="center">
+				<button type = "button" id="memberJoinBtn" onclick="memberJoin();">회원가입</button>
+				<div id="loginBtn"><input type="submit" value="로그인"></div>
+			</div>
+
+		</form>
+	</div>
+
 	<div class = "mainmenu">
 		<div class = "bar">
 			<div class = "menu" onclick ="goNotich()">공지사항</div>
@@ -40,6 +82,36 @@
 			
 		</div>
 	</div>
+	
+	<script>
+		function validate(){
+			if($("#userId").val().trim().length == 0){
+				alert("아이디를 입력하세요");
+				$("#userId").focus();
+				
+				return false;	// return값이 false면 submit이 되지 않는다
+			}
+			if($("#userPwd").val().trim().length == 0){
+				alert("비밀번호를 입력하세요");
+				$("#userPwd").focus();
+				
+				return false;
+			}
+			
+			return true;
+		}
+		
+		// logout() 함수 작성하기
+		function logout(){
+			location.href = '<%= request.getContextPath() %>/logout.me';
+			
+			// LogoutServlet 만들러 ㄱㄱ
+		}
+		
+		function memberJoin(){
+			location.href = '<%= request.getContextPath() %>/views/member/memberJoinForm.jsp';
+		}
+	</script>
 	
 	<Script>
 		function goNotich(){
