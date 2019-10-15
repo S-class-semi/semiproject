@@ -10,8 +10,13 @@
 	body{
 		background-color: white;
 	}
-	.mainmenu{
-		align-content: center;
+	.maingoing{
+		font-size : 15px;
+		font-color : balck;
+		font-family: 굴림;
+	}
+	.bar > div{
+		display: table-cell;
 	}
 	.menu{
 		background: rgb(160, 200, 220);
@@ -27,20 +32,37 @@
 		font-wight: bold;
 		cursor:pointer;
 	}
+	
+	.hometrans{
+		margin-left: 100px;
+	}
+	
+	#homeicon:hover{
+		-webkit-transform:scale(2,2);
+	}
 </style>
 </head>
 <body>
-	<a href = "<%=request.getContextPath() %>/NewFile.jsp"><h1">난 혼자 산다</h1></a><br>
-	<div class = "mainmenu">
-		<div class = "bar">
-			<div class = "menu" onclick ="goNotich()">공지사항</div>
-			<div class = "menu" onclick ="goProduct()">상품카테고리</div>
-			<div class = "menu" onclick ="goBoard();">자유게시판</div>
-			
-			
+
+		<div class="bar" align="left">
+			<div></div>
+			<div id= "hometrans">
+				<a href ="<%=request.getContextPath() %>/NewFile.jsp"> <img id="homeicon"
+					src="<%=request.getContextPath()%>/images/home.png" width="50px"
+					height="50px"></a>
+			</div>
+			<div id="maingoing">난 혼자 산다</div>
+			<div class="menu" onclick="goNotich()">공지사항</div>
+			<div class="menu" onclick="goProduct()">상품카테고리</div>
+			<div class="menu" onclick="goBoard();">자유게시판</div>
 		</div>
-	</div>
-	
+		<hr>
+		<%-- <a href = "<%=request.getContextPath() %>/NewFile.jsp"><h1">난 혼자 산다</h1></a><br>
+	 --%>
+
+
+
+
 	<Script>
 		function goNotich(){
 			location.href = "<%=request.getContextPath()%>/list.no";
