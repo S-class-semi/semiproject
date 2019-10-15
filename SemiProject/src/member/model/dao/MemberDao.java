@@ -1,11 +1,13 @@
 package member.model.dao;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -17,7 +19,7 @@ public class MemberDao {
 	private Properties prop = new Properties();
 
 	public MemberDao() {
-		String fileName = MemberDao.class.getResource("/sql/user/user-query.properties").getPath();
+		String fileName = MemberDao.class.getResource("/sql/member/member-query.properties").getPath();
 		
 		try {
 			prop.load(new FileReader(fileName));
@@ -34,13 +36,16 @@ public class MemberDao {
 		int result = 0;
 		
 		String query = prop.getProperty("insertMember");
-		
 		try {
+			
 			pstmt = conn.prepareStatement(query);
+			
 			pstmt.setString(1, m.getUserId());
 			pstmt.setString(2, m.getUserPwd());
 			pstmt.setString(3, m.getNickname());
 			pstmt.setInt(4, m.getSpace());
+			
+			
 			
 			result = pstmt.executeUpdate();
 			
@@ -51,6 +56,43 @@ public class MemberDao {
 		}
 		
 		return result;
+	}
+
+	public Member loginMember(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		Member loginUser = null;
+		
+		String query = prop.getProperty("loginMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getUserPwd());
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				loginUser = new Member(rs.getString("USER_ID"),
+										rs.getInt("USER_G"),
+										rs.getInt("USER_T"),
+										rs.getString("USER_PWD"),
+										rs.getString("NICKNAME"),
+										rs.getInt("SPACE"),
+										rs.getInt("POINT"),
+										rs.getString("CONTEXT"),
+										rs.getDate("BIRTH"),
+										rs.getString("GENDER"),
+										rs.getString("STATUS"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return loginUser;
 	}
 
 }

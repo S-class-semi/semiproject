@@ -46,6 +46,12 @@
 	.loginArea > form, #userInfo{
 		float: right;
 	}
+	#userId, #userPwd{
+		width: 200px;
+	}
+	.btns, #loginBtn{
+		display:inline-block
+	}
 </style>
 </head>
 <body>
@@ -57,7 +63,7 @@
 			<table>
 				<tr>
 					<td><label>ID : </label></td>
-					<td><input type="text" name="userId" id="userId"></td>
+					<td><input type="email" name="userId" id="userId"></td>
 				</tr>
 				<tr>
 					<td><label>PWD : </label></td>

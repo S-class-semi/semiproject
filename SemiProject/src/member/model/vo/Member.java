@@ -1,4 +1,6 @@
-package user.model.vo;
+package member.model.vo;
+
+import java.sql.Date;
 
 public class Member {
 	private String userId;
@@ -9,12 +11,22 @@ public class Member {
 	private int space;
 	private int point;
 	private String context;
-	private String birth;
+	private Date birth;
 	private String gender;
 	private String status;
 	
 	public Member() {}
 	
+	
+	
+	public Member(String userId, String userPwd) {
+		super();
+		this.userId = userId;
+		this.userPwd = userPwd;
+	}
+
+
+
 	public Member(String userId, String userPwd, String nickname, int space) {
 		super();
 		this.userId = userId;
@@ -24,7 +36,7 @@ public class Member {
 	}
 
 	public Member(String userId, int userG, int userT, String userPwd, String nickname, int space, int point,
-			String context, String birth, String gender, String status) {
+			String context, Date birth, String gender, String status) {
 
 		this.userId = userId;
 		this.userG = userG;
@@ -103,11 +115,11 @@ public class Member {
 		this.context = context;
 	}
 
-	public String getBirth() {
+	public Date getBirth() {
 		return birth;
 	}
 
-	public void setBirth(String birth) {
+	public void setBirth(Date birth) {
 		this.birth = birth;
 	}
 
