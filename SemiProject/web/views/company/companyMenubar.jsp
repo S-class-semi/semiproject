@@ -24,12 +24,12 @@ body {
 }
 
 /* 작성할 구간*/
-#centerbody {
+/* #centerbody {
 	display: inline-block;
 	position: relative;
 	width: 85%;
 	height: 100%;
-}
+} */
 /* 메뉴바 첫 div */
 #accordian {
 	display: inline-block;
@@ -68,7 +68,7 @@ body {
 	list-style-type: none;
 }
 /* 서브메뉴 스타일 */
-#accordian ul ul li a {
+#accordian ul ul li {
 	color: white;
 	text-decoration: none;
 	font-size: 11px;
@@ -80,11 +80,14 @@ body {
 	-o-transition: all 0.15s;
 	-ms-transition: all 0.15s;
 	transition: all 0.15s;
+	text-decoration: none;
+	cursor: pointer;
 }
 
-#accordian ul ul li a:hover {
+#accordian ul ul li:hover {
 	background: #003545;
 	border-left: 5px solid #09c;
+	
 }
 
 /* active 클래스 외에 것은 보이지 않게 하기 */
@@ -144,7 +147,7 @@ body {
 	margin-top: 50px;
 	text-decoration: none;
 	color: black;
-		cursor: pointer;
+	cursor: pointer;
 }
 
 #hometext h4 {
@@ -206,10 +209,10 @@ body {
 						<span class="icon-category"></span>상품카테고리
 					</h3>
 					<ul>
-						<li><a href="#">상품등록</a></li>
-						<li><a href="#">상품수정</a></li>
-						<li><a href="#">상품삭제</a></li>
-						<li><a href="#">상품재고</a></li>
+						<li onclick = "ProductInsert()">상품등록</li>
+						<li onclick = "ProductChange()">상품수정</li>
+						<li onclick = "ProdcutDelete()">상품삭제</li>
+						<li onclick = "ProdcutCount()">상품재고</li>
 					</ul>
 				</li>
 				<li class="active">
@@ -217,8 +220,8 @@ body {
 						<span class="icon-money"></span>매출확인
 					</h3>
 					<ul>
-						<li><a href="#">매출판매량</a></li>
-						<li><a href="#">기간별 매출량</a></li>
+						<li>매출판매량</li>
+						<li>기간별 매출량</li>
 					</ul>
 				</li>
 				<li>
@@ -226,9 +229,9 @@ body {
 						<span class="icon-qna"></span>QnA
 					</h3>
 					<ul>
-						<li><a href="#">1:1 QnA 확인</a></li>
-						<li><a href="#">공지사항 등록</a></li>
-						<li><a href="#">블랙컨슈머</a></li>
+						<li>1:1 QnA 확인</li>
+						<li>공지사항 등록</li>
+						<li>블랙컨슈머</li>
 					</ul>
 				</li>
 				<li>
@@ -236,22 +239,37 @@ body {
 						<span class="icon-info"></span>정보수정
 					</h3>
 					<ul>
-						<li><a href="#">정보수정</a></li>
-						<li><a href="#">탈퇴</a></li>
+						<li>정보수정</li>
+						<li>탈퇴</li>
 					</ul>
 				</li>
 			</ul>
 		</div>
 		
-		<div id = "centerbody">
-		</div>
+<!--  		<div id = "centerbody">
+ 		<h1> </h1>
+		</div>  -->
 	</div>
 
 	<script>
 		function C_home(){
-			location.href = "<%=request.getContextPath()%>/views/company/companyView.jsp";
+			location.href = "<%=request.getContextPath()%>/views/company/companyMenubar.jsp";
+		}
+		function ProductInsert(){
+			location.href = "<%=request.getContextPath()%>/views/product/prodcutInsertView.jsp";
+		}
+		function ProductChange(){
+			location.href = "<%=request.getContextPath()%>/views/product/prodcutChangeView.jsp";
+		}
+		function ProdcutDelete(){
+			location.href = "<%=request.getContextPath()%>/views/product/prodcutDeleteView.jsp";
+		}
+		function ProdcutCount(){
+			location.href = "<%=request.getContextPath()%>/views/product/prodcutCountView.jsp";
 		}
 	</script>
+	
+					
 
 
 </body>
