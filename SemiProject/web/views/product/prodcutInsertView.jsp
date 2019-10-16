@@ -59,7 +59,49 @@ text-align: justify;
 		<textarea rows="10" cols="10"></textarea>
 		</div>
 		<div>
-		공시내용 작성 
+		<table>
+			<tr>
+				<td>카테고리 : </td>
+				<td><input type = "text"></td>
+			</tr>
+			<tr>
+				<td>품명 및 모델명 </td>
+				<td><input type= "text"></td>
+			</tr>
+			<tr>
+				<td>크기(형태/용량)</td>
+				<td><input tpye= "text"></td>
+			</tr>
+			<tr>
+				<td>정격전압,소비전력<br>
+				에너지 소비효율 등급</td>
+				<td><input type = "text"></td>
+			</tr>
+			<tr>
+				<td>동일모델의 출시년월</td>
+				<td><input type = "text"></td>
+			</tr>
+			<tr>
+				<td>KC인증 필 유무</td>
+				<td><input type= "text"></td>
+			</tr>
+			<tr>
+				<td>품질보증기준</td>
+				<td><input type = "text"></td>
+			</tr>
+			<tr>
+				<td>제조자</td>
+				<td><input type = "text"></td>
+			</tr>
+			<tr>
+				<td>제조국(수입여부)</td>
+				<td><input type = "text"></td>
+			</tr>
+			<tr>
+				<td>고객센터</td>
+				<td><input type = "text"></td>
+			</tr>
+		</table> 
 		</div>
 	</div>
 		

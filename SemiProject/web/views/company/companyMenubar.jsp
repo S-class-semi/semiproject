@@ -239,7 +239,7 @@ body {
 						<span class="icon-info"></span>정보수정
 					</h3>
 					<ul>
-						<li>정보수정</li>
+						<li onclick = "C_info()">정보수정</li>
 						<li>탈퇴</li>
 					</ul>
 				</li>
@@ -250,7 +250,7 @@ body {
  		<h1> </h1>
 		</div>  -->
 	</div>
-
+	String c_name = "프로젝트";
 	<script>
 		function C_home(){
 			location.href = "<%=request.getContextPath()%>/views/company/companyMenubar.jsp";
@@ -266,6 +266,9 @@ body {
 		}
 		function ProdcutCount(){
 			location.href = "<%=request.getContextPath()%>/views/product/prodcutCountView.jsp";
+		}
+		function C_info(){
+			location.href = "<%=request.getContextPath()%>/info.com";
 		}
 	</script>
 	

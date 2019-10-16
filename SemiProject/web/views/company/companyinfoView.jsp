@@ -19,14 +19,14 @@
 <body>
 <%@ include file = "/views/company/companyMenubar.jsp" %> 
 		<div id="centerbody">
-		<table>
+		<table border="1">
 			<tr>
 			<td><label> 사업증 번호 : </label></td>
-			<td><input type = "text" > </td>
+			<td><input type = "text"  disabled> </td>
 			</tr>
 			<tr>
 			<td><label> 회사명 : </label></td>
-			<td><input type = "text" > </td>
+			<td><input type = "text" disabled> </td>
 			</tr>
 			<tr>
 			<td><label> 회사주소 : </label></td>
