@@ -39,6 +39,7 @@
 </style>
 </head>
 <body>
+
 	<%@ include file = "../common/menubar.jsp" %>
 	
 	<div class = "outer">
@@ -50,9 +51,10 @@
 				<tr>
 					<td>* 아이디(이메일)</td>
 					<td>
-						<input id="userId1" name="userId1" type="text" required autofocus> @ 
-						<input id="userId2" name="userId2" type="text" disabled>
-						<select id = "email" name = "email">
+						<input id="userId1" name="userId1" type="text" oninput = "checkId();" required autofocus> @ 
+						<input id="userId2" name="userId2" type="text" oninput = "checkId();" disabled>
+						<input type = "hidden" id = "userId3" name = "userId3">
+						<select id = "email" name = "email" >
 							<option value = "naver.com">naver.com</option>
                             <option value = "hanmail.net">hanmail.net</option>
                             <option value = "gmail.com">gmail.com</option>
@@ -60,21 +62,24 @@
 							<option value = "1">직접입력</option>
 						</select>
 					</td>
+					<td><div id = "checkId"></div></td>
 				</tr>
 				<tr>
 					<td>* 비밀번호</td>
-					<td><input id="userPwd" name="userPwd" type="password" required></td>
+					<td><input id="pwd" name="pwd" type="password" required></td>
 				</tr>
 				<tr>
 					<td>* 비밀번호 확인</td>
 					<td><input id="checkPwd" name="checkPwd" type="password" required></td>
+					<td><div id = "pwdTF"></div></td>
 				</tr>
 				<tr>
 					<td>* 별명</td>
 					<td><input id="nickname" name="nickname" type="text" required></td>
+					<td><div id = "nickTF"></div></td>
 				</tr>
 				<tr>
-					<td>* 평수</td><br>
+					<td>* 평수</td>
 					<td>
 					<input id="space1" name="space" type="radio" value = "1" checked>
 					<label for="space1">1평</label>&nbsp;
@@ -117,26 +122,99 @@
 				if($(this).parent().val()== "1"){ // 직접입력일 경우
 					$("#userId2").val(""); // 값 초기화
 					$("#userId2").attr("disabled",false); // 활성화
+					checkId();
 				}else{ // 직접입력이 아닐경우
 					$("#userId2").val($(this).parent().val()); // 선택값 입력
 					$("#userId2").attr("disabled",true); // 비활성화
+					checkId();
 				}
 			}); 
 
 		});
 		
-		// 메일주소 제대로 넘어가게
 		function toEnabled() {
-			$("#userId2").attr("disabled",false);
+			$("#userId2").attr("disabled",false);	// 메일주소 제대로 넘어가게
+			
 			}
 		
-		// 비밀번호 유효성 검사
-		$("#userPwd").change(function(){
-		    checkPassword($('#userPwd').val(),$('#userId1').val());
+		// 아이디 중복체크
+		function checkId(){
+			var isUsable = false;
+			
+			$("#userId3").val($("#userId1").val() + '@' + $("#userId2").val());
+			var userId = $("#userId3");
+			var userId1 = $("#userId1");
+			
+			if(userId1.val().length == 0){
+				$("#checkId").html('');
+			}else{
+				$.ajax({
+					url:"<%=request.getContextPath()%>/idcheck.me",
+					type:"post",
+					data:{userId:userId.val()},
+					success:function(data){
+						if(data == "fail"){
+							$("#checkId").html('');
+							$("#checkId").html("아이디가 중복됩니다").css("color", "red");
+							userId.focus();
+						}else{
+							$("#checkId").html('');
+							$("#checkId").html("아이디 사용 가능합니다").css("color", "green");
+							isUsable = true;
+						}
+					},
+					error:function(data){
+						console.log("서버 통신 안됨");
+					}
+				});
+			}
+		};
+
+		// 비밀번호 및 비밀번호 확인 일치 체크
+		$(function() {
+			$('#pwd').keyup(function() {
+				$("#pwdTF").html('');
+			});
+
+			$('#checkPwd').keyup(function() {
+				if ($('#pwd').val() != $('#checkPwd').val()) {
+					$("#pwdTF").html('');
+					$("#pwdTF").html("비밀번호 불일치").css("color", "red");
+				} else {
+					$("#pwdTF").html('');
+					$("#pwdTF").html("비밀번호 일치").css("color", "green");
+				}
+			});
 		});
 		
-		
-		
+		// 별명 중복 체크
+		$(function(){
+			$("#nickname").keyup(function(){
+				var nickname = $("#nickname");
+				
+				if(nickname.val().length == 0){
+					$("#nickTF").html('');
+				}else{
+					$.ajax({
+						url:"<%= request.getContextPath() %>/nickcheck.me",
+						type:"post",
+						data:{nickname:nickname.val()},
+						success:function(data){
+							if(data == "fail"){
+								$("#nickTF").html('');
+								$("#nickTF").html("이미 존재하는 별명입니다").css("color", "red");
+							}else{
+								$("#nickTF").html('');
+								$("#nickTF").html("사용 가능한 별명입니다").css("color", "green");
+							}
+						},
+						error:function(data){
+							console.log("서버 통신 안됨");
+						}
+					});
+				}
+			});
+		});
 	</script>
 	
 </body>

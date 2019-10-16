@@ -1,30 +1,27 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.oracle.jrockit.jfr.RequestDelegate;
-
 import member.model.service.MemberService;
-import member.model.vo.Member;
 
 /**
- * Servlet implementation class InsertMemberServlet
+ * Servlet implementation class nickCheckServlet
  */
-@WebServlet("/insert.me")
-public class InsertMemberServlet extends HttpServlet {
+@WebServlet("/nickcheck.me")
+public class nickCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public InsertMemberServlet() {
+    public nickCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,30 +30,20 @@ public class InsertMemberServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-//		String userId = request.getParameter("userId1") + "@" + request.getParameter("userId2");
-		String userId = request.getParameter("userId3");
-		String userPwd = request.getParameter("userPwd");
 		String nickname = request.getParameter("nickname");
-		int space = Integer.valueOf(request.getParameter("space"));
 		
-		Member member = new Member(userId, userPwd, nickname, space);
-
+		int result = new MemberService().nickCheck(nickname);
 		
-		int result = new MemberService().insertMember(member);
-		
-		RequestDispatcher view = null;
+		PrintWriter out = response.getWriter();
 		
 		if(result > 0) {
-			view = request.getRequestDispatcher("index.jsp");
-			request.setAttribute("msg", "회원 가입 성공!");
-			
+			out.append("fail");	// print 대신 append 해도 된다
 		}else {
-			view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			request.setAttribute("msg", "회원 가입 실패!");
+			out.append("success");
 		}
 		
-		view.forward(request, response);
+		out.flush();
+		out.close();
 	}
 
 	/**

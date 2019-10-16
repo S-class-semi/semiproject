@@ -69,11 +69,11 @@
 			onsubmit="return validate();" method="post">
 			<table>
 				<tr>
-					<td><label>ID : </label></td>
+					<td><label>아이디(이메일) : </label></td>
 					<td><input type="email" name="userId" id="userId"></td>
 				</tr>
 				<tr>
-					<td><label>PWD : </label></td>
+					<td><label>비밀번호 : </label></td>
 					<td><input type="password" name="userPwd" id="userPwd"></td>
 				</tr>
 			</table>

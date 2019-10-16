@@ -35,4 +35,22 @@ public class MemberService {
 		return loginUser;
 	}
 
+	public int idCheck(String userId) {
+		Connection conn = getConnection();
+		int result = new MemberDao().idCheck(conn, userId);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int nickCheck(String nickname) {
+		Connection conn = getConnection();
+		int result = new MemberDao().nickCheck(conn, nickname);
+		
+		close(conn);
+		
+		return result;
+	}
+
 }
