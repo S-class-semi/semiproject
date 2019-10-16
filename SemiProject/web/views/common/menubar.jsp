@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "member.model.vo.Member" %>
+    
+<%
+	Member loginUser = (Member)session.getAttribute("loginUser");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +42,7 @@
 		width: 100px;
 		border-radius: 5px;
 	}
-	#memberJoinBtn{
+	#memberJoinBtn, #myPage{
 		background: rgb(160, 200, 220);
 	}
 	#loginBtn input:hover, #changeInfo:hover, #logoutBtn:hover, #memberJoinBtn:hover, #myPage:hover{
@@ -58,6 +63,8 @@
 	<a href = "<%=request.getContextPath() %>/index.jsp"><h1">난 혼자 산다</h1></a><br>
 
 	<div class="loginArea">
+	
+	<% if(loginUser == null){ %>	<!-- 로그인 안했을 때 -->
 		<form id=loginForm " action="<%=request.getContextPath()%>/login.me"
 			onsubmit="return validate();" method="post">
 			<table>
@@ -77,7 +84,17 @@
 			</div>
 
 		</form>
+		<% } else{%>	<!-- 로그인 했을 때 -->
+			<div id = "userInfo">
+				<label>로그인됨. 환영.</label><br>
+				<div class = "btns" align = "right">
+					<div id = "myPage" onclick = "location.href = '/jspProject/mypage.me?userId=<%= loginUser.getUserId() %>'">정보수정</div>
+					<div id = "logoutBtn" onclick = "logout();">로그아웃</div>
+				</div>
+			</div>
+		<% } %>
 	</div>
+	
 
 	<div class = "mainmenu">
 		<div class = "bar">

@@ -67,7 +67,7 @@
 				</tr>
 				<tr>
 					<td>* 비밀번호 확인</td>
-					<td><input id="userPwd2" name="userPwd2" type="password" required></td>
+					<td><input id="checkPwd" name="checkPwd" type="password" required></td>
 				</tr>
 				<tr>
 					<td>* 별명</td>
@@ -129,7 +129,14 @@
 		function toEnabled() {
 			$("#userId2").attr("disabled",false);
 			}
-
+		
+		// 비밀번호 유효성 검사
+		$("#userPwd").change(function(){
+		    checkPassword($('#userPwd').val(),$('#userId1').val());
+		});
+		
+		
+		
 	</script>
 	
 </body>
