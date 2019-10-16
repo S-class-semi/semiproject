@@ -27,38 +27,62 @@ align : center;
 text-align: justify;
 }
 
+
+.test{
+display: hidden;
+}
+table tr td{
+align-content: center;
+align:center;
+text-align: center;
+}
+
+
 </style>
 </head>
 <body>
 <%@ include file = "/views/company/companyMenubar.jsp" %> 
 		<div id="centerbody">
-		<!-- 		<div id= "proimg">
-			<h1>사진 등록 </h1>
-		</div> -->
+		<form action="<%=request.getContextPath() %>/insert.pro" method="post">
 		<div  id="proinfotable">
+		<h1 id="inserttext">상품 등록</h1>
 			<table border="1" align="center">
-				<tr width="">
+				<tr>
 					<td colspan="2">상품코드 :</td>
-					<td colspan="2"><input type="text"></td>
+					<td colspan="2"><input id="code" type="text"></td>
 				</tr>
 				<tr>
 					<td colspan="2">상품 카테고리 :</td>
-					<td colspan="2"><input type="text"></td>
+					<td colspan="2">
+					<select>
+							<option>선택</option>
+							<option name="codenumber" value="C">의자</option>
+							<option name="codenumber" value="T">책상</option>
+							<option name="codenumber" value="A">주방용품</option>
+							<option name="codenumber" value="B">침구류</option>
+					</select></td>
 				</tr>
+
 				<tr>
 					<td>상품명 :</td>
-					<td><input type="text"></td>
+					<td><input type="text" name="codename"></td>
 					<td>상품 가격:</td>
-					<td><input type="text"></td>
+					<td><input type="text" name="codeprice"></td>
+				</tr>
+				<tr>
+				<td colspan="4">
+				<textarea rows="10" cols="100%" name ="proinfo"></textarea>
+				</td>
+				</tr>
+				<tr>
+				<td colspan="2"><button type= "submit">상품 등록</button></td>
+				<td colspan="2"><button type= "reset">등록 취소 </button></td>
 				</tr>
 			</table>
 		</div>
 		
-		<div>
-		<h1>그다음 내용은 어디로 붙을까요?</h1>
-		<textarea rows="10" cols="10"></textarea>
-		</div>
-		<div>
+		
+<!-- 		<div class ="test">
 		<table>
 			<tr>
 				<td>카테고리 : </td>
@@ -101,10 +125,12 @@ text-align: justify;
 				<td>고객센터</td>
 				<td><input type = "text"></td>
 			</tr>
-		</table> 
-		</div>
+		</table>
+		<button type = "sumbit">상품등록</button> 
+		</div> -->
+		</form>
 	</div>
-		
+
 
 </body>
 </html>

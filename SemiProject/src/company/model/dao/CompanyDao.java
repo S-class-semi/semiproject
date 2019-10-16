@@ -43,7 +43,7 @@ public class CompanyDao {
 			if(rs.next()) {
 				compnay = new Company(rs.getString("C_NAME"),
 									rs.getInt("USER_T"),
-									rs.getInt("C_NUMBER"),
+									rs.getString("C_NUMBER"),
 									rs.getString("C_ADD"),
 									rs.getString("C_PHON"),
 									rs.getString("C_MANAGER"),

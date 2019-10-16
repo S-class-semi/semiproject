@@ -26,7 +26,7 @@ public class JDBCTemplate {
 			String url = prop.getProperty("url");
 			String user = prop.getProperty("user");
 			String password = prop.getProperty("password");
-			
+			System.out.println(driver);
 			//1. 클래스 객체 등록, Driver 등록
 			Class.forName(driver);
 			

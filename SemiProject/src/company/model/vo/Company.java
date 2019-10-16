@@ -11,7 +11,7 @@ public class Company implements Serializable{
 	
 	private String c_name;
 	private int user_t;
-	private int c_number;
+	private String c_number;
 	private String c_add;
 	private String c_phone;
 	private String c_manager;
@@ -21,7 +21,7 @@ public class Company implements Serializable{
 	public Company() {
 		super();
 	}
-	public Company(String c_name, int user_t, int c_number, String c_add, String c_phone, String c_manager,
+	public Company(String c_name, int user_t, String c_number, String c_add, String c_phone, String c_manager,
 			String c_contact, String c_email, String c_flog) {
 		super();
 		this.c_name = c_name;
@@ -34,9 +34,6 @@ public class Company implements Serializable{
 		this.c_email = c_email;
 		this.c_flog = c_flog;
 	}
-	
-	
-	
 	public String getC_name() {
 		return c_name;
 	}
@@ -49,10 +46,10 @@ public class Company implements Serializable{
 	public void setUser_t(int user_t) {
 		this.user_t = user_t;
 	}
-	public int getC_number() {
+	public String getC_number() {
 		return c_number;
 	}
-	public void setC_number(int c_number) {
+	public void setC_number(String c_number) {
 		this.c_number = c_number;
 	}
 	public String getC_add() {
@@ -94,14 +91,12 @@ public class Company implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
 	@Override
 	public String toString() {
 		return "Company [c_name=" + c_name + ", user_t=" + user_t + ", c_number=" + c_number + ", c_add=" + c_add
 				+ ", c_phone=" + c_phone + ", c_manager=" + c_manager + ", c_contact=" + c_contact + ", c_email="
 				+ c_email + ", c_flog=" + c_flog + "]";
-	} 
-
+	}
 	
 	
 }
