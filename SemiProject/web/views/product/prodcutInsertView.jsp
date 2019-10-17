@@ -49,17 +49,17 @@ text-align: center;
 			<table border="1" align="center">
 				<tr>
 					<td colspan="2">상품코드 :</td>
-					<td colspan="2"><input id="code" type="text"></td>
+					<td colspan="2"><input name="code" type="text"></td>
 				</tr>
 				<tr>
 					<td colspan="2">상품 카테고리 :</td>
 					<td colspan="2">
-					<select>
+					<select name = "codenumber">
 							<option>선택</option>
-							<option name="codenumber" value="C">의자</option>
-							<option name="codenumber" value="T">책상</option>
-							<option name="codenumber" value="A">주방용품</option>
-							<option name="codenumber" value="B">침구류</option>
+							<option value="C">의자</option>
+							<option value="T">책상</option>
+							<option value="A">주방용품</option>
+							<option value="B">침구류</option>
 					</select></td>
 				</tr>
 
