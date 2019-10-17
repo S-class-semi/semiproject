@@ -1,29 +1,27 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
-import member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class nickCheckServlet
  */
-@WebServlet("/login.me")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/nickcheck.me")
+public class NickCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public NickCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,26 +30,20 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		String nickname = request.getParameter("nickname");
 		
-		Member member = new Member(userId, userPwd);
+		int result = new MemberService().nickCheck(nickname);
 		
-		Member loginUser = new MemberService().loginMember(member);
+		PrintWriter out = response.getWriter();
 		
-		int userG = loginUser.getUserG();
-		
-		if(loginUser != null) {
-			HttpSession session = request.getSession();
-			
-			session.setAttribute("loginUser", loginUser);
-			session.setAttribute("userG", userG);
-			response.sendRedirect("index.jsp");
+		if(result > 0) {
+			out.append("fail");	// print 대신 append 해도 된다
 		}else {
-			request.setAttribute("msg", "로그인 실패");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
+			out.append("success");
 		}
+		
+		out.flush();
+		out.close();
 	}
 
 	/**

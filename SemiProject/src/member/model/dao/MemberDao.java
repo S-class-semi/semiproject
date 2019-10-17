@@ -94,6 +94,43 @@ public class MemberDao {
 		
 		return loginUser;
 	}
+	
+	public Member selectMember(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Member member = null;
+		
+		String query = prop.getProperty("selectMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				member = new Member(rs.getString("USER_ID"),
+									rs.getInt("USER_G"),
+									rs.getInt("USER_T"),
+									rs.getString("USER_PWD"),
+									rs.getString("NICKNAME"),
+									rs.getInt("SPACE"),
+									rs.getInt("POINT"),
+									rs.getString("CONTEXT"),
+									rs.getDate("BIRTH"),
+									rs.getString("GENDER"),
+									rs.getString("STATUS"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return member;
+	}
 
 	public int idCheck(Connection conn, String userId) {
 		PreparedStatement pstmt = null;

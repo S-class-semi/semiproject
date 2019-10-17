@@ -36,7 +36,7 @@ public class InsertMemberServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 //		String userId = request.getParameter("userId1") + "@" + request.getParameter("userId2");
 		String userId = request.getParameter("userId3");
-		String userPwd = request.getParameter("userPwd");
+		String userPwd = request.getParameter("pwd");
 		String nickname = request.getParameter("nickname");
 		int space = Integer.valueOf(request.getParameter("space"));
 		

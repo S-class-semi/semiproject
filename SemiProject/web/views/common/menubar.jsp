@@ -3,6 +3,7 @@
     
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
+	Integer userG = (Integer)session.getAttribute("userG");
 %>
 
 <!DOCTYPE html>
@@ -79,23 +80,41 @@
 			</table>
 
 			<div class="btns" align="center">
+				<button type = "button">비밀번호 찾기</button>
 				<button type = "button" id="memberJoinBtn" onclick="memberJoin();">회원가입</button>
 				<div id="loginBtn"><input type="submit" value="로그인"></div>
 			</div>
 
 		</form>
-		<% } else{%>	<!-- 로그인 했을 때 -->
+		
+	<%}else if(loginUser != null && userG == 2){%>	<!-- 판매자 로그인 -->
 			<div id = "userInfo">
-				<label>로그인됨. 환영.</label><br>
+				<label>판매자 로그인됨 환영</label><br>
 				<div class = "btns" align = "right">
-					<div id = "myPage" onclick = "location.href = '/jspProject/mypage.me?userId=<%= loginUser.getUserId() %>'">정보수정</div>
+					<div id = "myPage" onclick = "location.href = '/SemiProject/mypage.me?userId=<%= loginUser.getUserId() %>'">마이페이지</div>
+					<div id = "logoutBtn" onclick = "logout();">로그아웃</div>
+				</div>
+			</div>
+		
+	<%}else if(loginUser != null && userG == 3){%>	<!-- 관리자 로그인 -->
+			<div id = "userInfo">
+				<label>관리자 로그인됨 환영</label><br>
+				<div class = "btns" align = "right">
+					<div id = "myPage" onclick = "location.href = '/SemiProject/mypage.me?userId=<%= loginUser.getUserId() %>'">마이페이지</div>
+					<div id = "logoutBtn" onclick = "logout();">로그아웃</div>
+				</div>
+			</div>
+	<%}else{%>	<!-- 로그인 했을 때 -->
+			<div id = "userInfo">
+				<label>소비자 로그인됨 환영</label><br>
+				<div class = "btns" align = "right">
+					<div id = "myPage" onclick = "location.href = '/SemiProject/mypage.me?userId=<%= loginUser.getUserId() %>'">마이페이지</div>
 					<div id = "logoutBtn" onclick = "logout();">로그아웃</div>
 				</div>
 			</div>
 		<% } %>
 	</div>
 	
-
 	<div class = "mainmenu">
 		<div class = "bar">
 			<div class = "menu" onclick ="goNotich()">공지사항</div>
@@ -107,6 +126,7 @@
 	</div>
 	
 	<script>
+
 		function validate(){
 			if($("#userId").val().trim().length == 0){
 				alert("아이디를 입력하세요");
@@ -124,11 +144,9 @@
 			return true;
 		}
 		
-		// logout() 함수 작성하기
+		// 로그아웃 함수
 		function logout(){
 			location.href = '<%= request.getContextPath() %>/logout.me';
-			
-			// LogoutServlet 만들러 ㄱㄱ
 		}
 		
 		function memberJoin(){

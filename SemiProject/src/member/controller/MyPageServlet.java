@@ -1,8 +1,8 @@
 package member.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,18 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class nickCheckServlet
+ * Servlet implementation class MyPageServlet
  */
-@WebServlet("/nickcheck.me")
-public class nickCheckServlet extends HttpServlet {
+@WebServlet("/mypage.me")
+public class MyPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public nickCheckServlet() {
+    public MyPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,20 +31,20 @@ public class nickCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String nickname = request.getParameter("nickname");
+		String userId = request.getParameter("userId");
 		
-		int result = new MemberService().nickCheck(nickname);
-		
-		PrintWriter out = response.getWriter();
-		
-		if(result > 0) {
-			out.append("fail");	// print 대신 append 해도 된다
+		Member member = new MemberService().selectMember(userId);
+		System.out.println(member);
+		RequestDispatcher view = null;
+		if(member != null) {
+			view = request.getRequestDispatcher("마이페이지 jsp파일 써넣을 곳");
+			request.setAttribute("member", member);
 		}else {
-			out.append("success");
+			view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			request.setAttribute("msg", "조회에 실패했습니다.");
 		}
 		
-		out.flush();
-		out.close();
+		view.forward(request, response);
 	}
 
 	/**
