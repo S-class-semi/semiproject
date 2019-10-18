@@ -17,7 +17,7 @@
 	<%--
 	 
 	 다른 페이지에서 사용할때는  밑에 있는 구문을 사용하자.
-	 <%@ include file = "views/common/menubar.jsp" %> 
+	 <%@ include file = "/views/common/menubar.jsp" %> 
 	 
 	 --%>
 	<%-- 

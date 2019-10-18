@@ -221,8 +221,8 @@ body {
 						<span class="icon-money"></span>매출확인
 					</h3>
 					<ul>
-						<li>매출판매량</li>
-						<li>기간별 매출량</li>
+						<li onclick = "SalesGraph()">매출판매량</li>
+						<li onclick = "SalesGraph2()">기간별 매출량</li>
 					</ul>
 				</li>
 				<li>
@@ -273,6 +273,9 @@ body {
 		}
 		function C_info(){
 			location.href = "<%=request.getContextPath()%>/info.com";
+		}
+		function SalesGraph2(){
+			location.href = "<%=request.getContextPath()%>/views/product/prodcutSales.jsp";
 		}
 	</script>
 	

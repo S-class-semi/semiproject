@@ -99,7 +99,7 @@ if(#ulTable > li > ul > li:first-child +li=="공지"){
 
 </head>
 <body>
-	<%@include file="../common/menubar.jsp" %>
+	<%@ include file = "/views/common/menubar.jsp" %> 
     <div class="mainWrapper">
 
         <ul>
