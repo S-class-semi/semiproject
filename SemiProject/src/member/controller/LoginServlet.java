@@ -40,7 +40,6 @@ public class LoginServlet extends HttpServlet {
 		Member loginUser = new MemberService().loginMember(member);
 		
 		int userG = loginUser.getUserG();
-		System.out.println(userG);
 		RequestDispatcher view= null;
 		HttpSession session =null;
 		
@@ -52,7 +51,6 @@ public class LoginServlet extends HttpServlet {
 			
 		}else if(loginUser != null) {
 			session = request.getSession();
-			
 			session.setAttribute("loginUser", loginUser);
 			session.setAttribute("userG", userG);
 			response.sendRedirect("index.jsp");

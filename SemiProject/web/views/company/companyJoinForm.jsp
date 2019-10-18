@@ -32,12 +32,12 @@
 			<td><label> 회사주소 : </label></td>
 			<td>
 			<input type="text" id="postcode" class = "a_form.mini" placeholder="우편번호">
-<input type="button" onclick="on_click()" class ="a_btn" value="우편번호 찾기"><br>
-<input type="text" id="roadAddress" class = "a_form.std" placeholder="도로명주소">
-<input type="text" id="jibunAddress" class = "a_form.std"placeholder="지번주소">
-<span id="guide" style="color:#999;display:none"></span>
-<input type="text" id="detailAddress" placeholder="상세주소">
-<input type="text" id="extraAddress" placeholder="참고항목">
+			<input type="button" onclick="on_click()" class ="a_btn" value="우편번호 찾기"><br>
+			<input type="text" id="roadAddress" class = "a_form.std" placeholder="도로명주소">
+			<input type="text" id="jibunAddress" class = "a_form.std"placeholder="지번주소">
+			<span id="guide" style="color:#999;display:none"></span>
+			<input type="text" id="detailAddress" placeholder="상세주소">
+			<input type="text" id="extraAddress" placeholder="참고항목">
 			 </td>
 			</tr>
 			<tr>
@@ -88,6 +88,9 @@ function on_click(){
 		autoClose: true;
 		
 		$("#postcode").attr("readonly","true");
+		$("#roadAddress").attr("readonly","true");
+		$("#jibunAddress").attr("readonly","true");
+		$("#extraAddress").attr("readonly","true");
         }
     
     
