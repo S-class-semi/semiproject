@@ -110,6 +110,7 @@
 				<div class = "btns" align = "right">
 					<div id = "myPage" onclick = "location.href = '/SemiProject/mypage.me?userId=<%= loginUser.getUserId() %>'">마이페이지</div>
 					<div id = "logoutBtn" onclick = "logout();">로그아웃</div>
+					<div id = "companyJoin" onclick = "c_insertInfo();">판매자등록</div>
 				</div>
 			</div>
 		<% } %>
@@ -151,6 +152,10 @@
 		
 		function memberJoin(){
 			location.href = '<%= request.getContextPath() %>/views/member/memberJoinForm.jsp';
+		}
+		//판매자 등록 부분
+		function c_insertInfo(){
+			location.href = "<%= request.getContextPath()%>/insert.com";
 		}
 	</script>
 	

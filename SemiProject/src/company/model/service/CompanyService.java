@@ -20,4 +20,21 @@ public class CompanyService {
 		return result;
 	}
 
+	public int idCheck(int c_number) {
+		Connection conn = getConnection();
+		int result = new CompanyDao().idCheck(conn, c_number);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int idCheck(String c_name) {
+		Connection conn = getConnection();
+		int result = new CompanyDao().idCheck(conn,c_name);
+		
+		close(conn);
+		return result;
+	}
+
 }

@@ -62,5 +62,57 @@ public class CompanyDao {
 		
 		return compnay;
 	}
+	public int idCheck(Connection conn, int c_number) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		String query = prop.getProperty("c_numberCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, c_number);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);	// 1은 의미상 resultSet 테이블의 첫 번째 컬럼명이랑 동일함
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return result;
+	}
+	public int idCheck(Connection conn, String c_name) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		String query = prop.getProperty("c_nameCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, c_name);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);	// 1은 의미상 resultSet 테이블의 첫 번째 컬럼명이랑 동일함
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return result;
+	}
 
 }
