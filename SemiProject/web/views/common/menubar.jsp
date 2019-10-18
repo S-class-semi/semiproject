@@ -66,8 +66,7 @@
 	<div class="loginArea">
 	
 	<% if(loginUser == null){ %>	<!-- 로그인 안했을 때 -->
-		<form id=loginForm " action="<%=request.getContextPath()%>/login.me"
-			onsubmit="return validate();" method="post">
+		<form id=loginForm " action="<%=request.getContextPath()%>/login.me" onsubmit="return validate();" method="post">
 			<table>
 				<tr>
 					<td><label>아이디(이메일) : </label></td>
@@ -80,7 +79,7 @@
 			</table>
 
 			<div class="btns" align="center">
-				<button type = "button">비밀번호 찾기</button>
+				<button type = "button" onclick = "findingPwd();">비밀번호 찾기</button>
 				<button type = "button" id="memberJoinBtn" onclick="memberJoin();">회원가입</button>
 				<div id="loginBtn"><input type="submit" value="로그인"></div>
 			</div>
@@ -144,26 +143,22 @@
 			return true;
 		}
 		
-		// 로그아웃 함수
+		// 로그아웃
 		function logout(){
 			location.href = '<%= request.getContextPath() %>/logout.me';
 		}
 		
+		// 회원가입
 		function memberJoin(){
 			location.href = '<%= request.getContextPath() %>/views/member/memberJoinForm.jsp';
 		}
+		
+		// 비밀번호 찾기
+		function findingPwd(){
+			location.href = '<%= request.getContextPath() %>/views/member/findPwdView.jsp';
+		}
+		
 	</script>
 	
-	<Script>
-		function goNotich(){
-			location.href = "<%=request.getContextPath()%>/list.no";
-		}
-		function goNotich(){
-			location.href = "<%=request.getContextPath()%>/list.pro";
-		}
-		function goNotich(){
-			location.href = "<%=request.getContextPath()%>/list.bo";
-		}
-	</Script>
 </body>
 </html>

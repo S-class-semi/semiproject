@@ -1,4 +1,8 @@
+/board/
+/common/
+/company/
+/member/
+/notice/
+/payment/
 /product/
 /sql/
-/company/
-/board/
