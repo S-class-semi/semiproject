@@ -158,12 +158,6 @@
 		function goNotich(){
 			location.href = "<%=request.getContextPath()%>/list.no";
 		}
-		function goNotich(){
-			location.href = "<%=request.getContextPath()%>/list.pro";
-		}
-		function goNotich(){
-			location.href = "<%=request.getContextPath()%>/list.bo";
-		}
 	</Script>
 </body>
 </html>
