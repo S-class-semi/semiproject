@@ -27,7 +27,7 @@ public class CompanyDao {
 		}
 		
 	}
-	public Company compnayInfo(Connection conn, String c_name) {
+	public Company compnayInfo(Connection conn, String userid) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Company compnay = null;
@@ -36,12 +36,13 @@ public class CompanyDao {
 		
 		try {
 			pstmt = conn.prepareStatement(qeury);
-			pstmt.setString(1, c_name);
+			pstmt.setString(1, userid);
 			
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
-				compnay = new Company(rs.getString("C_NAME"),
+				compnay = new Company(rs.getString("USERID"),
+									rs.getString("C_NAME"),
 									rs.getInt("USER_T"),
 									rs.getString("C_NUMBER"),
 									rs.getString("C_ADD"),
@@ -114,5 +115,39 @@ public class CompanyDao {
 		
 		return result;
 	}
+	public int admission(Connection conn, Company company) {
+		PreparedStatement pstmt = null;
+
+		int  result = 0;
+		
+		String query = prop.getProperty("c_admission");
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, company.getUserid());
+			pstmt.setString(2, company.getC_name());
+			pstmt.setInt(3, company.getUser_t());
+			pstmt.setInt(4, Integer.valueOf(company.getC_number()));
+			pstmt.setString(5, company.getC_add());
+			pstmt.setInt(6, Integer.valueOf(company.getC_phone()));
+			pstmt.setString(7, company.getC_manager());
+			pstmt.setInt(8, Integer.valueOf(company.getC_contact()));
+			pstmt.setString(9, company.getC_email());
+			pstmt.setString(10, company.getC_flog());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+
+		}
+		
+		return result;
+	}
+
+
+
 
 }

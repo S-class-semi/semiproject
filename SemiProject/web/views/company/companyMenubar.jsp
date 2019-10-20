@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import = "company.model.vo.*"%>
+	
+	<%
+	Company companyinfo = (Company)session.getAttribute("companyinfo");
+	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -175,9 +179,7 @@ body {
 		
 			<div id="homeimg" onclick = "C_home();">
 			<%-- <a href="<%=request.getContextPath()%>/views/company/companyView.jsp">
- --%>				<img id="homeicon"
-					src="<%=request.getContextPath()%>/images/home.png" width="80px"
-					height="80px">
+ --%>				<img id="homeicon" src="<%=request.getContextPath()%>/images/home.png" width="80px" height="80px">
 			</div>
 			<div id="hometext" onclick = "C_home();">
 				<h1>난 혼자 산다</h1>
@@ -190,9 +192,9 @@ body {
 		<div class="CompanyInfo1">
 		<fieldset id = "roginuser">
 		<legend align="center">로그인</legend>
-			<label>회사명 : </label><input type= "text" value="나혼자산다" readonly="readonly" disabled><br>
-			<label>담당자 : </label><input type= "text" value="나혼자산다" readonly="readonly" disabled><br> 
-			<label>연락처 : </label><input type= "text" value="나혼자산다" readonly="readonly" disabled><br>
+			<label>회사명 : </label><input type= "text" value="<%=companyinfo.getC_name() %>" readonly="readonly" disabled><br>
+			<label>담당자 : </label><input type= "text" value="<%=companyinfo.getC_manager() %>" readonly="readonly" disabled><br> 
+			<label>연락처 : </label><input type= "text" value="<%=companyinfo.getC_phone() %>" readonly="readonly" disabled><br>
 			<button id="rogout" >로그아웃</button>
 		</fieldset>
 		</div>

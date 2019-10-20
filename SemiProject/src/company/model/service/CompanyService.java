@@ -1,6 +1,6 @@
 package company.model.service;
 
-import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.*;
 import static common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
@@ -10,10 +10,10 @@ import company.model.vo.Company;
 
 public class CompanyService {
 
-	public Company companyInfo(String c_name) {
+	public Company companyInfo(String userid) {
 		Connection conn = getConnection();
 		
-		Company result = new CompanyDao().compnayInfo(conn,c_name);
+		Company result = new CompanyDao().compnayInfo(conn,userid);
 		
 		close(conn);
 		
@@ -36,5 +36,22 @@ public class CompanyService {
 		close(conn);
 		return result;
 	}
+
+	public int admission(Company companyAdmission) {
+		Connection conn = getConnection();
+		
+		int result = new CompanyDao().admission(conn,companyAdmission);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return result;
+	}
+
+
 
 }

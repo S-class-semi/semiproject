@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import company.model.service.CompanyService;
+import company.model.vo.Company;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
@@ -44,8 +46,10 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session =null;
 		
 		if(loginUser != null && (userG==2)){
+			Company companyinfo  = new CompanyService().companyInfo(userId);
 			session = request.getSession();
 			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("companyinfo",companyinfo);
 			view = request.getRequestDispatcher("views/company/companyMenubar.jsp");
 			view.forward(request, response);
 			

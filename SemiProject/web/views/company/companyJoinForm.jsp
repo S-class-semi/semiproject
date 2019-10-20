@@ -12,60 +12,60 @@
 </head>
 <body>
 <%@ include file = "/views/common/menubar.jsp" %> 
+	<div>
+		<form action="<%=request.getContextPath() %>/insert.com" method="post">
+			<table border="1">
+				<tr>
+				<td><label>사용자 ID : </label></td>
+				<td><label name = "userid"><%=userid %></label>
+				</tr>
+				<tr>
+				<td><label> 사업증 번호 : </label></td>
+				<td><input type="text" name="c_number" id="c_number" oninput="c_numCheck()" required autofocus> </td>
+				<td><div id = "c_numCheck"></div></td>
+				</tr>
+				<tr>
+				<td><label> 회사명 : </label></td>
+				<td><input type = "text" name="c_name" id="c_name" oninput="c_nameCheck()" reqeuired autofocus> </td>
+				<td><div id = "c_nameCheck"></div>
+				</tr>
+				<tr>
+				<td><label> 회사주소 : </label></td>
+				<td>
+				<input type="text" id="postcode" name = "postcode" class = "a_form.mini" placeholder="우편번호">
+				<input type="button" onclick="on_click()" class ="a_btn" value="우편번호 찾기"><br>
+				<input type="text" id="roadAddress" name = "roadAddress" class = "a_form.std" placeholder="도로명주소">
+				<input type="text" id="jibunAddress" name = "jibunAddress" class = "a_form.std"placeholder="지번주소">
+				<span id="guide" style="color:#999;display:none"></span>
+				<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소">
+				<input type="text" id="extraAddress" name = "extraAddress" placeholder="시/도/구">
+				 </td>
+				</tr>
+				<tr>
+				<td><label> 회사연락처 : </label></td>
+				<td><input type = "text" name = "c_phone"> </td>
+				</tr>
+				<tr>
+				<td><label> 담당자 : </label></td>
+				<td><input type = "text" name = "c_manager"> </td>
+				</tr>
+				<tr>
+				<td><label> 담당자 연락처 : </label></td>
+				<td><input type = "text" name = "c_contact"> </td>
+				</tr>
+				<tr>
+				<td><label> 담당자 이메일 : </label></td>
+				<td><input type = "text" name = "c_email"> </td>
+				</tr>
+				<tr>
+				<td><button type = "submit">정보 수정</button></td>		
+	
+				<td><button type= "reset">취소 </button></td>
+				</tr>
+			</table>
+		</form>
 
-	<table border="1">
-	<tr>
-	<td><label>사용자 ID : </label></td>
-	<td><label name = "userid"><%=userid %></label>
-	</tr>
-			<tr>
-			<td><label> 사업증 번호 : </label></td>
-			<td><input type = "text" name="c_number" id= "c_number" oninput = "c_numCheck()" required autofocus> </td>
-			<td><div id = "c_numCheck"></div></td>
-			</tr>
-			<tr>
-			<td><label> 회사명 : </label></td>
-			<td><input type = "text"name="c_name" id = "c_name" oninput = "c_nameCheck()" reqeuired autofocus> </td>
-			<td><div id = "c_nameCheck"></div>
-			</tr>
-			<tr>
-			<td><label> 회사주소 : </label></td>
-			<td>
-			<input type="text" id="postcode" class = "a_form.mini" placeholder="우편번호">
-			<input type="button" onclick="on_click()" class ="a_btn" value="우편번호 찾기"><br>
-			<input type="text" id="roadAddress" class = "a_form.std" placeholder="도로명주소">
-			<input type="text" id="jibunAddress" class = "a_form.std"placeholder="지번주소">
-			<span id="guide" style="color:#999;display:none"></span>
-			<input type="text" id="detailAddress" placeholder="상세주소">
-			<input type="text" id="extraAddress" placeholder="참고항목">
-			 </td>
-			</tr>
-			<tr>
-			<td><label> 회사연락처 : </label></td>
-			<td><input type = "text"> </td>
-			</tr>
-			<tr>
-			<td><label> 담당자 : </label></td>
-			<td><input type = "text"> </td>
-			</tr>
-			<tr>
-			<td><label> 담당자 연락처 : </label></td>
-			<td><input type = "text"> </td>
-			</tr>
-			<tr>
-			<td><label> 담당자 이메일 : </label></td>
-			<td><input type = "text"> </td>
-			</tr>
-			<tr>
-			<td><label> 판메종목 : </label></td>
-			<td><input type = "text"> </td>
-			</tr>
-			
-		</table>
-		<div>
-		<button align = "center">정보 수정</button>
-		<button>취소 </button>
-		</div>
+	</div>
 	<!-- 주소 스크립트 -->
 <script>
 function on_click(){
@@ -85,12 +85,13 @@ function on_click(){
 		document.getElementById('jibunAddress').value = JibunAddress;
 		document.getElementById('extraAddress').value = Bname;
 		
-		autoClose: true;
+
 		
 		$("#postcode").attr("readonly","true");
 		$("#roadAddress").attr("readonly","true");
 		$("#jibunAddress").attr("readonly","true");
 		$("#extraAddress").attr("readonly","true");
+		autoClose: true;
         }
     
     

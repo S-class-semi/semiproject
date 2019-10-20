@@ -9,15 +9,19 @@ public class Company implements Serializable{
 	 */
 	private static final long serialVersionUID = -8080893958562438547L;
 	
-	private String c_name;
+	private String userid;
 	private int user_t;
 	private String c_number;
+	private String c_name;
 	private String c_add;
 	private String c_phone;
 	private String c_manager;
 	private String c_contact;
 	private String c_email;
 	private String c_flog;
+	
+	
+
 	public Company() {
 		super();
 	}
@@ -27,6 +31,36 @@ public class Company implements Serializable{
 		this.c_name = c_name;
 		this.user_t = user_t;
 		this.c_number = c_number;
+		this.c_add = c_add;
+		this.c_phone = c_phone;
+		this.c_manager = c_manager;
+		this.c_contact = c_contact;
+		this.c_email = c_email;
+		this.c_flog = c_flog;
+	}
+	
+	public Company(String userid, int user_t, String c_number, String c_name, String c_add, String c_phone,
+			String c_manager, String c_contact, String c_email, String c_flog) {
+		super();
+		this.userid = userid;
+		this.user_t = user_t;
+		this.c_number = c_number;
+		this.c_name = c_name;
+		this.c_add = c_add;
+		this.c_phone = c_phone;
+		this.c_manager = c_manager;
+		this.c_contact = c_contact;
+		this.c_email = c_email;
+		this.c_flog = c_flog;
+	}
+	
+	public Company(String userid, String c_name , int user_t, String c_number , String c_add , String c_phone,
+			String c_manager, String c_contact, String c_email, String c_flog) {
+		
+		this.userid = userid;
+		this.c_number = c_number;
+		this.user_t = user_t;
+		this.c_name = c_name;
 		this.c_add = c_add;
 		this.c_phone = c_phone;
 		this.c_manager = c_manager;
@@ -90,6 +124,14 @@ public class Company implements Serializable{
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	
+	public String getUserid() {
+		return userid;
+	}
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	@Override
 	public String toString() {

@@ -46,6 +46,8 @@ public class ProductService {
 		
 		ProductInfo productinfo = new ProductDao().selectProduct(conn,pro_id);
 		
+		
+		
 		close(conn);
 		return productinfo;
 	}

@@ -155,19 +155,13 @@
 		}
 		//판매자 등록 부분
 		function c_insertInfo(){
-			location.href = "<%= request.getContextPath()%>/insert.com";
+			location.href = "<%= request.getContextPath()%>/admssion.com";
 		}
 	</script>
 	
 	<Script>
 		function goNotich(){
 			location.href = "<%=request.getContextPath()%>/list.no";
-		}
-		function goNotich(){
-			location.href = "<%=request.getContextPath()%>/list.pro";
-		}
-		function goNotich(){
-			location.href = "<%=request.getContextPath()%>/list.bo";
 		}
 	</Script>
 </body>
