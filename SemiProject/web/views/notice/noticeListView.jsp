@@ -14,20 +14,21 @@
 <style>
 	.outer{
 		width:800px;
-		height:500px;
+		height:600px;
 		background:white;
 		color:black;
 		margin-left:auto;
 		margin-right:auto;
-		margin-top:50px;
+		margin-top:60px;
 	}
 	table{
 		border:1px solid black;
 		text-align:center;
+		
 	}
 	.tableArea{
 		width:650px;
-		height:350px;
+		height:400px;
 		margin-left:auto;
 		margin-right:auto;
 	}
@@ -43,13 +44,15 @@
 	<%@ include file="../common/menubar.jsp" %>
 	<div class="outer">
 		<br>
+		
 		<h2 align="center">공지사항</h2>
+		
 		<div class="tableArea">
 			<!-- 조회가 잘 되어 출력되는지 확인 -->
 			<table align="center" id="listArea">
 				<tr>
 					<th>글번호</th>
-					<th width="300px">글제목</th>
+					<th width="300px">제목</th>
 					<th width="100px">작성자</th>
 					<th>조회수</th>
 					<th width="100px">작성일</th>
@@ -62,7 +65,7 @@
 					<%for(Notice no : list){ %>
 					<tr>
 						<td><%= no.getB_NO() %></td>
-						<td><%= no.getB_TITLE() %></td>
+						<td style="text-align:left"><%= no.getB_TITLE() %></td>
 						<td><%= no.getUSER_ID() %></td>
 						<td><%= no.getB_COUNT() %></td>
 						<td><%= no.getB_TIME() %></td>
@@ -70,6 +73,9 @@
 					<%} %>
 				<%} %>  
 			</table>
+			<%{ %>
+			<button onclick="location.href='views/notice/noticeInsertForm.jsp'">작성하기</button>
+			<%} %>
 		</div>
 		
 		<!-- 보통 사이트들에서는 공지사항이나 게시판 아래에 검색하기 기능을 하는 부분이 있다. -->
@@ -88,10 +94,8 @@
 		
 		<!-- 공지사항 글쓰기 기능 추가 -->
 		<!-- 공지사항은 보통 관리자만 쓸 수 있다. 따라서 관리자만 쓸 수 있도록 조건을 달자! -->
-<%-- 		<%if(loginUser != null && loginUser.getUserId().equals("admin")){ %>
-			<button onclick="location.href='views/notice/noticeInsertForm.jsp'">작성하기</button>
-		<%} %>
-		 --%>
+		
+		 
 		</div>
 	</div>
 	
