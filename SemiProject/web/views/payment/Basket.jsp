@@ -7,23 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-function selectAll(checkFlag) { 
 
-		       var f = document.sendForm; 
-
-		       for(var i=0; i<f.elements.length; i++) { 
-
-		               if(f.elements[i].name == 'checkbox2'){ 
-
-		                       f.elements[i].checked = checkFlag; 
-
-		               } 
-
-		       } 
-
-		} 
-
-		</script>
 
 		</head>
 
