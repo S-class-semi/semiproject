@@ -39,13 +39,15 @@ public class LoginServlet extends HttpServlet {
 		
 		Member loginUser = new MemberService().loginMember(member);
 		
-		int userG = loginUser.getUserG();
+		response.setContentType("text/html;charset=utf-8");
 		
+		int userT = 0;
 		if(loginUser != null) {
+			userT = loginUser.getUserT();
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("loginUser", loginUser);
-			session.setAttribute("userG", userG);
+			session.setAttribute("userT", userT);
 			response.sendRedirect("index.jsp");
 		}else {
 			request.setAttribute("msg", "로그인 실패");

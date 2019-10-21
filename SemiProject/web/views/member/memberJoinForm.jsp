@@ -227,11 +227,11 @@
 		function checkPassword(password,id){
 		    var checkNumber = password.search(/[0-9]/g);
 		    var checkEnglish = password.search(/[a-z]/ig);
-		    var pattern1 = /^(?=.*[a-zA-Z])(?=.*[`~!@#$%^*()-_+=\|])(?=.*[0-9]).{8,25}$/;
+		    var pattern1 = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
 		    var pattern2 = /(\w)\1\1\1/;
 		    
 		    if(!pattern1.test(password)){            
-		    	$("#pwdTest").html("영문, 숫자, 특수문자 8자 이상 조합을 사용해야 합니다").css("color", "red");
+		    	$("#pwdTest").html("영문, 숫자 8자 이상 조합을 사용해야 합니다").css("color", "red");
 		    	
 		    }else if(pattern2.test(password)){
 		    	$("#pwdTest").html("같은 문자를 4번 이상 사용하실 수 없습니다").css("color", "red");

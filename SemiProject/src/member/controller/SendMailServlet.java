@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
  
 /**
  * Servlet implementation class SendMail
@@ -34,23 +35,21 @@ public class SendMailServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-    	request.setCharacterEncoding("UTF-8");
-    	 
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
- 
+        HttpSession session = request.getSession();
+        
         String m_name = "리성호";
-        String m_email = request.getParameter("findMail");
+        String m_email = (String)session.getAttribute("findMail");
         String m_title = "임시비밀번호는?";
         String m_text = "임시비밀번호 : ";
-        String randomPwd = request.getParameter("randomPwd");
- 
+        String randomPwd = (String)session.getAttribute("randomPwd");
+        
         try {
-            String mail_from =  "livealone1199@gmail.com";
-            String mail_to =    m_email;
-            String title =      m_title;
-            String contents =   m_text + randomPwd;
+            String mail_from = "livealone1199@gmail.com";
+            String mail_to = m_email;
+            String title = m_title;
+            String contents = m_text + randomPwd;
  
             mail_from = new String(mail_from.getBytes("UTF-8"), "UTF-8");
             mail_to = new String(mail_to.getBytes("UTF-8"), "UTF-8");
@@ -81,7 +80,7 @@ public class SendMailServlet extends HttpServlet {
  
             response.sendRedirect("index.jsp");
         } catch (Exception e) {
-            response.sendRedirect("errorPage.jsp");
+            response.sendRedirect("views/common/errorPage.jsp");
         } finally {
  
         }

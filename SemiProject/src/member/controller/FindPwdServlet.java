@@ -2,11 +2,13 @@ package member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
@@ -36,7 +38,19 @@ public class FindPwdServlet extends HttpServlet {
 		
 		int result = new MemberService().findPwd(new Member(userId, userPwd));
 		
-		System.out.println(result);
+		if(result > 0) {
+			HttpSession session = request.getSession();
+			session.setAttribute("findMail", userId);
+			session.setAttribute("randomPwd", userPwd);
+			session.setMaxInactiveInterval(10);
+			
+			RequestDispatcher view = request.getRequestDispatcher("sendmail.me");
+			view.forward(request, response);
+		}else {
+			request.setAttribute("msg", "임시 비밀번호 생성 실패");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
+		}
 		
 	}
 
