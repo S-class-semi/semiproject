@@ -50,13 +50,13 @@ public class NoticeDao {
 
 			while(rs.next()) {
 				Notice no = new Notice(rs.getInt("B_NO"),
-						rs.getString("USER_ID"),
 						rs.getInt("B_TYPE"),
 						rs.getString("B_TITLE"),
 						rs.getString("B_TEXT"),
-						rs.getDate("B_TIME"),
+						rs.getString("USER_ID"),
 						rs.getInt("B_COUNT"),
-						rs.getString("B_FLOG"));	
+						rs.getDate("B_TIME")
+						);	
 				arr.add(no);		
 			}
 
@@ -77,11 +77,12 @@ public class NoticeDao {
 
 		String query = prop.getProperty("insertNotice");
 
-		try { pstmt = conn.prepareStatement(query); 
+		try { 
+		pstmt = conn.prepareStatement(query); 
 		pstmt.setString(1,n.getB_TITLE());
-		pstmt.setString(2, n.getB_TEXT());
+		pstmt.setString(2,n.getB_TEXT());
 		pstmt.setString(3,n.getUSER_ID());
-		pstmt.setDate(4, n.getB_TIME());
+		
 
 		result = pstmt.executeUpdate();
 
@@ -92,6 +93,36 @@ public class NoticeDao {
 		}
 		return result;
 		}
+
+	public Notice selectNotice(Connection conn, int bNO) {
+		PreparedStatement pstmt =null;
+		ResultSet rs =null;
+		Notice notice =null;
+		String query =prop.getProperty("selectNotice");
+		try {
+			pstmt=conn.prepareStatement(query);
+			pstmt.setInt(1, bNO);
+			rs =pstmt.executeQuery();
+			
+			while(rs.next()) {
+				notice =new Notice(rs.getInt("B_NO"),
+						rs.getInt("B_TYPE"),
+						rs.getString("B_TITLE"),
+						rs.getString("B_TEXT"),
+						rs.getString("USER_ID"),
+						rs.getInt("B_COUNT"),
+						rs.getDate("B_TIME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);ssss
+			close(pstmt);
+		}
+		
+		return notice;
+	}
 
 
 	/*

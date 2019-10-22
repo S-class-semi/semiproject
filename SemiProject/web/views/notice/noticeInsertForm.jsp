@@ -35,19 +35,12 @@
 		<div class="tableArea">
 			<form action="<%=request.getContextPath() %>/insert.no" method="post">
 				<table>
+			
 					<tr>
+
 						<td>제목</td>
 						<td colspan="3"><input type="text" size="50" name="title"></td>
-					</tr>
-					<tr>
-						<td>작성자</td>
-						<td>
- 							<%--<input type="text" value="<%=loginUser.getUserName() %>" name="writer" readonly>
-							<input type="hidden" value="<%=loginUser.getUserId() %>" name="userId"> --%>
-							<!-- 화면에는 안보이지만 값을 servlet으로 넘겨 줄려고 하면 hidden태그 활용하자! -->
-						</td>	
-
-						<td></td>
+						
 					</tr>
 					<tr>
 						<td>내용</td>
@@ -61,7 +54,7 @@
 				<br>
 				<div align="center">
 					<button type="reset">취소하기</button>	
-					<!-- 사용자가 입력을 잘못 하면 입력했던 내용을 지워줄 수 있게 reset타입 button만들자! -->
+
 					<button type="submit">등록하기</button>				
 				</div>
 				<!-- InsertNoticeServlet 만들러 ㄱㄱ씽! -->

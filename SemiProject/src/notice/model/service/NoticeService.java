@@ -39,6 +39,12 @@ public class NoticeService {
 		
 		return result;
 	}
+	public Notice selectNotice(int bNO) {
+		Connection conn =getConnection();
+		Notice notice =new NoticeDao().selectNotice(conn,bNO);
+		
+		return notice;
+	}
 	
 	
 	

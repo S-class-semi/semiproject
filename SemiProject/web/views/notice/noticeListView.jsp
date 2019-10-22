@@ -53,7 +53,7 @@
 				<tr>
 					<th>글번호</th>
 					<th width="300px">제목</th>
-					<th width="100px">작성자</th>
+					
 					<th>조회수</th>
 					<th width="100px">작성일</th>
 				</tr>
@@ -66,7 +66,7 @@
 					<tr>
 						<td><%= no.getB_NO() %></td>
 						<td style="text-align:left"><%= no.getB_TITLE() %></td>
-						<td><%= no.getUSER_ID() %></td>
+					
 						<td><%= no.getB_COUNT() %></td>
 						<td><%= no.getB_TIME() %></td>
 					</tr>
