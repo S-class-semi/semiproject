@@ -21,7 +21,7 @@
 	input{
 		margin-top: 2px;
 	}
-	#idCheck, #goMain, #joinBtn{
+	#idCheck, #joinBtn{
 		background: rgb(160, 200, 220);
 		border-radius: 5px;
 		width: 80px;
@@ -32,10 +32,13 @@
 	#joinBtn{
 		background: hotpink;
 		color: white;
-	}
-	#joinBtn, #goMain{
 		display: inline-block;
-	}	
+	}
+	.joinBtn{
+		width: 200px;
+		margin-left: auto;
+		margin-right: auto;
+	}
 </style>
 </head>
 <body>
@@ -47,7 +50,7 @@
 		<h2 align = "center">회원가입</h2>
 
 		<form id="joinForm" action="<%=request.getContextPath()%>/insert.me" method="post" onsubmit = "toEnabled()">
-			<table>
+			<table align = "center">
 				<tr>
 					<td>* 아이디(이메일)</td>
 				</tr>
@@ -114,19 +117,13 @@
 				</tr>
 			</table>
 
-			<div class="btns" align="center">
-				<input type="button" id="goMain" onclick="goMain();" value = "메인으로">
+			<div class="joinBtn">
 				<input type="submit" id="joinBtn" value="가입하기">
-
 			</div>
 		</form>
 	</div>
 	
 	<script>
-		// 메인으로
-		function goMain(){
-			location.href = "<%= request.getContextPath() %>/index.jsp";
-		}
 		
 		// 처음 시작할 때 naver.com으로
 		$(function(){
@@ -179,7 +176,7 @@
 							if(data == "fail"){
 								$("#checkId").html('');
 								$("#checkId").html("아이디가 중복됩니다").css("color", "red");
-								userId.focus();
+								idUsable = false;
 							}else{
 								$("#checkId").html('');
 								$("#checkId").html("아이디 사용 가능합니다").css("color", "green");
@@ -262,6 +259,7 @@
 							if(data == "fail"){
 								$("#nickTF").html('');
 								$("#nickTF").html("이미 존재하는 별명입니다").css("color", "red");
+								nickUsable = false;
 							}else{
 								$("#nickTF").html('');
 								$("#nickTF").html("사용 가능한 별명입니다").css("color", "green");

@@ -93,10 +93,10 @@
 			</div>
 			<br>
 			
-			<div id = "kakao">
+			<!-- <div id = "kakao">
 			<a id="kakao-login-btn"></a>
 			<a href="http://developers.kakao.com/logout"></a>
-			</div>
+			</div> -->
 		</form>
 		
 
