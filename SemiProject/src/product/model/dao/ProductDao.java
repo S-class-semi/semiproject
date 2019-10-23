@@ -80,33 +80,7 @@ public class ProductDao {
 		return listCount;
 	}
 
-	/*
-	 * public ArrayList<ProductInfo> selectProList(Connection conn, int currentPage,
-	 * int limit) { PreparedStatement pstmt = null; ResultSet rs= null;
-	 * 
-	 * ArrayList<ProductInfo> list =null;
-	 * 
-	 * String query = prop.getProperty("selectProList");
-	 * 
-	 * int startRow = (currentPage -1) * limit + 1;
-	 * 
-	 * int endRow = startRow + limit -1;
-	 * 
-	 * 
-	 * try { pstmt = conn.prepareStatement(query); pstmt.setInt(1, startRow);
-	 * pstmt.setInt(2, endRow);
-	 * 
-	 * rs=pstmt.executeQuery();
-	 * 
-	 * list = new ArrayList<ProductInfo>(); //초기값 잡아 놓자
-	 * 
-	 * while(rs.next()) { ProductInfo p = new ProductInfo(rs.getInt("ROWNUM"),
-	 * rs.getString("P_CODE"), rs.getString("PRO_CODE"), rs.getString("P_NAME"),
-	 * rs.getString("P_PRICE"), rs.getString("P_INFO"), rs.getString("C_NAME"));
-	 * 
-	 * list.add(p); } } catch (SQLException e) { e.printStackTrace(); } finally {
-	 * close(pstmt); close(rs); } return list; }
-	 */
+	
 	public ProductInfo selectProduct(Connection conn, String c_code) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -141,7 +115,7 @@ public class ProductDao {
 		
 		return p;
 	}
-	public ArrayList<ProductInfo> selectProList(Connection conn, int currentPage, int limit, String com_name) {
+	public ArrayList<ProductInfo> selectProList(Connection conn, int currentPage, int limit, String c_name) {
 		PreparedStatement pstmt = null;
 		ResultSet rs= null;
 		
@@ -158,7 +132,7 @@ public class ProductDao {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			pstmt.setString(3, com_name);
+			pstmt.setString(3, c_name);
 			
 			rs=pstmt.executeQuery();
 			

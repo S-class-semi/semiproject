@@ -30,20 +30,23 @@ public class CompanyNameCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		String c_name = request.getParameter("c_name");
 		System.out.println(c_name);
-		int result = new CompanyService().idCheck(c_name);
+		int result = new CompanyService().nameCheck(c_name);
 
 		PrintWriter out = response.getWriter();
 
 		if (result > 0) {
-			out.append("fail"); // print 대신 append 해도 된다
-		} else {
+			out.append("fail"); // print 대신 append 해도 된다 } else {
+		
+		}else {
 			out.append("success");
 		}
 
 		out.flush();
 		out.close();
+
 	}
 
 	/**

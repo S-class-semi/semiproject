@@ -31,7 +31,7 @@ public class CompanyNumberCheckServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int c_number = Integer.valueOf(request.getParameter("c_number"));
+		String c_number = request.getParameter("c_number");
 		System.out.println(c_number);
 		int result = new CompanyService().idCheck(c_number);
 

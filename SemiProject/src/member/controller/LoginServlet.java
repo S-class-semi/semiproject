@@ -51,7 +51,6 @@ public class LoginServlet extends HttpServlet {
 			if(userT==2) {
 				Company companyinfo  = new CompanyService().companyInfo(userId);
 				session = request.getSession();
-				session.setAttribute("loginUser", loginUser);
 				session.setAttribute("companyinfo",companyinfo);
 				view = request.getRequestDispatcher("views/company/companyMenubar.jsp");
 				view.forward(request, response);

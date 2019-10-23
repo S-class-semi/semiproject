@@ -20,7 +20,7 @@ public class CompanyService {
 		return result;
 	}
 
-	public int idCheck(int c_number) {
+	public int idCheck(String c_number) {
 		Connection conn = getConnection();
 		int result = new CompanyDao().idCheck(conn, c_number);
 		
@@ -29,13 +29,7 @@ public class CompanyService {
 		return result;
 	}
 
-	public int idCheck(String c_name) {
-		Connection conn = getConnection();
-		int result = new CompanyDao().idCheck(conn,c_name);
-		
-		close(conn);
-		return result;
-	}
+
 
 	public int admission(Company companyAdmission) {
 		Connection conn = getConnection();
@@ -72,6 +66,14 @@ public class CompanyService {
 		
 		close(conn);
 		return com;
+	}
+
+	public int nameCheck(String c_name) {
+		Connection conn = getConnection();
+		int result = new CompanyDao().nameCheck(conn,c_name);
+
+		close(conn);
+		return result;
 	}
 
 

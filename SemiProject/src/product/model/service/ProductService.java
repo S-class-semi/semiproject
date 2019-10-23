@@ -59,9 +59,9 @@ public class ProductService {
 		return productinfo;
 	}
 
-	public ArrayList<ProductInfo> selectProList(int currentPage, int limit, String com_name) {
+	public ArrayList<ProductInfo> selectProList(int currentPage, int limit, String c_name) {
 		Connection conn = getConnection();
-		ArrayList<ProductInfo> list = new ProductDao().selectProList(conn,currentPage,limit,com_name);
+		ArrayList<ProductInfo> list = new ProductDao().selectProList(conn,currentPage,limit,c_name);
 		
 		close(conn);
 		return list;

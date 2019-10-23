@@ -35,15 +35,14 @@ public class ProductListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
 		
 		HttpSession user = request.getSession();
 		Company cominfo = (Company) user.getAttribute("companyinfo");
-		
-		String com_name = cominfo.getC_name();
+
+		String c_name = cominfo.getC_name();
 		ProductService pService = new ProductService();
 		//두개의 서비스를 호출 
-		
 		int pListCount = pService.getListCount();
 		//상품의 갯수를 가져와야 되니 만들어준다.
 		System.out.println(pListCount);
@@ -98,7 +97,7 @@ public class ProductListServlet extends HttpServlet {
 				
 				//상품 리스트 조회해오기
 				
-				ArrayList<ProductInfo> pList = pService.selectProList(currentPage,limit,com_name);
+				ArrayList<ProductInfo> pList = pService.selectProList(currentPage,limit,c_name);
 				System.out.println(pList);
 				
 				
@@ -108,10 +107,12 @@ public class ProductListServlet extends HttpServlet {
 					view = request.getRequestDispatcher("views/product/prodcutListView.jsp");
 					request.setAttribute("pList", pList);
 					request.setAttribute("pi", pi);
+					view.forward(request, response);
 				}else {
 					request.setAttribute("msg", "실패");
+					view.forward(request, response);
 				}
-				view.forward(request, response);
+				
 		
 	}
 

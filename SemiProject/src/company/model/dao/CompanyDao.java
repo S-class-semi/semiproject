@@ -63,7 +63,7 @@ public class CompanyDao {
 		
 		return compnay;
 	}
-	public int idCheck(Connection conn, int c_number) {
+	public int idCheck(Connection conn, String c_number) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int result = 0;
@@ -72,7 +72,7 @@ public class CompanyDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setInt(1, c_number);
+			pstmt.setString(1, c_number);
 			
 			rs = pstmt.executeQuery();
 			
@@ -89,32 +89,7 @@ public class CompanyDao {
 		
 		return result;
 	}
-	public int idCheck(Connection conn, String c_name) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int result = 0;
-		
-		String query = prop.getProperty("c_nameCheck");
-		
-		try {
-			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, c_name);
-			
-			rs = pstmt.executeQuery();
-			
-			if(rs.next()) {
-				result = rs.getInt(1);	// 1은 의미상 resultSet 테이블의 첫 번째 컬럼명이랑 동일함
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}	finally {
-			close(pstmt);
-			close(rs);
-		}
-		
-		return result;
-	}
+
 	public int admission(Connection conn, Company company) {
 		PreparedStatement pstmt = null;
 
@@ -127,11 +102,11 @@ public class CompanyDao {
 			pstmt.setString(1, company.getUserid());
 			pstmt.setString(2, company.getC_name());
 			pstmt.setInt(3, company.getUser_t());
-			pstmt.setInt(4, Integer.valueOf(company.getC_number()));
+			pstmt.setString(4, company.getC_number());
 			pstmt.setString(5, company.getC_add());
-			pstmt.setInt(6, Integer.valueOf(company.getC_phone()));
+			pstmt.setString(6, company.getC_phone());
 			pstmt.setString(7, company.getC_manager());
-			pstmt.setInt(8, Integer.valueOf(company.getC_contact()));
+			pstmt.setString(8, company.getC_contact());
 			pstmt.setString(9, company.getC_email());
 			pstmt.setString(10, company.getC_flog());
 			
@@ -156,9 +131,9 @@ public class CompanyDao {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, company.getC_add());
-			pstmt.setInt(2, Integer.valueOf(company.getC_phone()));
+			pstmt.setString(2,company.getC_phone());
 			pstmt.setString(3, company.getC_manager());
-			pstmt.setInt(4, Integer.valueOf(company.getC_contact()));
+			pstmt.setString(4, company.getC_contact());
 			pstmt.setString(5, company.getC_email());
 			pstmt.setString(6, company.getC_name());
 			
@@ -175,6 +150,33 @@ public class CompanyDao {
 		PreparedStatement pstmt = null;
 		
 		return null;
+	}
+	public int nameCheck(Connection conn, String c_name) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		String query = prop.getProperty("c_nameCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, c_name);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);	// 1은 의미상 resultSet 테이블의 첫 번째 컬럼명이랑 동일함
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return result;
+
 	}
 
 

@@ -133,8 +133,17 @@
 		}).mouseout(function(){
 			$(this).parent().css({"background":"#dcdcdc"});
 		}).click(function(){
-			var c_code=$(this).parent().children().eq(2).text();
-			location.href= " <%=request.getContextPath() %>/detail.pro?c_code=" + c_code;
+			
+			
+				var c_code=$(this).parent().children().eq(2).text();
+		 		if(c_code==[]){
+		 			
+		 		}else{
+		 			location.href= " <%=request.getContextPath() %>/detail.pro?c_code=" + c_code;	
+					
+		 		}
+					
+				
 		});
 	});
 </script>
