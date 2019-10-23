@@ -1,8 +1,6 @@
 package notice.controller;
 
 import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,16 +11,16 @@ import notice.model.service.NoticeService;
 import notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NocticeDetailServlet
+ * Servlet implementation class NotcieUpdateServlet
  */
-@WebServlet("/detail.no")
-public class NocticeDetailServlet extends HttpServlet {
+@WebServlet("/update.no")
+public class NotcieUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NocticeDetailServlet() {
+    public NotcieUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +29,15 @@ public class NocticeDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int nno =Integer.valueOf(request.getParameter("no"));
-		Notice notice=new NoticeService().selectNotice(nno);
-		
-		RequestDispatcher view = null;
-		if(notice!=null) {
-			view = request.getRequestDispatcher("views/notice/noticeDetailView1.jsp");
-			request.setAttribute("notice", notice);
-		}else {
-			view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			request.setAttribute("msg", "공지사항 조회에 실패했습니다.");
-		}
-		
-		view.forward(request, response);
+		request.setCharacterEncoding("utf-8");
+		String title =request.getParameter("title");
+		String content = request.getParameter("content");
+		int nno = Integer.parseInt(request.getParameter("nno"));
+		Notice n =new Notice();
+		n.setB_TITLE(title);
+		n.setB_TEXT(content);
+		n.setB_NO(nno);
+		int result =new NoticeService().updateNotice(n);
 	}
 
 	/**

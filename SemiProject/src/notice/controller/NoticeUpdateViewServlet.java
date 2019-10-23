@@ -13,16 +13,16 @@ import notice.model.service.NoticeService;
 import notice.model.vo.Notice;
 
 /**
- * Servlet implementation class NocticeDetailServlet
+ * Servlet implementation class NoticeUpdateViewServlet
  */
-@WebServlet("/detail.no")
-public class NocticeDetailServlet extends HttpServlet {
+@WebServlet("/updateView.no")
+public class NoticeUpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NocticeDetailServlet() {
+    public NoticeUpdateViewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +31,21 @@ public class NocticeDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int nno =Integer.valueOf(request.getParameter("no"));
-		Notice notice=new NoticeService().selectNotice(nno);
+		int nno = Integer.valueOf(request.getParameter("no"));
+		
+		Notice notice = new NoticeService().selectNotice(nno);
+		
 		
 		RequestDispatcher view = null;
-		if(notice!=null) {
-			view = request.getRequestDispatcher("views/notice/noticeDetailView1.jsp");
+		if(notice != null) {
+			view=request.getRequestDispatcher("views/notice/noticeUpdateView.jsp");
 			request.setAttribute("notice", notice);
 		}else {
-			view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			request.setAttribute("msg", "공지사항 조회에 실패했습니다.");
+			view=request.getRequestDispatcher("views/common/errorPage.jsp");
+			request.setAttribute("msg", "공지사항  실패");
 		}
-		
 		view.forward(request, response);
+
 	}
 
 	/**

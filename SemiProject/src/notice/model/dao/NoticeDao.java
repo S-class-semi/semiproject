@@ -33,7 +33,7 @@ public class NoticeDao {
 	}
 
 	public ArrayList<Notice> selectList(Connection conn) {
-		// 이건 Statement로 한번 해보자~
+		
 		Statement stmt = null;
 		ResultSet rs = null;
 
@@ -94,14 +94,14 @@ public class NoticeDao {
 		return result;
 		}
 
-	public Notice selectNotice(Connection conn, int bNO) {
+	public Notice selectNotice(Connection conn, int nno) {
 		PreparedStatement pstmt =null;
 		ResultSet rs =null;
 		Notice notice =null;
 		String query =prop.getProperty("selectNotice");
 		try {
 			pstmt=conn.prepareStatement(query);
-			pstmt.setInt(1, bNO);
+			pstmt.setInt(1, nno);
 			rs =pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -124,28 +124,32 @@ public class NoticeDao {
 		return notice;
 	}
 
+	public int updateNotice(Connection conn, Notice n) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1,  n.getB_TITLE());
+			pstmt.setString(2,  n.getB_TEXT());
+			pstmt.setInt(3,  n.getB_NO());
 
-	/*
-	 * public Notice selectNotice(Connection conn, int nno) { PreparedStatement
-	 * pstmt = null; ResultSet rs = null;
-	 * 
-	 * Notice notice = null;
-	 * 
-	 * String query = prop.getProperty("selectNotice");
-	 * 
-	 * try { pstmt = conn.prepareStatement(query); pstmt.setInt(1, nno); rs =
-	 * pstmt.executeQuery();
-	 * 
-	 * while(rs.next()) { notice = new Notice(rs.getInt("B_NO"),
-	 * rs.getString("USER_ID"), rs.getInt("B_TYPE"), rs.getString("B_TTITLE"),
-	 * rs.getString("B_TEXT"), rs.getDate("B_TIME"), rs.getInt("B_COUNT"),
-	 * rs.getString("B_FLOG")); }
-	 * 
-	 * } catch (SQLException e) { e.printStackTrace(); } finally { close(rs);
-	 * close(pstmt); }
-	 * 
-	 * return notice; }
-	 */
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+
+		return result;
+	}
+
+
+	
 
 
 

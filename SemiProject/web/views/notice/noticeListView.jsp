@@ -100,7 +100,13 @@
 	</div>
 	
 	<script>
-		/* 공지사항 리스트에 이벤트를 달아주자 */
+	$(function(){
+		$("#listArea td").click(function(){
+			var num = $(this).parent().children().eq(0).text();	
+			
+			location.href="<%=request.getContextPath()%>/detail.no?no="+num;
+		});
+	});
 		
 				//이제 NoticeDetailServlet 만들러 ㄱㄱ씽!
 		
