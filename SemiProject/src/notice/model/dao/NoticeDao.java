@@ -117,7 +117,7 @@ public class NoticeDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			close(rs);ssss
+			close(rs);
 			close(pstmt);
 		}
 		
