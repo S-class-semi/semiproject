@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
-<%--     
+    pageEncoding="UTF-8" import = "member.model.vo.Member" %>
+     
 <%
-   UserInfo loginUser = (UserInfo)session.getAttribute("loginUser");
-
-   /* ArrayList<surveyList> rlist = (ArrayList<surveyList>)request.getAttribute("rlist"); */
-
-%> --%>
+   Member loginUser = (Member)session.getAttribute("loginUser");
+%>
     
 <!DOCTYPE html>
 <html>
@@ -27,21 +24,6 @@
     <link rel="stylesheet" href="css/slick.css">
     <link rel="stylesheet" href="css/lightgallery.css">
 
-    <!-- Facebook meta tags -->
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content="반응형 사이트 만들기(title)" />
-    <meta property="og:url" content="http://richclub8.dothome.co.kr/responsive/html5/index.html" />
-    <meta property="og:image" content="http://richclub8.dothome.co.kr/assets/ico/icon.png" />
-    <meta property="og:site_name" content="반응형 사이트 만들기(site_name)" />
-    <meta property="og:description" content="반응형 사이트 따라하기(description)" />
-
-    <!-- twitter meta tags -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@webstoryboy" />
-    <meta name="twitter:title" content="반응형 사이트 만들기(title)" />
-    <meta name="twitter:description" content="반응형 사이트 만들기(description)." />
-    <meta property="twitter:image" content="http://richclub8.dothome.co.kr/assets/ico/icon.png" />
-
     <!-- 파비콘 -->
     <link rel="shortcut icon" href="icon/favicon.ico">
     <link rel="apple-touch-icon-precomposed" href="icon/favicon-152.png">
@@ -57,13 +39,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nanum+Brush+Script" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
 
-    <!-- HTLM5shiv ie6~8 -->
-    <!--[if lt IE 9]> 
-        <script src="js/html5shiv.min.js"></script>
-        <script type="text/javascript">
-            alert("현재 당신이 보는 브라우저는 지원하지 않습니다. 최신 브라우저로 업데이트해주세요!");
-        </script>
-    <![endif]-->
+
     <style>
         /* reset */
         /* 여백 초기화 */
@@ -138,7 +114,6 @@
         /* 헤더 */
         #userHeader{display: inline-block; } 
         
-/*         .header {height: 327px;} */
         .header {height: 200px;} 
         .header .header_menu {text-align: right;}
         .header .header_menu a {color: #fff; padding: 8px 0 6px 10px; display: inline-block; transition: color 0.3s ease; font-family: 'Abel', sans-serif;}
@@ -877,14 +852,10 @@
             <div class="row">
                 <div class="header">
                     <div class="header_menu">
-                    
-<!--                         <a href="http://websedu.tistory.com/">Blog</a>
-                        <a href="https://www.facebook.com/webstoryboys">facebook</a>
-                        <a href="http://richclub8.dothome.co.kr/webstandard/web/index.html">Webstandard</a> -->
 
-                    <%if(true/* loginUser != null */) {%>
+                    <%if(loginUser != null) {%>
                           <div class="userHeader">
-                           <label><%-- <%=loginUser.getUserName() %>  --%>하이? </label>  
+                           <label> <%=loginUser.getNickname() %> 하이? </label>  
                               <a id="myPage" <%-- onclick="location.href='/surveyNow/mypage.me?userId=<%=loginUser.getUserId()%>'" --%>>정보수정</a>
                            <a id="logoutBtn" onclick="logout()">로그아웃</a>                    
                         </div>     
@@ -1036,31 +1007,17 @@
                 <section id="cont_left">
                     <h3 class="ir_su">메뉴 및 게시판 컨텐츠 영역</h3>
                     <article class="column col1">
-                        <h4 class="col_tit">Menu</h4>
-<!-- .col_desc : 메뉴 설명 모두 주석 -->
-                  <!-- <p class="col_desc">Box-shadow를 이용한 마우스 오버 효과 메뉴입니다.</p> -->
-                  <!-- 메뉴 -->
-                  
-<%--              <div class="menu">
-                  <ul>
-                     <li><a href="#" onclick="location.href='/surveyNow/mypage.me?userId=<%=loginUser.getUserId()%>'">마이메뉴 <i class="fa fa-angle-double-right" aria-hidden="true" ></i></a></li>
-                     <li><a href="#">Tutorial <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                     <li><a href="#">WebSite <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                     <li><a href="#">Reference <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                     <li><a href="#">CSS3 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                     <li><a href="#">HTML5 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
-                  </ul>
-               </div>    --%>         
+                        <h4 class="col_tit">Menu</h4>      
 
  
              <div class="menu">
-               <li class="menuTest" value="3"><a>가구 <i class="fa fa-angle-double-right" aria-hidden="true" ></i></a></li>
+               <li class="menuTest" value="3"><a>공지사항 <i class="fa fa-angle-double-right" aria-hidden="true" ></i></a></li>
                   <ul class="contentsTest" >
                      <li class="lowMenu">테이블</li>
                      <li class="lowMenu">의자</li>
                   </ul>
                   
-               <li class="menuTest" value="0"><a>침구 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+               <li class="menuTest" value="0"><a>상품 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
                   <ul class="contentsTest">
                      <li class="lowMenu" onclick = "doSurvey();">설문 참여하기</li>
                      <li class="lowMenu" onclick="makeSurvey();">설문 만들기</li>
@@ -1071,7 +1028,7 @@
                      <li class="lowMenu" onclick="purchaseSurvey();">설문 결제하기</li>
                   </ul>   
                   
-               <li class="menuTest" value="0"><a>패브릭 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
+               <li class="menuTest" value="0"><a>자유게시판 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a></li>
                   <ul class="contentsTest" >
                      <li class="lowMenu">회원 조회</li>
                      <li class="lowMenu">패널 랭킹</li>
@@ -1130,29 +1087,11 @@
                   </div>
                   <!--//게시판2 -->
                </article>
-               <!-- //col2 -->
                     
                     <article class="column col3">
                   <h4 class="col_tit">Blog</h4>
                   <!-- <p class="col_desc">해상도에 따라 이미지를 다르게 표현하는 방법입니다.</p> -->
-                  <!-- blog -->
-                  <div class="blog1">
-                     <h5 class="ir_su">Image1</h5>
-                     <figure>
-                                <img src="image/blog4_@1.jpg" class="img-normal" alt="normal image">
-                                <img src="image/blog4_@2.jpg" class="img-retina" alt="retina image">
-                                <figcaption>위의 이미지에 대한 주석 들어가면됨</figcaption>
-                     </figure>
-                  </div>
-                  <!--//blog -->
-                  <!-- blog2 -->
-                  <div class="blog2 mt15">
-                     <div class="img-retina">
-                         <h5>Image2</h5>
-                     </div>
-                            <p>위의 이미지에 대한 주석 들어가면됨
-                  </div>
-                  <!--//blog2 -->
+                 
                </article>
                <!-- //col3 -->
                 </section>
@@ -1470,60 +1409,8 @@
              }
          ]
       }); */
-         
-        //sns 공유하기
-        $(".facebook").click(function(e){
-            e.preventDefault();
-            window.open('https://www.facebook.com/sharer/sharer.php?u=' +encodeURIComponent(document.URL)+'&t='+encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no, toolbar=no, resizable=yes, scrollbars=yes, height=300, width=600'); 
-        });
-        $(".twitter").click(function(e){
-            e.preventDefault();
-            window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' +encodeURIComponent(document.URL)+'%20-%20'+encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no, toolbar=no, resizable=yes, scrollbars=yes, height=300, width=600');
-        });
+
     </script>
-
-<%--    <script type="text/javascript">
-       function makeSurvey(){
-          location.href = "views/survey/makeSurvey.jsp";
-       }
-       function holdSurvey(){
-          location.href = "<%=request.getContextPath()%>/surveyHoldList.sv?userId=<%=loginUser.getUserId()%>";
-       }
-       function ingSurvey(){
-          location.href = "<%=request.getContextPath()%>/surveyIngList.sv?userId=<%=loginUser.getUserId()%>";
-       }
-       function finishedSurvey(){
-          location.href = "<%=request.getContextPath()%>/surveyFinishedList.sv?userId=<%=loginUser.getUserId()%>";
-       }
-       function deletedSurvey(){
-          location.href = "<%=request.getContextPath()%>/surveyDeletedList.sv?userId=<%=loginUser.getUserId()%>";
-       }
-       function purchaseSurvey(){
-          location.href = "<%=request.getContextPath()%>/surveyPurchaseList.sv?userId=<%=loginUser.getUserId()%>";
-       }
-       function doSurvey(){
-          location.href = "<%=request.getContextPath()%>/surveyListView.sv?userId=<%=loginUser.getUserId()%>";
-       }
-    </script> --%>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

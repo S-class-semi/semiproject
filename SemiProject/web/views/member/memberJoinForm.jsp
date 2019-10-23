@@ -21,23 +21,21 @@
 	input{
 		margin-top: 2px;
 	}
-	#idCheck, #joinBtn{
-		background: rgb(160, 200, 220);
-		border-radius: 5px;
-		width: 80px;
-		height: 25px;
-		text-align: center;
-		color: white;
-	}
 	#joinBtn{
 		background: hotpink;
 		color: white;
 		display: inline-block;
+		text-align: center;
+		width: 300px;
+		height: 50px;
 	}
 	.joinBtn{
-		width: 200px;
 		margin-left: auto;
 		margin-right: auto;
+		text-align: center;
+	}
+	.outer input{
+		
 	}
 </style>
 </head>
@@ -116,7 +114,7 @@
 					</td>
 				</tr>
 			</table>
-
+			<br><br><br>
 			<div class="joinBtn">
 				<input type="submit" id="joinBtn" value="가입하기">
 			</div>
