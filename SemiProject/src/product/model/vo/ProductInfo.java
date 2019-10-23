@@ -15,11 +15,22 @@ public class ProductInfo implements Serializable{
 	private String p_price;
 	private String p_info;
 	private String c_name;
+	
+	
+	
 	public ProductInfo() {
 		super();
 	}
-	
-	
+	public ProductInfo(String p_code, String p_name, String p_price, String p_info, String c_name) {
+		super();
+		this.p_code = p_code;
+		this.p_name = p_name;
+		this.p_price = p_price;
+		this.p_info = p_info;
+		this.c_name = c_name;
+	}
+
+
 	public ProductInfo(int p_number, String p_code, String pro_code, String p_name, String p_price, String p_info,
 			String c_name) {
 		super();
@@ -31,8 +42,10 @@ public class ProductInfo implements Serializable{
 		this.p_info = p_info;
 		this.c_name = c_name;
 	}
-
-
+	
+	
+	
+	
 	public ProductInfo(String p_code, String pro_code, String p_name, String p_price, String p_info, String c_name) {
 		super();
 		this.p_code = p_code;

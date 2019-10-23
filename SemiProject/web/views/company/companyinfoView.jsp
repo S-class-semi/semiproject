@@ -2,13 +2,13 @@
     pageEncoding="UTF-8" import="company.model.vo.*"%>
     
     <%
-    	Company c_info = (Company)request.getAttribute("companyinfo");
-    	String add[] = c_info.getC_add().split("/");
+    	Company c_info = (Company)request.getAttribute("cominfo");
+    	String address[] = c_info.getC_add().split("/");
     	
-    	String addcode1 = add[0]; 
-    	String addcode2 = add[1];
-    	String addcode3 = add[2];
-    	String addcode4 = add[3];
+    	String addcode1 = address[0]; 
+    	String addcode2 = address[1];
+    	String addcode3 = address[2];
+    	String addcode4 = address[3];
     	
     %>
 <!DOCTYPE html>
@@ -40,7 +40,7 @@
 				</tr>
 				<tr>
 					<td><label> 회사명 : </label></td>
-					<td><input type="text" value="<%=c_info.getC_name()%>"
+					<td><input type="text" name = "c_name" value="<%=c_info.getC_name()%>"
 						disabled></td>
 				</tr>
 				<tr>
@@ -74,7 +74,7 @@
 					</td>
 				</tr>
 				<tr>
-				<td><button type = "submit">정보 수정</button></td>
+				<td><button type = "submit" onclick = "chenge()">정보 수정</button></td>
 				<td><button type = "reset">취소</button></td>
 				</tr>
 			</table>
@@ -89,26 +89,26 @@ function on_click(){
         var Postcode =data.postcode;
 		var Address = data.address;
 		var JibunAddress = data.jibunAddress;
-		var Bname = data.bname;
 		
 		console.log(Postcode);
 		console.log(Address);
 		console.log(JibunAddress);
-		console.log(Bname);
 		document.getElementById('postcode').value = Postcode;
 		document.getElementById('roadAddress').value = Address;
 		document.getElementById('jibunAddress').value = JibunAddress;
-		document.getElementById('extraAddress').value = Bname;
 	
 		$("#postcode").attr("readonly","true");
 		$("#roadAddress").attr("readonly","true");
 		$("#jibunAddress").attr("readonly","true");
-		$("#extraAddress").attr("readonly","true");
+
+		autoClose: true;
         }
     
     }).open({autoClose: true});
    
 }
 </script>
+
+
 </body>
 </html>

@@ -38,7 +38,7 @@ public class CompanyInsertServlet extends HttpServlet {
 		Member userlogin = (Member)user.getAttribute("loginUser");
 		
 		String userid = userlogin.getUserId();
-		int user_t = userlogin.getUserG(); //나중에 G와 T변경
+		int user_t = userlogin.getUserT(); //나중에 G와 T변경
 		String c_number = request.getParameter("c_number");
 		String c_name = request.getParameter("c_name");
 		String postcode = request.getParameter("postcode");
@@ -70,8 +70,7 @@ public class CompanyInsertServlet extends HttpServlet {
 		
 		
 		if (companyResult > 0) {
-			request.getRequestDispatcher("views/common/successPage.jsp").forward(request, response);
-			request.setAttribute("msg", "성공했습니다.");
+			request.getRequestDispatcher("views/common/menubar.jsp").forward(request, response);
 		}else {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			request.setAttribute("msg", "실패 했습니다.");

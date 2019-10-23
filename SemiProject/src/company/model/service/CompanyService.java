@@ -52,6 +52,28 @@ public class CompanyService {
 		return result;
 	}
 
+	public int companyUpdate(Company company) {
+		Connection conn = getConnection();
+		
+		int result = new CompanyDao().companyUpdate(conn,company);
+		
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		return result;
+	}
+
+	public Company chenge(String c_name) {
+		Connection conn = getConnection();
+		
+		Company com = new CompanyDao().cheng(conn,c_name);
+		
+		close(conn);
+		return com;
+	}
+
 
 
 }

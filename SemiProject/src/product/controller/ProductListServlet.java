@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import company.model.vo.Company;
 import product.model.service.ProductService;
 import product.model.vo.ProductInfo;
 import product.model.vo.ProductPage;
@@ -33,6 +35,12 @@ public class ProductListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		HttpSession user = request.getSession();
+		Company cominfo = (Company) user.getAttribute("companyinfo");
+		
+		String com_name = cominfo.getC_name();
 		ProductService pService = new ProductService();
 		//두개의 서비스를 호출 
 		
@@ -90,7 +98,7 @@ public class ProductListServlet extends HttpServlet {
 				
 				//상품 리스트 조회해오기
 				
-				ArrayList<ProductInfo> pList = pService.selectProList(currentPage,limit);
+				ArrayList<ProductInfo> pList = pService.selectProList(currentPage,limit,com_name);
 				System.out.println(pList);
 				
 				

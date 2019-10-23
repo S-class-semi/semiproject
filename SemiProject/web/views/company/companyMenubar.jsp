@@ -192,9 +192,9 @@ body {
 		<div class="CompanyInfo1">
 		<fieldset id = "roginuser">
 		<legend align="center">로그인</legend>
-			<label>회사명 : </label><input type= "text" value="<%=companyinfo.getC_name() %>" readonly="readonly" disabled><br>
-			<label>담당자 : </label><input type= "text" value="<%=companyinfo.getC_manager() %>" readonly="readonly" disabled><br> 
-			<label>연락처 : </label><input type= "text" value="<%=companyinfo.getC_phone() %>" readonly="readonly" disabled><br>
+			<label>회사명 : </label><input type= "text" id = "c_name" name = "c_name" value="<%=companyinfo.getC_name() %>" readonly="readonly" disabled><br>
+			<label>담당자 : </label><input type= "text" id = "c_manager" name = "c_manager" value="<%=companyinfo.getC_manager() %>" readonly="readonly" disabled><br> 
+			<label>연락처 : </label><input type= "text" id= "c_contact" name = "c_contact" value="<%=companyinfo.getC_contact() %>" readonly="readonly" disabled><br>
 			<button id="rogout" >로그아웃</button>
 		</fieldset>
 		</div>
@@ -211,11 +211,9 @@ body {
 						<span class="icon-category"></span>상품카테고리
 					</h3>
 					<ul>
-						<li onclick = "ProdcutList()">상품조회</li>
+						<li onclick = "ProdcutList()">상품조회 및 수정</li>
 						<li onclick = "ProductInsert()">상품등록</li>
-						<li onclick = "ProductChange()">상품수정</li>
 						<li onclick = "ProdcutDelete()">상품삭제</li>
-						<li onclick = "ProdcutCount()">상품재고</li>
 					</ul>
 				</li>
 				<li class="active">
@@ -253,7 +251,6 @@ body {
  		<h1> </h1>
 		</div>  -->
 	</div>
-	String c_name = "프로젝트";
 	<script>
 		function C_home(){
 			location.href = "<%=request.getContextPath()%>/views/company/companyMenubar.jsp";
@@ -261,14 +258,8 @@ body {
 		function ProductInsert(){
 			location.href = "<%=request.getContextPath()%>/views/product/prodcutInsertView.jsp";
 		}
-		function ProductChange(){
-			location.href = "<%=request.getContextPath()%>/views/product/prodcutChangeView.jsp";
-		}
 		function ProdcutDelete(){
-			location.href = "<%=request.getContextPath()%>/views/product/prodcutDeleteView.jsp";
-		}
-		function ProdcutCount(){
-			location.href = "<%=request.getContextPath()%>/views/product/prodcutCountView.jsp";
+			location.href = "<%=request.getContextPath()%>/listDelete.pro";
 		}
 		function ProdcutList(){
 			location.href = "<%=request.getContextPath()%>/list.pro";
@@ -280,9 +271,6 @@ body {
 			location.href = "<%=request.getContextPath()%>/views/product/prodcutSales.jsp";
 		}
 	</script>
-	
-					
-
 
 </body>
 </html>

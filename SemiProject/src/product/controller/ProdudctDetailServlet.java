@@ -1,6 +1,7 @@
 package product.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import product.model.service.ProductService;
+import product.model.vo.ProductImgFile;
 import product.model.vo.ProductInfo;
 
 /**
@@ -30,14 +32,22 @@ public class ProdudctDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("잘넘어 오니?");
-		int pro_id = Integer.valueOf(request.getParameter("pro_id"));
+		String c_code =request.getParameter("c_code");
+		System.out.println(c_code);
 		
-		ProductInfo prodcutinfo = new ProductService().selectProduct(pro_id);
+		//상품 정보 값
+		ProductInfo prodcutinfo = new ProductService().selectProduct(c_code);
 		
-		if(prodcutinfo != null) {
-			request.getRequestDispatcher("views/prodcut/productDetailView.jsp").forward(request, response);
-		}
+		ArrayList<ProductImgFile> imgList = new ProductService().selectImgList(c_code);
+		
+		  System.out.println(prodcutinfo);
+		  System.out.println(imgList);
+		  if(prodcutinfo != null) { 
+	      request.setAttribute("prodcutinfo", prodcutinfo);
+	      request.setAttribute("imgList", imgList);
+		  request.getRequestDispatcher("views/product/productDetailView.jsp").forward(request, response);
+		  }
+		 
 	}
 
 	/**

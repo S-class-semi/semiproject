@@ -146,6 +146,36 @@ public class CompanyDao {
 		
 		return result;
 	}
+	public int companyUpdate(Connection conn, Company company) {
+		PreparedStatement pstmt= null;
+		
+		int result = 0 ;
+		
+		String query = prop.getProperty("companyUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, company.getC_add());
+			pstmt.setInt(2, Integer.valueOf(company.getC_phone()));
+			pstmt.setString(3, company.getC_manager());
+			pstmt.setInt(4, Integer.valueOf(company.getC_contact()));
+			pstmt.setString(5, company.getC_email());
+			pstmt.setString(6, company.getC_name());
+			
+			result= pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	public Company cheng(Connection conn, String c_name) {
+		PreparedStatement pstmt = null;
+		
+		return null;
+	}
 
 
 

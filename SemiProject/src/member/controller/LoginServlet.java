@@ -40,26 +40,29 @@ public class LoginServlet extends HttpServlet {
 		Member member = new Member(userId, userPwd);
 		
 		Member loginUser = new MemberService().loginMember(member);
+		System.out.println(loginUser);
+		int userT = loginUser.getUserT();
 		
-		int userG = loginUser.getUserG();
 		RequestDispatcher view= null;
 		HttpSession session =null;
 		
-		if(loginUser != null && (userG==2)){
-			Company companyinfo  = new CompanyService().companyInfo(userId);
-			session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
-			session.setAttribute("companyinfo",companyinfo);
-			view = request.getRequestDispatcher("views/company/companyMenubar.jsp");
-			view.forward(request, response);
-			
-		}else if(loginUser != null) {
-			session = request.getSession();
-			session.setAttribute("loginUser", loginUser);
-			session.setAttribute("userG", userG);
-			response.sendRedirect("index.jsp");
-		} 
-		else{
+
+		if(loginUser != null){
+			if(userT==2) {
+				Company companyinfo  = new CompanyService().companyInfo(userId);
+				session = request.getSession();
+				session.setAttribute("loginUser", loginUser);
+				session.setAttribute("companyinfo",companyinfo);
+				view = request.getRequestDispatcher("views/company/companyMenubar.jsp");
+				view.forward(request, response);
+			}else if(userT==1){
+				session = request.getSession();
+				session.setAttribute("loginUser", loginUser);
+				session.setAttribute("userT", userT);
+				response.sendRedirect("index.jsp");	
+			}
+				
+		}else{
 			request.setAttribute("msg", "로그인 실패");
 			view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);

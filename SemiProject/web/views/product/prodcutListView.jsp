@@ -47,7 +47,7 @@
 <%@ include file = "/views/company/companyMenubar.jsp" %> 
 		<div id="centerbody">
 			<br>
-	<h2 align= "center">게시판</h2>
+	<h2 align= "center">상품 조회</h2>
 	<div class = "tableArea">
 		<table align = "center" id = "listArea">
 			<tr>
@@ -133,19 +133,8 @@
 		}).mouseout(function(){
 			$(this).parent().css({"background":"#dcdcdc"});
 		}).click(function(){
-			var pro_id=$(this).parent().children().eq(1).text();
-			location.href= " <%=request.getContextPath() %>/detail.pro?pro_id=" + pro_id;
-			
-<%-- 			//로그인 한 사람만 이용하도록 하자!
-			<% if(loginUser != null ){%>
-				location.href= " <%=request.getContextPath() %>/detail.bo?bid=" + bid;
-			<% } else{ %>
-				alert("로그인 해야 상세보기가 가능합니다!");
-			<%} %>
-			//BoardDetailServlet 만들러 ㄱㄱ씽
-		 --%>
-			
-			
+			var c_code=$(this).parent().children().eq(2).text();
+			location.href= " <%=request.getContextPath() %>/detail.pro?c_code=" + c_code;
 		});
 	});
 </script>
