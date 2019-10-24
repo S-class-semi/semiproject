@@ -5,10 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
 .outer {
 	width: 900px;
-	height: 700px;
+	height: 1700px;
 	background: #f2f2f2;
 	color: black;
 	margin-left: auto;
@@ -39,7 +40,7 @@ input {
 	text-align: center;
 }
 
-.join {
+/* .join {
 	width: 200px;
 	padding: 12px 20px;
 	margin: 8px 0;
@@ -54,8 +55,7 @@ input {
 }
 .join:focus {
 	box-shadow : 5px 5px 3px 2px #40e0d0;
-	border: 1px solid #40e0d0;
-}
+} */
 
 @keyframes click-wave {
   0% {
@@ -233,25 +233,28 @@ form {
     d: path("M2,2 C21,17 46,25 74,25 C102,25 118,25 120,25");
   }
 }
-
 </style>
 </head>
 <body>
 
-	<%@ include file = "../common/menubar.jsp" %>
 	
 	<div class = "outer">
 		<br>
 		<h2 align = "center">회원가입</h2>
 
 		<form id="joinForm" action="<%=request.getContextPath()%>/insert.me" method="post" onsubmit = "toEnabled()">
-			<table align = "center">
-				<tr>
-					<td>* 아이디(이메일)</td>
-				</tr>
-				<tr>
-					<td>
-						<input id="userId1" name="userId1" class = "join" type="text" oninput = "checkId();" placeholder = "아이디" required autofocus> @ 
+		<div>
+			* 아이디(이메일)
+			<br><br>
+			<label for="inp" class="inp">
+				<input id="userId1" name="userId1" class = "join" type="text" oninput = "checkId();" placeholder = "&nbsp;" required autofocus>
+				<span class="label">아이디(이메일)</span>
+				<svg width="120px" height="26px" viewBox="0 0 120 26">
+				<path d="M0,25 C21,25 46,25 74,25 C102,25 118,25 120,25"></path>
+				</svg>
+				<span class="border"></span>
+			</label>&nbsp;
+						 @ 
 						<input id="userId2" name="userId2" class = "join" type="text" oninput = "checkId();" disabled>&nbsp;&nbsp;
 						<input type = "hidden" id = "userId3" name = "userId3">
 						<select id = "email" name = "email" class = "join">
@@ -261,59 +264,27 @@ form {
                             <option value = "nate.com">nate.com</option>
 							<option value = "1">직접입력</option>
 						</select>
-					</td>
-				</tr>
-					<tr><td><div id = "checkId"></div></td></tr>
-				<tr>
-					<td>* 비밀번호</td>
-				</tr>
-				<tr>
-					<td>8자 이상 영문, 숫자, 특수문자를 사용하세요</td>
-				</tr>
-				<tr>
-					<td><input id="pwd" name="pwd" class = "join" type="password" placeholder = "비밀번호" required></td>
-				</tr>
-					<tr><td><div id = "pwdTest"></div></td></tr>
-				<tr>
-					<td>* 비밀번호 확인</td>
-				</tr>
-				<tr>
-					<td><input id="checkPwd" name="checkPwd" class = "join" type="password" placeholder = "비밀번호 확인" required></td>
-				</tr>
-					<tr><td><div id = "pwdTF"></div></td></tr>
-				<tr>
-					<td>* 별명</td>
-				</tr>
-				<tr>
-					<td>한글, 영문, 숫자만 입력 가능합니다</td>
-				</tr>
-				<tr>
-					<td><input id="nickname" name="nickname" class = "join" type="text" placeholder = "별명" required></td>
-				</tr>
-					<tr><td><div id = "nickTF"></div></td></tr>
-				<tr>
-					<td>* 평수</td>
-				</tr>
-				<tr>
-					<td>
-					<input id="space1" name="space" class="option-input radio" type="radio" value = "1" checked>
-					<label for="space1">1평</label>&nbsp;
-					<input id="space3" name="space" class="option-input radio" type="radio" value = "3">
-					<label for="space3">3평</label>&nbsp;
-					<input id="space5" name="space" class="option-input radio" type="radio" value = "5">
-					<label for="space5">5평</label>&nbsp;
-					<input id="space7" name="space" class="option-input radio" type="radio" value = "7">
-					<label for="space7">7평</label>&nbsp;
-					<input id="space9" name="space" class="option-input radio" type="radio" value = "9">
-					<label for="space9">9평</label>&nbsp;
-					<input id="space10" name="space" class="option-input radio" type="radio" value = "10">
-					<label for="space10">10평</label>
-					</td>
-				</tr>
-			</table>
+					<div id = "checkId"></div>
+				<br><br>
+				</div>
+				<div>
+			* 비밀번호
+			<br>
+			8자 이상 영문, 숫자, 특수문자를 사용하세요
 			<br><br>
+			<label for="inp" class="inp">
+				<input id="pwd" name="pwd" class="join" type="password" placeholder="&nbsp;" required> <span class="label">Label</span>
+				<svg width="120px" height="26px" viewBox="0 0 120 26">
+				<path d="M0,25 C21,25 46,25 74,25 C102,25 118,25 120,25"></path>
+				</svg> <span class="border"></span>
+			</label>
+
+			<!-- <input id="pwd" name="pwd" class = "join" type="password" placeholder = "비밀번호" required> -->
+				<div id = "pwdTest"></div>
+				
 			<div class="joinBtn">
 				<input type="submit" id="joinBtn" value="가입하기">
+			</div>
 			</div>
 		</form>
 	</div>
@@ -422,14 +393,14 @@ form {
 		    var pattern1 = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
 		    var pattern2 = /(\w)\1\1\1/;
 		    
-			if(!pattern1.test(password)){            
+		    if(!pattern1.test(password)){            
 		    	$("#pwdTest").html("영문, 숫자 8자 이상 조합을 사용해야 합니다").css("color", "red");
 		    	
 		    }else if(pattern2.test(password)){
 		    	$("#pwdTest").html("같은 문자를 4번 이상 사용하실 수 없습니다").css("color", "red");
 		    	
 		    }else if(password.search(id) > -1 && id.length > 3){
-		    	$("#pwdTest").html("비밀번호에 아이디가 포함되어 있습니다").css("color", "red");
+		    	$("#pwdTest").html("비밀번호에 아이디가 포함되었습니다").css("color", "red");
 		    	
 		    }else{
 		    	$("#pwdTest").html('');
@@ -479,9 +450,6 @@ form {
 		
 		// 가입버튼 클릭했을 때 실행 함수
 		function invalidJoin(){
-			var pattern1 = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
-		    var pattern2 = /(\w)\1\1\1/;
-		    
 			if($("#userId1").val().length == 0){
 				alert("아이디를 입력하세요");
 				$("#userId1").focus();
@@ -554,24 +522,6 @@ form {
 				return false;
 			}
 			
-			if(!pattern1.test($("#pwd").val())){            
-				alert("비밀번호는 영문, 숫자 8자 이상 조합을 사용해야 합니다");
-		    	$("#pwd").focus();
-		    	return false;
-		    }
-			
-			if(pattern2.test($("#pwd").val())){
-				alert("비밀번호에 같은 문자를 4번 이상 사용하실 수 없습니다");
-		    	$("#pwd").focus();
-		    	return false;
-		    }
-			
-			if($("#pwd").val().search($("#userId1").val()) > -1 && $("#userId1").val().length > 3){
-				alert("비밀번호에 아이디가 포함되어 있습니다");
-		    	$("#pwd").focus();
-		    	return false;
-		    }
-			
 			if(!/^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*$/.test($("#nickname").val())){
 				alert("별명은 한글, 영문, 숫자만 입력 가능합니다");
 				$("#nickname").focus();
@@ -588,5 +538,6 @@ form {
 		}
 	</script>
 	
+
 </body>
 </html>

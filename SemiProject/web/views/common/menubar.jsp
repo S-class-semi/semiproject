@@ -53,18 +53,23 @@
 	.loginArea > form, #userInfo{
 		float: right;
 	}
+	.loginArea{
+	border: 3px solid black;
+	}
 	#userId, #userPwd{
 		width: 200px;
 	}
 	.btns, #loginBtn{
 		display:inline-block
 	}
+
 </style>
 </head>
 <body>
+
+
 	<a href="<%=request.getContextPath() %>/index.jsp"><h1">난 혼자 산다</h1></a>
 	<br>
-
 	<div class="loginArea">
 
 		<% if(loginUser == null){ %>
@@ -139,8 +144,6 @@
 			<div class="menu" onclick="goNotich()">공지사항</div>
 			<div class="menu" onclick="goProduct()">상품카테고리</div>
 			<div class="menu" onclick="goBoard();">자유게시판</div>
-
-
 		</div>
 	</div>
 
