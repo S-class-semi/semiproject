@@ -83,7 +83,8 @@ public class MemberDao {
 										rs.getString("CONTEXT"),
 										rs.getDate("BIRTH"),
 										rs.getString("GENDER"),
-										rs.getString("STATUS"));
+										rs.getString("STATUS"),
+										rs.getString("KAKAO"));
 			}
 			
 		} catch (SQLException e) {
@@ -119,7 +120,8 @@ public class MemberDao {
 									rs.getString("CONTEXT"),
 									rs.getDate("BIRTH"),
 									rs.getString("GENDER"),
-									rs.getString("STATUS"));
+									rs.getString("STATUS"),
+									rs.getString("KAKAO"));
 			}
 			
 		} catch (SQLException e) {
@@ -206,6 +208,96 @@ public class MemberDao {
 		}
 		
 		return result;
+	}
+
+	public int kakaoCheck(Connection conn, String kakaoId) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		String query = prop.getProperty("kakaoCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, kakaoId);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt(1);	// 1은 의미상 resultSet 테이블의 첫 번째 컬럼명이랑 동일함
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return result;
+	}
+
+	public int kakaoMember(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("kakaoMember");
+		try {
+			
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, m.getUserId());
+			pstmt.setString(2, m.getNickname());
+			pstmt.setInt(3, m.getSpace());
+			pstmt.setString(4, m.getKakao());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public Member kakaoLogin(Connection conn, Member m) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		Member loginUser = null;
+		
+		String query = prop.getProperty("kakaoLogin");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, m.getKakao());
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				loginUser = new Member(rs.getString("USER_ID"),
+										rs.getInt("USER_G"),
+										rs.getInt("USER_T"),
+										rs.getString("USER_PWD"),
+										rs.getString("NICKNAME"),
+										rs.getInt("SPACE"),
+										rs.getInt("POINT"),
+										rs.getString("CONTEXT"),
+										rs.getDate("BIRTH"),
+										rs.getString("GENDER"),
+										rs.getString("STATUS"),
+										rs.getString("KAKAO"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return loginUser;
 	}
 
 }

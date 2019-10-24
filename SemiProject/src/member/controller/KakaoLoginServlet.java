@@ -8,21 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class MyPageServlet
+ * Servlet implementation class KakaoLoginServlet
  */
-@WebServlet("/mypage.me")
-public class MyPageServlet extends HttpServlet {
+@WebServlet("/kakaologin.me")
+public class KakaoLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageServlet() {
+    public KakaoLoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +32,27 @@ public class MyPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
+		String kakaoId = request.getParameter("kakaoId");
 		
-		Member member = new MemberService().selectMember(userId);
-		System.out.println(member);
-		RequestDispatcher view = null;
-		if(member != null) {
-			view = request.getRequestDispatcher("findpwd.me");
-			request.setAttribute("member", member);
+		Member member = new Member(kakaoId);
+		
+		Member loginUser = new MemberService().kakaoLogin(member);
+		
+		response.setContentType("text/html;charset=utf-8");
+		
+		int userT = 0;
+		if(loginUser != null) {
+			userT = loginUser.getUserT();
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("userT", userT);
+			response.sendRedirect("index.jsp");
 		}else {
-			view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			request.setAttribute("msg", "조회에 실패했습니다.");
+			request.setAttribute("msg", "로그인 실패");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}
-		
-		view.forward(request, response);
 	}
 
 	/**

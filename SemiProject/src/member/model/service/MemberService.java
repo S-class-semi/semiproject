@@ -78,4 +78,40 @@ public class MemberService {
 		return result;
 	}
 
+	public int kakaoCheck(String kakaoId) {
+		Connection conn = getConnection();
+		int result = new MemberDao().kakaoCheck(conn, kakaoId);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int kakaoMember(Member m) {
+		Connection conn = getConnection();
+
+		int result = new MemberDao().kakaoMember(conn, m);
+
+		if(result > 0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public Member kakaoLogin(Member m) {
+		Connection conn = getConnection();
+		
+		Member loginUser = new MemberDao().kakaoLogin(conn, m);
+		
+		close(conn);
+		
+		return loginUser;
+	}
+
+
 }

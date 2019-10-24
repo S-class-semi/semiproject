@@ -13,16 +13,16 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class MyPageServlet
+ * Servlet implementation class InsertKakaoServlet
  */
-@WebServlet("/mypage.me")
-public class MyPageServlet extends HttpServlet {
+@WebServlet("/kakao.me")
+public class InsertKakaoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageServlet() {
+    public InsertKakaoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,17 +31,26 @@ public class MyPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
+		request.setCharacterEncoding("utf-8");
+		String userId = request.getParameter("userId3");
+		String nickname = request.getParameter("nickname");
+		int space = Integer.valueOf(request.getParameter("space"));
+		String kakaoId = request.getParameter("kakaoId");
 		
-		Member member = new MemberService().selectMember(userId);
-		System.out.println(member);
+		Member member = new Member(userId, nickname, space, kakaoId);
+
+		
+		int result = new MemberService().kakaoMember(member);
+		
 		RequestDispatcher view = null;
-		if(member != null) {
-			view = request.getRequestDispatcher("findpwd.me");
-			request.setAttribute("member", member);
+		
+		if(result > 0) {
+			view = request.getRequestDispatcher("index.jsp");
+			request.setAttribute("msg", "회원 가입 성공!");
+			
 		}else {
 			view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			request.setAttribute("msg", "조회에 실패했습니다.");
+			request.setAttribute("msg", "회원 가입 실패!");
 		}
 		
 		view.forward(request, response);

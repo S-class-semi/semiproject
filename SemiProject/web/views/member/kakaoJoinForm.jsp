@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%
+	String kakaoId = request.getParameter("kakaoId");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -242,12 +246,13 @@ form {
 	
 	<div class = "outer">
 		<br>
-		<h2 align = "center">회원가입</h2>
+		<h2 align = "center">추가 정보 입력</h2>
+		
 
-		<form id="joinForm" action="<%=request.getContextPath()%>/insert.me" method="post" onsubmit = "toEnabled()">
+		<form id="joinForm" action="<%=request.getContextPath()%>/kakao.me?kakaoId=<%=kakaoId %>" method="post" onsubmit = "toEnabled()">
 			<table align = "center">
 				<tr>
-					<td>* 아이디(이메일)</td>
+					<td>* 이메일</td>
 				</tr>
 				<tr>
 					<td>
@@ -264,23 +269,7 @@ form {
 					</td>
 				</tr>
 					<tr><td><div id = "checkId"></div></td></tr>
-				<tr>
-					<td>* 비밀번호</td>
-				</tr>
-				<tr>
-					<td>8자 이상 영문, 숫자를 조합하여 입력하세요</td>
-				</tr>
-				<tr>
-					<td><input id="pwd" name="pwd" class = "join" type="password" placeholder = "비밀번호" required></td>
-				</tr>
-					<tr><td><div id = "pwdTest"></div></td></tr>
-				<tr>
-					<td>* 비밀번호 확인</td>
-				</tr>
-				<tr>
-					<td><input id="checkPwd" name="checkPwd" class = "join" type="password" placeholder = "비밀번호 확인" required></td>
-				</tr>
-					<tr><td><div id = "pwdTF"></div></td></tr>
+				
 				<tr>
 					<td>* 별명</td>
 				</tr>
@@ -386,55 +375,6 @@ form {
 			}
 		};
 
-		// 비밀번호 및 비밀번호 확인 일치 체크
-		$(function() {
-			$('#pwd').keyup(function() {
-					$("#pwdTF").html('');
-			});
-
-			$('#checkPwd').keyup(function() {
-				if($('#pwd').val() != $('#checkPwd').val()) {
-					$("#pwdTF").html('');
-					$("#pwdTF").html("비밀번호 불일치").css("color", "red");
-				} else {
-					$("#pwdTF").html('');
-					$("#pwdTF").html("비밀번호 일치").css("color", "green");
-				}
-			});
-		});
-		
-		// 비밀번호 유효성 검사
-		$(function(){
-			$("#pwd").blur(function(){
-				checkPassword($('#pwd').val(),$('#userId1').val());	// 유효성 검사 함수 실행
-				
-				if($('#pwd').val() != $('#checkPwd').val() && $('#checkPwd').val() != "") {	// 비밀번호를 다 썼으면 일치 불일치 뜨게
-					$("#pwdTF").html('');
-					$("#pwdTF").html("비밀번호 불일치").css("color", "red");
-				}
-			});
-		});
-		
-		// 비밀번호 유효성 검사 실행 함수
-		function checkPassword(password,id){
-		    var checkNumber = password.search(/[0-9]/g);
-		    var checkEnglish = password.search(/[a-z]/ig);
-		    var pattern1 = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
-		    var pattern2 = /(\w)\1\1\1/;
-		    
-			if(!pattern1.test(password)){            
-		    	$("#pwdTest").html("영문, 숫자 8자 이상 조합을 사용해야 합니다").css("color", "red");
-		    	
-		    }else if(pattern2.test(password)){
-		    	$("#pwdTest").html("같은 문자를 4번 이상 사용하실 수 없습니다").css("color", "red");
-		    	
-		    }else if(password.search(id) > -1 && id.length > 3){
-		    	$("#pwdTest").html("비밀번호에 아이디가 포함되어 있습니다").css("color", "red");
-		    	
-		    }else{
-		    	$("#pwdTest").html('');
-		    }
-		}
 		
 		// 별명 중복 체크
 		var nickUsable = false;
@@ -488,24 +428,6 @@ form {
 				return false;
 			}
 			
-			if($("#pwd").val().length == 0){
-				alert("비밀번호를 입력하세요");
-				$("#pwd").focus();
-				return false;
-			}
-			
-			if($("#pwd").val().length < 8){
-				alert("비밀번호는 8자 이상이어야 합니다");
-				$("#pwd").focus();
-				return false;
-			}
-			
-			if($("#checkPwd").val().length == 0){
-				alert("비밀번호 확인을 입력하세요");
-				$("#checkPwd").focus();
-				return false;
-			}
-			
 			if($("#nickname").val().length == 0){
 				alert("별명을 입력하세요");
 				$("#nickname").focus();
@@ -515,12 +437,6 @@ form {
 			if(idUsable == false){
 				alert("아이디가 중복됩니다");
 				$("#userId1").focus();
-				return false;
-			}
-			
-			if($("#pwd").val() != $("#checkPwd").val()){
-				alert("비밀번호가 일치하지 않습니다");
-				$("#checkPwd").focus();
 				return false;
 			}
 			
@@ -541,36 +457,6 @@ form {
 				$("#userId1").focus();
 				return false;
 			}
-			
-			if($('#pwd').val().indexOf(" ") >= 0){
-				alert("비밀번호에 공백은 입력할 수 없습니다");
-				$('#pwd').focus();
-				return false;
-			}
-			
-			if($('#checkPwd').val().indexOf(" ") >= 0){
-				alert("비밀번호 확인에 공백은 입력할 수 없습니다");
-				$('#checkPwd').focus();
-				return false;
-			}
-			
-			if(!pattern1.test($("#pwd").val())){            
-				alert("비밀번호는 영문, 숫자 8자 이상 조합을 사용해야 합니다");
-		    	$("#pwd").focus();
-		    	return false;
-		    }
-			
-			if(pattern2.test($("#pwd").val())){
-				alert("비밀번호에 같은 문자를 4번 이상 사용하실 수 없습니다");
-		    	$("#pwd").focus();
-		    	return false;
-		    }
-			
-			if($("#pwd").val().search($("#userId1").val()) > -1 && $("#userId1").val().length > 3){
-				alert("비밀번호에 아이디가 포함되어 있습니다");
-		    	$("#pwd").focus();
-		    	return false;
-		    }
 			
 			if(!/^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*$/.test($("#nickname").val())){
 				alert("별명은 한글, 영문, 숫자만 입력 가능합니다");

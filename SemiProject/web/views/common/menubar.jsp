@@ -67,7 +67,6 @@
 </head>
 <body>
 
-
 	<a href="<%=request.getContextPath() %>/index.jsp"><h1">난 혼자 산다</h1></a>
 	<br>
 	<div class="loginArea">
@@ -98,10 +97,10 @@
 			</div>
 			<br>
 			
-			<!-- <div id = "kakao">
+			<div id = "kakao">
 			<a id="kakao-login-btn"></a>
 			<a href="http://developers.kakao.com/logout"></a>
-			</div> -->
+			</div>
 		</form>
 		
 
@@ -168,6 +167,7 @@
 		
 		// 로그아웃
 		function logout(){
+			Kakao.Auth.logout();
 			location.href = '<%= request.getContextPath() %>/logout.me';
 		}
 		
@@ -237,7 +237,7 @@
 		}
 		
 	</script>
-
+	
 	<script type='text/javascript'>
 	// 사용할 앱의 JavaScript 키를 설정해 주세요.
 	Kakao.init('e955c40a1536d6e04ad9bbc441193544');
@@ -249,10 +249,27 @@
 		Kakao.API.request({
 			url: '/v1/user/me',
 			success: function(res) {
-				console.log(JSON.stringify(res.kaccount_email));
 				console.log(JSON.stringify(res.id));
-				console.log(JSON.stringify(res.properties.profile_image));
-				console.log(JSON.stringify(res.properties.nickname));
+				var kakaoId = JSON.stringify(res.id);
+				
+				$.ajax({
+					url:"<%=request.getContextPath()%>/kakaocheck.me",
+					type:"post",
+					data:{kakaoId:kakaoId},
+					success:function(data){
+						if(data == "o"){
+							alert("이미가입");
+							location.href = '<%= request.getContextPath() %>/kakaologin.me?kakaoId='+kakaoId;
+						}else{
+							alert("가입안됨");
+							location.href = '<%= request.getContextPath() %>/views/member/kakaoJoinForm.jsp?kakaoId='+kakaoId;
+						}
+					},
+					error:function(data){
+						console.log("서버 통신 안됨");
+					}
+				});
+				
 			},
 			fail: function(error) {
 				alert(JSON.stringify(error));
