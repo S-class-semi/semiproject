@@ -73,9 +73,6 @@
 					<%} %>
 				<%} %>  
 			</table>
-			<%{ %>
-			<button onclick="location.href='views/notice/noticeInsertForm.jsp'">작성하기</button>
-			<%} %>
 		</div>
 		
 		<!-- 보통 사이트들에서는 공지사항이나 게시판 아래에 검색하기 기능을 하는 부분이 있다. -->
@@ -116,6 +113,9 @@
 	
 	
 	
+<%-- <%{ %>
+			<button onclick="location.href='views/notice/noticeInsertForm.jsp'">작성하기</button>
+			<%} %> --%>
 	
 	
 	

@@ -56,7 +56,13 @@
 						</td>
 					</tr>
 				</table>
-
+				<br>
+		<%-- 		<div>
+				<%{ %>
+				<button type="submit" onclick="location.href='<%=request.getContextPath()%>/updateView.no?no=<%=n.getB_NO()%>'">수정하기</button>				
+				<%} %>
+				</div>
+ --%>
 </div>
 </div> 
 
