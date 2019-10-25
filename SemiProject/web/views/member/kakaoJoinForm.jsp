@@ -39,8 +39,8 @@ input {
   border-radius: 5px;
   position:relative;
   width: 300px;
-  height:50px;
-  font-size:1.1em;
+  height:40px;
+  font-size:1em;
   padding:0 2em;
   cursor:pointer;
   transition:800ms ease all;

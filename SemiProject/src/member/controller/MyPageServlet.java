@@ -37,7 +37,7 @@ public class MyPageServlet extends HttpServlet {
 		System.out.println(member);
 		RequestDispatcher view = null;
 		if(member != null) {
-			view = request.getRequestDispatcher("findpwd.me");
+			view = request.getRequestDispatcher("마이페이지 연결 주소");
 			request.setAttribute("member", member);
 		}else {
 			view = request.getRequestDispatcher("views/common/errorPage.jsp");
