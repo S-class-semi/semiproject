@@ -101,7 +101,7 @@ public class MemberService {
 		Connection conn = getConnection();
 		
 		int result = new MemberDao().updateGrade(conn,member);
-		
+		System.out.println(result);
 		if(result > 0)
 			commit(conn);
 		else
@@ -111,5 +111,7 @@ public class MemberService {
 		
 		return result;
 	}
+
+	
 
 }

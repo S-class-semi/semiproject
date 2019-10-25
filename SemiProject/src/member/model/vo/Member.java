@@ -15,6 +15,15 @@ public class Member {
 	private String gender;
 	private String status;
 	
+	public Member(String user_Id, int user_G, String nickname, int point, String gender) {
+		super();
+		this.user_Id = user_Id;
+		this.user_G = user_G;
+		this.nickname = nickname;
+		this.point = point;
+		this.gender = gender;
+	}
+
 	public Member(String user_Id, String user_Pwd) {
 		super();
 		this.user_Id = user_Id;

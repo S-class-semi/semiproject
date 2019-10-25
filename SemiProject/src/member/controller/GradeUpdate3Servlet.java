@@ -32,12 +32,14 @@ public class GradeUpdate3Servlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		String userId = request.getParameter("user_Id");
 		int user_G = Integer.parseInt(request.getParameter("user_G"));
-		
+		String nickname = request.getParameter("nickname");
 		int point = Integer.parseInt(request.getParameter("point"));
+		String gender = request.getParameter("gender");
 		
-		int result = new MemberService().updateGrade(new Member(user_G,point));
-		
+		int result = new MemberService().updateGrade(new Member(userId,user_G,nickname,point,gender));
+		System.out.println(result);
 		String page = "";
 		
 		if(result >0) {

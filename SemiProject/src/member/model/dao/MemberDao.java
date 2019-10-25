@@ -350,6 +350,7 @@ public class MemberDao {
 			pstmt.setInt(2, member.getUser_G());
 			pstmt.setInt(3, member.getPoint());
 			pstmt.setString(4, member.getGender());
+			pstmt.setString(5, member.getUser_Id());
 			
 			result = pstmt.executeUpdate();
 			
@@ -364,5 +365,6 @@ public class MemberDao {
 		
 		return result;
 	}
-
 }
+
+	
