@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<script>
 function selectAll(checkFlag) { 
 
 		       var f = document.sendForm; 
