@@ -36,10 +36,15 @@ public class ProductDeleteServler extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String p_code = request.getParameter("p_code");
+		String deletecode = request.getParameter("deletecode");
+		System.out.println(deletecode);
 		
+		String sub[] = deletecode.split("/");
+		
+		String p_code = sub[0];
+		String c_name = sub[1];
 		int result1 = new ProductService().deleteProduct(p_code);
-		int result2 = new ProductService().deleteImgFile(p_code);
+		int result2 = new ProductService().deleteImgFile(p_code,c_name);
 		
 		
 		if(result1 >0 && result2>0) {

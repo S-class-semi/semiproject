@@ -134,12 +134,14 @@
 			$(this).parent().css({"background":"#dcdcdc"});
 		}).click(function(){
 			
-			
-				var c_code=$(this).parent().children().eq(2).text();
-		 		if(c_code==[]){
+				var p_code=$(this).parent().children().eq(2).text();
+				var c_name=$(this).parent().children().eq(6).text();
+				
+				var p_info = p_code + "/" +c_name;
+		 		if(p_code==[]){
 		 			
 		 		}else{
-		 			location.href= " <%=request.getContextPath() %>/detail.pro?c_code=" + c_code;	
+		 			location.href= " <%=request.getContextPath() %>/detail.pro?p_info=" + p_info;	
 					
 		 		}
 					

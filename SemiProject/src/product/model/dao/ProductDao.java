@@ -2,6 +2,7 @@ package product.model.dao;
 
 import static common.JDBCTemplate.close;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -81,7 +82,7 @@ public class ProductDao {
 	}
 
 	
-	public ProductInfo selectProduct(Connection conn, String c_code) {
+	public ProductInfo selectProduct(Connection conn, String p_code) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -91,7 +92,7 @@ public class ProductDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, c_code);
+			pstmt.setString(1, p_code);
 			
 			rs = pstmt.executeQuery();
 			
@@ -180,6 +181,7 @@ public class ProductDao {
 		
 		return result;
 	}
+	
 	public int inserimgFile(Connection conn, ArrayList<ProductImgFile> imgList, String c_name, String p_code) {
 		PreparedStatement pstmt = null;
 		
@@ -192,6 +194,7 @@ public class ProductDao {
 				ProductImgFile file = imgList.get(i);
 				
 				pstmt=conn.prepareStatement(query);
+				
 				pstmt.setString(1, c_name);
 				pstmt.setString(2, p_code);
 				pstmt.setString(3, file.getOrigin_name());
@@ -203,11 +206,11 @@ public class ProductDao {
 			}
 			
 		} catch (SQLException e) {
-			
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
+		System.out.println("삽입분   result값 : " +result);
 		if(result == imgList.size()) {
 			return result;
 		}else {
@@ -215,7 +218,9 @@ public class ProductDao {
 		}
 		
 	}
-	public ArrayList<ProductImgFile> selectImgList(Connection conn, String c_code) {
+	
+	
+	public ArrayList<ProductImgFile> selectImgList(Connection conn, String p_code, String c_name) {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
@@ -225,24 +230,23 @@ public class ProductDao {
 		
 		try {
 			pstmt = conn.prepareStatement(query);
-			pstmt.setString(1, c_code);
-			
+			pstmt.setString(1, p_code);
+			pstmt.setString(2, c_name);
 			rs = pstmt.executeQuery();
 			
 			filelist = new ArrayList<ProductImgFile>();
 			
 			while(rs.next()) {
-				ProductImgFile file = new ProductImgFile();
-				file.setC_name(rs.getString("c_name"));
-				file.setP_code(rs.getString("p_code"));
-				file.setOrigin_name(rs.getString("origin_name"));
-				file.setChange_name(rs.getString("change_name"));
-				file.setFile_path(rs.getString("file_path"));
-				file.setUpload_date(rs.getDate("upload_date"));
-				file.setFile_level(rs.getInt("file_level"));
-				file.setStatus(rs.getString("status"));
-				
+				ProductImgFile file = new ProductImgFile(rs.getString("C_NAME"),
+														rs.getString("P_CODE"),
+														rs.getString("ORIGIN_NAME"),
+														rs.getString("CHANGE_NAME"),
+														rs.getString("FILE_PATH"),
+														rs.getDate("UPLOAD_DATE"),
+														rs.getInt("FILE_LEVEL"),
+														rs.getString("STATUS"));
 				filelist.add(file);
+				System.out.println("파일이 출력되니?" +file);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -253,7 +257,7 @@ public class ProductDao {
 		
 		return  filelist;
 	}
-	public int deleteImgFile(Connection conn, String p_code) {
+	public int deleteImgFile(Connection conn, String p_code, String c_name) {
 		PreparedStatement pstmt = null;
 		
 		int result = 0;
@@ -263,6 +267,7 @@ public class ProductDao {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, p_code);
+			pstmt.setString(2, c_name);
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -273,6 +278,7 @@ public class ProductDao {
 		
 		return result;
 	}
+	
 	public int updateProduct(Connection conn, ProductInfo p_info) {
 		PreparedStatement pstmt= null;
 		
@@ -297,6 +303,73 @@ public class ProductDao {
 			close(pstmt);
 		}
 		
+		return result;
+	}
+	public int p_codeCheck(Connection conn, String p_code) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		int result = 0;
+		String query = prop.getProperty("p_codeCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, p_code);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result= rs.getInt(1);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return result;
+	}
+	public int updateImgfile(Connection conn, String p_code, String c_name) {
+		PreparedStatement pstmt = null;
+	
+		int result = 0;
+		
+		String query = prop.getProperty("updateImg");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, p_code);
+			pstmt.setString(2, c_name);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		return result;
+	}
+	public int updateImgFile(Connection conn, String failedpath) {
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("updateImgFile");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, failedpath);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
 		
 		return result;
 	}

@@ -63,24 +63,19 @@ public class ProdcutUpdateServlet extends HttpServlet {
 			// 다중 파일을 묶어서 업로드(다중파일업로드) 하기 떄문에 컬렉션을 사용
 			// 저장한 파일의 이름을 저장할 ArrayList를 생성하자
 			ArrayList<String> saveFiles = new ArrayList<String>();
-			
-			System.out.println(saveFiles);
-			
+			System.out.println("update부분 saveFiles : "+saveFiles);
 			//원본  파일의 이름을 저장할 ArrayList를 생성하자
 			ArrayList<String> originFiles = new ArrayList<String>();
-			System.out.println(originFiles);
+			System.out.println("update부분 originFiles :" + originFiles);
 			
 			
 			// getFileNames() - 폼에서 전송된 파일 리스들의 name을 반환한다.
 			Enumeration<String> files = multiRequest.getFileNames();
-			System.out.println(files);
-			
-			
+			System.out.println("update부분 files:" + files);
 			while(files.hasMoreElements()) {
-				
 				//전송 순서 역순으로 파일을 가져온다.
 				String name = files.nextElement();
-				
+				System.out.println("update부분 name :" + multiRequest.getOriginalFileName(name));
 				if(multiRequest.getFilesystemName(name) != null) {
 					 // getFilesystemName() - MyRenamePolicy의 rename 메소드에서 작성한대로 rename된 파일명
 					saveFiles.add(multiRequest.getFilesystemName(name));
@@ -89,12 +84,11 @@ public class ProdcutUpdateServlet extends HttpServlet {
 					
 				}
 			}
-			
-			
+			System.out.println("update부분 :" + originFiles);
 			
 			//수정 받아올 데이터 값
 			HttpSession user = request.getSession();
-			Company cominfo = (Company) user.getAttribute("companyinfo");
+			Company cominfo = (Company)user.getAttribute("companyinfo");
 			
 			String c_name = cominfo.getC_name();
 			String p_code = multiRequest.getParameter("p_code");
@@ -103,43 +97,67 @@ public class ProdcutUpdateServlet extends HttpServlet {
 			String p_price = multiRequest.getParameter("p_price");
 			String pro_info = multiRequest.getParameter("p_info");
 			
-			int size = Integer.valueOf(multiRequest.getParameter("size"));
+			//int size = Integer.valueOf(multiRequest.getParameter("size"));
 			
-			System.out.println(size);
+			//System.out.println(size);
 			
 			
 			ProductInfo p_info = new ProductInfo(p_code,pro_code,p_name,p_price,pro_info,c_name);
-
 			
 			ArrayList<ProductImgFile> imgList = new ArrayList<ProductImgFile>();
-			for(int i=originFiles.size()-1;i>=0;i--) {
-				ProductImgFile at = new ProductImgFile();
-				at.setFile_path(savePath);
-				at.setOrigin_name(originFiles.get(i));
-				at.setChange_name(saveFiles.get(i));
-				
-			//타이틀 이미지가 originFiles에서의 마지막 인덱스이기 때문에 다음과 같이 조건을 준 다음에 level을 0으로 지정
-				if( i== originFiles.size()-1) {
-					at.setFile_level(0);
-				}else {
-					at.setFile_level(1);
+			System.out.println("update부분 imgList 값:" + imgList);
+			System.out.println("update부분 originFiles.size() : "+originFiles.size());
+				for(int i=originFiles.size()-1;i>=0;i--) {
+					ProductImgFile at = new ProductImgFile();
+					at.setFile_path(savePath);
+					at.setOrigin_name(originFiles.get(i));
+					at.setChange_name(saveFiles.get(i));
+					
+				//타이틀 이미지가 originFiles에서의 마지막 인덱스이기 때문에 다음과 같이 조건을 준 다음에 level을 0으로 지정
+					if( i== originFiles.size()-1) {
+						at.setFile_level(0);
+					}else {
+						at.setFile_level(1);
+					}
+					imgList.add(at);
 				}
-				imgList.add(at);
-			}
 			
+
+
 			System.out.println(p_info);
 			System.out.println(imgList);
 			
 			
-			int filedelete = new ProductService().deleteImgFile(p_info.getP_code());
-			
-			int fileinsert = new ProductService().insertProduct(p_code,c_name,imgList);
-			
+			System.out.println("뭐야 씨발");
 			int result = new ProductService().updateProduct(p_info);
+			System.out.println(result);
+			
+			int result1 = new ProductService().deleteImgFile(p_code,c_name);
+			
+			System.out.println(result1);
+			
+			if(result>0 && result1 >0) {
+				int result2 = new ProductService().insertProduct(c_name,p_code, imgList);
+				System.out.println("파일삽입 :" +result2);
+				if(result2>0) {
+					response.sendRedirect("list.pro?currentPage=1");
+				}else {
+					for(int i=0;i<saveFiles.size();i++) {
+						File failedFile = new File(savePath + saveFiles.get(i));
+						failedFile.delete();
+					}
+				}
+			
+			}else {
+				
+				request.setAttribute("msg", "실패 했습니다.");
+				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+			}
 			
 			
 			
-			if(result>0 && filedelete >0 && fileinsert>0 ) {
+		/*	
+			if((result>0 && result1>0 && result2>0)||(result>0)) {
 				response.sendRedirect("list.pro?currentPage=1");
 			}else {
 				//실페시 저장된 사진 삭제
@@ -150,7 +168,7 @@ public class ProdcutUpdateServlet extends HttpServlet {
 				request.setAttribute("msg", "실패 했습니다.");
 				request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			}
-			
+			*/
 		
 		}
 		

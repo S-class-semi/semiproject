@@ -57,24 +57,23 @@ public class prodcutInsertServlet extends HttpServlet {
 		String savePath = root +"images/productimg/";
 		
 		MultipartRequest multiRequest = new MultipartRequest(request,savePath,maxSize,"UTF-8",new MyFileRenamePolicy());
-		
+		System.out.println("insert부분 multiRequest" + multiRequest);
 		//2_2. DB에 저장하기 위해ㅔ change_name 과 origin_name 각각의 리슽들을 만들어 주는 작업
 		
 		// 다중 파일을 묶어서 업로드(다중파일업로드) 하기 떄문에 컬렉션을 사용
 		// 저장한 파일의 이름을 저장할 ArrayList를 생성하자
 		ArrayList<String> saveFiles = new ArrayList<String>();
-		
+		System.out.println("insert부분 saveFiles : "+saveFiles);
 		//원본  파일의 이름을 저장할 ArrayList를 생성하자
 		ArrayList<String> originFiles = new ArrayList<String>();
-		
+		System.out.println("insert부분 originFiles :" + originFiles);
 		// getFileNames() - 폼에서 전송된 파일 리스들의 name을 반환한다.
 		Enumeration<String> files = multiRequest.getFileNames();
-		
+		System.out.println("insert부분 files : "+files);
 		while(files.hasMoreElements()) {
-			
 			//전송 순서 역순으로 파일을 가져온다.
 			String name = files.nextElement();
-			
+			System.out.println("insert부분 getOriginalFileName :" + multiRequest.getOriginalFileName(name));
 			if(multiRequest.getFilesystemName(name) != null) {
 				 // getFilesystemName() - MyRenamePolicy의 rename 메소드에서 작성한대로 rename된 파일명
 				saveFiles.add(multiRequest.getFilesystemName(name));
@@ -98,6 +97,8 @@ public class prodcutInsertServlet extends HttpServlet {
 		ProductInfo p_info = new ProductInfo(p_code,pro_code,p_name,p_price,pro_info,c_name);
 		
 		ArrayList<ProductImgFile> imgList = new ArrayList<ProductImgFile>();
+		System.out.println("insert부분 imgList값 : " + imgList);
+		System.out.println("insert부분 originFiles.size() : "+ originFiles.size());
 		for(int i=originFiles.size()-1;i>=0;i--) {
 			ProductImgFile at = new ProductImgFile();
 			at.setFile_path(savePath);

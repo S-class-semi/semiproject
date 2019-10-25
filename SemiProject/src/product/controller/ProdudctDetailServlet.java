@@ -32,20 +32,27 @@ public class ProdudctDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String c_code =request.getParameter("c_code");
-		System.out.println(c_code);
+		String p_info =request.getParameter("p_info");
+		System.out.println(p_info);
+		
+		String p_infomaction[] = p_info.split("/");
+		String p_code = p_infomaction[0];
+		String c_name = p_infomaction[1];
 		
 		//상품 정보 값
-		ProductInfo prodcutinfo = new ProductService().selectProduct(c_code);
+		ProductInfo prodcutinfo = new ProductService().selectProduct(p_code);
 		
-		ArrayList<ProductImgFile> imgList = new ProductService().selectImgList(c_code);
+		//img 값 확인하기
+		ArrayList<ProductImgFile> imgList = new ProductService().selectImgList(p_code,c_name);
 		
 		  System.out.println(prodcutinfo);
 		  System.out.println(imgList);
-		  if(prodcutinfo != null) { 
+		  if(prodcutinfo != null && imgList != null ) { 
 	      request.setAttribute("prodcutinfo", prodcutinfo);
 	      request.setAttribute("imgList", imgList);
 		  request.getRequestDispatcher("views/product/productDetailView.jsp").forward(request, response);
+		  }else {
+			  System.out.println("실패");
 		  }
 		 
 	}

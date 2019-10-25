@@ -48,7 +48,8 @@
 				</tr>
 				<tr>
 				<td><label> 담당자 : </label></td>
-				<td><input type = "text" name = "c_manager"> </td>
+				<td><input type = "text" name = "c_manager" id="c_manager"> </td>
+				<td><div id = "c_managerCheck"></div></td>
 				</tr>
 				<tr>
 				<td><label> 담당자 연락처 : </label></td>
@@ -107,15 +108,16 @@ function on_click(){
 	
 	<script>
 	
-
+	/* 유효성 검사를 위한 블린값 */
 	var c_numCK = false;
 	var c_nameCK = false;
 	var c_phoneCK = false;
+	var c_managerCK = false;
 	var c_contactCK = false;
 	var c_emailCK = false;
-
+	
 	$(function(){
-
+	/* 사업자번호 */
 		 c_numCK = false;
 	$("#c_number").keyup(function(){
 		var c_number = $("#c_number");
@@ -163,7 +165,7 @@ function on_click(){
 	
 	});
 	
-	
+	/* 회사이름 */
 	 c_nameCK = false;
 	$("#c_name").keyup(function(){
 		var c_name = $("#c_name");
@@ -205,7 +207,7 @@ function on_click(){
 		
 		
 	});
-
+	/* 회사전화번호 */
 	 c_phoneCK = false;
 	$("#c_phone").keyup(function(){
 		var c_phone = $("#c_phone").val();
@@ -223,7 +225,26 @@ function on_click(){
 			c_phoneCK = true;	
 		}
 	});
-
+	/* 담당자이름 */
+	c_managerCK = false;
+		$("#c_manager").keyup(function(){
+			var c_manager = $("#c_manager").val();
+			var c_manCheck = /^[가-힣]*$/;
+			
+			if(c_manager == " "){
+				$("#c_managerCheck").html("공백 입력 불가");
+				$("#c_manager").val('');
+				c_managerCK = false;
+			}else if(!c_manCheck.test(c_manager)){
+				$("#c_managerCheck").html("한글만 입력하세요");
+				c_managerCK = false;
+			}else{
+				$("#c_managerCheck").html("담당자 이름 확인");
+				c_managerCK = true;	
+			}
+		});
+	
+	/* 담당자번호 */
 	 c_contactCK = false;
 	$("#c_contact").keyup(function(){
 		var c_contact = $("#c_contact").val();
@@ -243,7 +264,7 @@ function on_click(){
 	});
 	
 
-
+	/* 담당자이메일 */
 	 c_emailCK = false;
 	$("#c_email").keyup(function(){
 		var c_email = $("#c_email").val();
@@ -264,6 +285,7 @@ function on_click(){
 		
 	});
 	
+	/* 입력되지않은 textbox및 마지막 유효성검사 */
 	function ifCheck(){
 			console.log("사업자" +c_numCK);
 			console.log("회사명" +c_nameCK);
@@ -273,6 +295,7 @@ function on_click(){
 			
 			if (c_numCK == false) {
 				alert("사업자등록 번호를 확인하세요");
+				$("#c_number").focus();
 				return false;
 			} else {
 				c_numCk = true;
@@ -280,20 +303,31 @@ function on_click(){
 			
 			if (c_nameCK == false) {
 				alert("회사이름 확인하세요");
+				$("#c_name").focus();
 				return false;
 			} else {
 				c_nameCK= true;
 			}
 			
 			if(c_phoneCK == false) {
-				alert("회사 번호를 확인하세요");
+				alert("회사 전화번호를 확인하세요");
+				$("#c_phone").focus();
 				return false;
 			} else {
 				c_phoneCK= true;
 			}
 			
+			if(c_managerCK == false) {
+				alert("담당자 이름을 확인하세요");
+				$("#c_manager").focus();
+				return false;
+			} else {
+				c_managerCK= true;
+			}
+			
 			if (c_contactCK == false) {
 				alert("담당자 번호를 확인하세요");
+				$("#c_contact").focus();
 				return false;
 			} else {
 				c_contactCK = true;
@@ -301,6 +335,7 @@ function on_click(){
 			
 			if (c_emailCK == false) {
 				alert("이메일을 확인하세요");
+				$("#c_email").focus();
 				return false;
 			} else {
 				c_emailCK = true;
@@ -308,23 +343,44 @@ function on_click(){
 			
 			if($("#c_phone").val()==''&& $("#c_phone").val().length==0){
 				alert("회사전화 입력을 다시하세요");
+				$("#c_phone").focus();
 				return false;
 			}else{
 				c_phoneCK = true;
 			}
 			
+			if($("#c_manager").val()==''&& $("#c_manager").val().length==0){
+				alert("담당자 명을 확인하세요");
+				$("#c_manager").focus();
+				return false;
+			}else{
+				c_managerCK = true;
+			}
+			
 			if($("#c_contact").val()==''&& $("#c_contact").val().length==0){
-				alert("담당자확인");
+				alert("담당자 번호 확인해주세요");
+				$("#c_contact").focus();
 				return false;
 			}else{
 				c_contactCK = true;
 			}
 			
 			if($("#c_email").val()==''&& $("#c_email").val().length==0){
-				alert("이메일 입력확인");
+				alert("이메일을 확인해주세요");
+				$("#c_email").focus();
 				return false;
 			}else{
 				c_emailCK = true;
+			}
+			
+
+			if($("#postcode").val()==''&& $("#postcode").val().length==0){
+				alert("주소확인해주세요");
+				return false;
+			}
+			if($("#detailAddress").val()==''&& $("#detailAddress").val().length==0){
+				alert("주소확인해주세요");
+				return false;
 			}
 			return true;
 			

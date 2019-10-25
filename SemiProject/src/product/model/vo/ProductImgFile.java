@@ -19,9 +19,13 @@ public class ProductImgFile implements Serializable{
 	private Date upload_date;
 	private int file_level;
 	private String status;
+	
+	
 	public ProductImgFile() {
 		super();
 	}
+	
+	
 	public ProductImgFile(String c_name, String p_code, String origin_name, String change_name, String file_path,
 			Date upload_date, int file_level, String status) {
 		super();

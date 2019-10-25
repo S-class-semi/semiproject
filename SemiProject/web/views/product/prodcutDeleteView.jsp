@@ -49,7 +49,7 @@
 <%@ include file = "/views/company/companyMenubar.jsp" %> 
 		<div id="centerbody">
 			<br>
-	<h2 align= "center">게시판</h2>
+	<h2 align= "center">상품 삭제</h2>
 	<div class = "tableArea">
 		<table align = "center" id = "listArea">
 			<tr>
@@ -130,18 +130,23 @@
 		<script>
 	//클릭시 삭제
 	$(function(){
-		
 		$("#listArea td").mouseenter(function(){
 			$(this).parent().css({"background":"white","cursor":"pointer"});
 		}).mouseout(function(){
 			$(this).parent().css({"background":"#dcdcdc"});
 		}).click(function(){
+			var p_code=$(this).parent().children().eq(2).text();
+			var c_name=$(this).parent().children().eq(2).text();
 			
-			if(confirm("삭제하시겠습니까?")){
-				var p_code=$(this).parent().children().eq(2).text();
-				location.href= " <%=request.getContextPath() %>/p_delete.pro?p_code=" +p_code;
+			var deletecode = p_code + "/" + c_name;
+			if(p_code == []){
+				
 			}else{
-				alert("취소합니다.");
+				if(confirm("삭제하시겠습니까?")){
+					location.href= "<%=request.getContextPath() %>/p_delete.pro?deletecode="+deletecode;
+				}else{
+					alert("취소합니다.");
+				}
 			}
 			});
 	});

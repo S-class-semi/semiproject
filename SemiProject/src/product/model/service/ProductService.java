@@ -2,6 +2,7 @@ package product.model.service;
 
 import static common.JDBCTemplate.*;
 
+import java.io.File;
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ public class ProductService {
 	public int insertProduct(ProductInfo p_info, ArrayList<ProductImgFile> imgList) {
 		Connection conn = getConnection();
 		
+		System.out.println("처음 삽입 부분입니다.");
 		ProductDao pDao = new ProductDao();
 		String c_name = p_info.getC_name();
 		String p_code = p_info.getP_code();
@@ -27,6 +29,24 @@ public class ProductService {
 			commit(conn);
 			result = 1;
 		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int insertProduct(String p_code, String c_name, ArrayList<ProductImgFile> imgList) {
+		Connection conn = getConnection();
+		
+		System.out.println("업데이트 부분입니다.");
+		int result = new ProductDao().inserimgFile(conn, imgList, c_name, p_code);
+		System.out.println("S - c_name : " + c_name);
+		System.out.println("S - p_code : " + p_code);
+		System.out.println("S - imgList : " + imgList);
+		if (result > 0) {
+			commit(conn);
+		} else {
 			rollback(conn);
 		}
 		close(conn);
@@ -50,10 +70,10 @@ public class ProductService {
 	 * close(conn); return list; }
 	 */
 
-	public ProductInfo selectProduct(String c_code) {
+	public ProductInfo selectProduct(String p_code) {
 		Connection conn = getConnection();
 		
-		ProductInfo productinfo = new ProductDao().selectProduct(conn,c_code);
+		ProductInfo productinfo = new ProductDao().selectProduct(conn,p_code);
 		
 		close(conn);
 		return productinfo;
@@ -82,41 +102,31 @@ public class ProductService {
 		return result;
 	}
 
-	public ArrayList<ProductImgFile> selectImgList(String c_code) {
+	public ArrayList<ProductImgFile> selectImgList(String p_code, String c_name) {
 		Connection conn = getConnection();
-		ArrayList<ProductImgFile> imglist = new ProductDao().selectImgList(conn,c_code);
+		ArrayList<ProductImgFile> imglist = new ProductDao().selectImgList(conn,p_code,c_name);
 		
 		close(conn);
 		
 		return imglist;
 	}
 
-	public int deleteImgFile(String p_code) {
+	public int deleteImgFile(String p_code, String c_name) {
 		Connection conn = getConnection();
 		
-		int result = new ProductDao().deleteImgFile(conn,p_code);
+		int result = new ProductDao().deleteImgFile(conn,p_code,c_name);
 		
-		if(result>0) {
+		if(result > 0) {
 			commit(conn);
 		}else {
 			rollback(conn);
 		}
+		
+		close(conn);
 		
 		return result;
 	}
 
-	public int insertProduct(String p_code, String c_name, ArrayList<ProductImgFile> imgList) {
-		Connection conn = getConnection();
-		
-		int result = new ProductDao().inserimgFile(conn, imgList, c_name, p_code);
-		if(result>0) {
-			commit(conn);
-		}else {
-			rollback(conn);
-		}
-		close(conn);
-		return result;
-	}
 
 	public int updateProduct(ProductInfo p_info) {
 		Connection conn = getConnection();
@@ -130,6 +140,44 @@ public class ProductService {
 		}
 		close(conn);
 		
+		return result;
+	}
+
+	public int p_codeCheck(String p_code) {
+		Connection conn = getConnection();
+		
+		int result = new ProductDao().p_codeCheck(conn,p_code);
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int updateImgFile(String p_code, String c_name) {
+		Connection conn = getConnection();
+		
+		int result = new ProductDao().updateImgfile(conn, p_code,c_name);
+		
+		if(result>0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleteImgFile(String failedpath) {
+		Connection conn = getConnection();
+		
+		int result = new ProductDao().updateImgFile(conn,failedpath);
+		
+		if(result >0) {
+			commit(conn);
+		}else {
+			rollback(conn);
+		}
 		return result;
 	}
 
