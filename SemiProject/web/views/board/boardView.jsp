@@ -1,171 +1,166 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="board.model.vo.*, java.util.ArrayList"%>
+    pageEncoding="UTF-8" import="board.model.vo.*, java.util.ArrayList" %>
+    
 <%
- 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list"); 
-/*	PageInfo pi = (PageInfo)request.getAttribute("pi");
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
+	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
 	int listCount = pi.getListCount();
 	int currentPage = pi.getCurrentPage();
 	int maxPage = pi.getMaxPage();
 	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();*/
-%>
-	
+	int endPage = pi.getEndPage();
+%>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>전체게시판</title>
-<style type="text/css">
-    body{
-        line-height:2em;        
-        font-family:"맑은 고딕";
-}
-    ul, li{ 
-        list-style:none;
-        text-align:center;
-        padding:0;
-        margin:0;
-}
-if(#ulTable > li > ul > li:first-child +li=="공지"){
-
-}
-    #mainWrapper{
-        width: 800px;
-        margin: 0 auto; /*가운데 정렬*/
-    }
-
-    #mainWrapper > ul > li:first-child {
-        text-align: center;
-        font-size:14pt;
-        height:40px;
-        vertical-align:middle;
-        line-height:30px;
-}
-
-    #ulTable {margin-top:10px;}
-    
-
-    #ulTable > li:first-child > ul > li {
-        background-color:#c9c9c9;
-        font-weight:bold;
-        text-align:center;
-}
-
-    #ulTable > li > ul {
-        clear:both;
-        padding:0px auto;
-        position:relative;
-        min-width:40px;
-}
-    #ulTable > li > ul > li { 
-        float:left;
-        font-size:10pt;
-        border-bottom:1px solid silver;
-        vertical-align:baseline;
-}    
-
-    #ulTable > li > ul > li:first-child					{width:10%;} /*NO열 크기*/
-    #ulTable > li > ul > li:first-child +li				{width:10%;} /*타입 크기*/
-    #ulTable > li > ul > li:first-child +li+li			{width:35%;} /*제목 열 크기*/
-    #ulTable > li > ul > li:first-child +li+li+li   	{width:20%;} /*작성일 열 크기*/
-    #ulTable > li > ul > li:first-child +li+li+li+li	{width:15%;} /*작성자 열 크기*/
-    #ulTable > li > ul > li:first-child +li+li+li+li+li	{width:10%;} /*조회수 열 크기*/
-
-    #divPaging {
-        clear:both; 
-        margin:0 auto; 
-        width:220px; 
-        height:50px;
-}
-
-  
-
-    #liSearchOption {clear:both;}
-    #liSearchOption > div {
-        margin:0 auto; 
-        margin-top: 20px; 
-        width:auto; 
-        height:100px;
-
-}
-
-    .left {
-        text-align : left;
-}
-
-
+<title>Insert title here</title>
+<style>
+   .outer{
+      width:900px;
+      height:500px;
+      background:black;
+      color:white;
+      margin-left:auto;
+      margin-right:auto;
+      margin-top:50px;
+   }
+   table {
+      border:1px solid white;
+      text-align:center;
+   }
+   .tableArea {
+      width:650px;
+      height:350px;
+      margin-left:auto;
+      margin-right:auto;
+   }
+   .searchArea {
+      width:650px;
+      margin-left:auto;
+      margin-right:auto;
+   }
 </style>
-
 </head>
 <body>
-	<%@ include file = "/views/common/menubar.jsp" %> 
-    <div class="mainWrapper">
-
-        <ul>
-
-            <li>전체 게시판</li>
-
-            <!-- 게시판 목록  -->
-            <li>
-                <ul id ="ulTable">
-                    <li>
-                        <ul>
-                            <li>No</li>
-                            <li>카테고리</li>
-                            <li>제목</li>
-                            <li>작성일</li>
-                            <li>작성자</li>
-                            <li>조회수</li>
-                        </ul>
-                    <!-- 게시물이 출력될 영역 -->
-                    <li>
-                    <%if(list.isEmpty()){ %>
-                    <tr>
-                    	<td colspan="6">게시글이없습니다</td>
-                    </tr>
-                    </li>
-                    <%}else{ %>
-                    <%for(Board b :list){ %>
-                    	<tr>q
-                    		<input value="<%=b.getB_NO()%>">
-                    		<li><%=b.getB_NO()%></li>
-                    		<li><%=b.getB_TYPE()%></li>
-                    		<li><%=b.getB_TITLE()%></li>
-                    		<li><%=b.getUSER_ID()%></li>
-                    		<li><%=b.getB_COUNT()%></li>
-                    		</tr>
-                    		<%} %>
+	<%@include file="../common/menubar.jsp" %>
+	<div class="outer">
+		<br>
+		<h2 align="center">게시판</h2>
+		<div class="tableArea">
+			<table align="center" id="listArea">
+				<tr>
+					<th width="100px">글번호</th>
+					<th width="100px">카테고리</th>
+					<th width="300px">글제목</th>
+					<th width="100px">작성자</th>
+					<th width="100px">조회수</th>
+					<th width="150px">작성일</th>
+				</tr>
+				<% if(list.isEmpty()){ %>
+				<tr>
+					<td colspan="6">조회된 리스트가 없습니다.</td>
+				</tr>
+				<%}else{ %>
+					<% for(Board b : list){ %>
+						<tr>
+							<input type="hidden" value="<%=b.getbNo() %>">
+							<td><%=b.getbNo() %></td>
+							<td><%=b.getbType() %></td>
+							<td><%=b.getbTitle() %></td>
+							<td><%=b.getbText() %></td>
+							<td><%=b.getUserId() %></td>
+							<td><%=b.getbCount() %></td>
+							
+						</tr>
+					<%} %>
 				<%} %>
+			</table>
+		</div>
+		
+		<!-- 페이징 처리 시작 -->
+		<div class="pagingArea" align="center">
+			<!-- 맨 처음으로(<<) -->
+			<button onclick="location.href='<%=request.getContextPath() %>/list.bo?currentPage=1'"> << </button>
+			
+			<!-- 이전 페이지로(<) -->
+			<%if(currentPage <= 1) {%>
+				<button disabled> < </button>
+			<%} else{ %>
+				<button onclick="location.href='<%=request.getContextPath() %>/list.bo?currentPage=<%=currentPage-1 %>'"> < </button>
+			<%} %>
+			
+			<!-- 10개의 페이지 목록 -->
+			<%for(int p = startPage; p<=endPage; p++){ %>
+				<% if(p == currentPage){ %>
+					<button disabled><%=p %></button>
+				<%} else{%>
+					<button onclick="location.href='<%=request.getContextPath() %>/list.bo?currentPage=<%=p %>'"><%=p %></button>
+				<%} %>
+			<%} %>
+			
+			<!-- 다음 페이지로(>) -->
+			<%if(currentPage >= maxPage){ %>
+				<button disabled> > </button>
+			<%}else{ %>
+				<button onclick="location.href='<%=request.getContextPath() %>/list.bo?currentPage=<%=currentPage+1 %>'"> > </button>
+			<%} %>
+			
+			<!-- 맨 끝으로(>>) -->
+			<button onclick="location.href='<%=request.getContextPath() %>/list.bo?currentPage=<%=maxPage %>'"> >> </button>
+			
+		</div>
+		
+		<!-- 공지사항 때와 마찬가지로 검색 부분이 있다. 기능 구현은 생략 -->
+		<div class="searchArea" align="center">
+			<select id="searchCondition" name="searchCondition">
+				<option>----</option>
+				<option value="category">카테고리</option>
+				<option value="writer">작성자</option>
+				<option value="title">제목</option>
+				<option value="content">내용</option>
+			</select>
+			<input type="search">
+			<button type="submit">검색하기</button>
+			
+			<!-- 공지사항 때와는 다르게 여기선 로그인을 한 사람만 게시글을 작성하게 하자 -->
+			<% if(loginUser != null){%>
+				<button onclick="location.href='views/board/boardInsertForm.jsp'">작성하기</button>
+			<%} %>
+			<!-- boardInsertForm.jsp 만들러 ㄱㄱ씽 -->
+		</div>
+	</div>
+
+	<script>
+		// 게시판 상세보기 기능 구현하기
+		$(function(){
+			$("#listArea td").mouseenter(function(){
+				$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+			}).mouseout(function(){
+				$(this).parent().css({"background":"black"});
+			}).click(function(){
+				var bid=$(this).parent().children("input").val();
 				
-				</div>
-<!--
-		B_NO = b_NO;
-		B_TYPE = b_TYPE;
-		B_NAME = b_NAME;
-		B_TITLE = b_TITLE;
-		B_TEXT = b_TEXT;
-		USER_ID = uSER_ID;
-		B_TIME = b_TIME;
-		B_COUNT = b_COUNT;
-		B_FLOG = b_FLOG;
+				//로그인 한 사람만 이용하도록 하자!
+				<% if(loginUser != null){%>
+					location.href="<%=request.getContextPath()%>/detail.bo?bid=" + bid;
+				<%}else{%>
+					alert("로그인 해야만 상세보기가 가능합니다!");
+				<%}%>
+				// BoardDetailServlet 만들러 ㄱㄱ씽!
+			});
+		});
+		
+	</script>
 
-            <!-- 게시판 페이징 영역 -->
-        
-            <!-- 검색 폼 영역 -->
-            <li id='liSearchOption'>
-                <div>
-                    <select id='selSearchOption' >
-                        <option value='A'>제목+내용</option>
-                        <option value='T'>제목</option>
-                        <option value='C'>내용</option>
-                    </select>
-                    <input id='txtKeyWord' />
-                    <input type='button' value='검색'/>
-                </div>
-                </li>
 
-        </ul>
-    </div>
+
+
+
+
+
+
+
 </body>
 </html>
