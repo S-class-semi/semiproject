@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="member.model.vo.Member"%>
+	
+	<%
+	Member loginUser = (Member)session.getAttribute("loginUser");
+	Integer user_G = (Integer)session.getAttribute("user_G");
+	Member m = (Member)request.getAttribute("member");
+	%>
+	
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -186,8 +194,15 @@ body {
 				<h4>(관리자)</h4>
 			</div>
 	<!-- 	</a> -->
-
+		<%if(loginUser!=null && user_G==3) {%>
 		<div class="CompanyInfo1">
+		<fieldset id = "roginuser">
+		<legend aling ="center">관리자님 환영합니다.</legend>
+		<button id="rogout" onclick="logout();" >로그아웃</button>
+		</fieldset>
+		</div>
+		<%}else{ %>
+		<div class = "CompanyInfo1">
 		<fieldset id = "roginuser">
 		<legend align="center">로그인</legend>
 			<label>회사명 : </label><input type= "text" value="나혼자산다" readonly="readonly" disabled><br>
@@ -196,6 +211,9 @@ body {
 			<button id="rogout" >로그아웃</button>
 		</fieldset>
 		</div>
+		<%} %>
+		
+		
 	</div>
 	<br clear="both">
 	<hr id="underbar">
@@ -230,11 +248,18 @@ body {
 						<span class="icon-qna"></span>QnA
 					</h3>
 					<ul>
-						<li>1:1 QnA 확인</li>
+						<li onclick = "QnaView()">1:1 QnA 확인</li>
 						<li>공지사항 등록</li>
 						<li>블랙컨슈머</li>
 					</ul>
 				</li>
+				<h3>
+					<span class="icon-info"></span>정보확인
+				</h3>
+				<ul>
+					<li>주문내역 관리</li>
+					<li onclick = "GradeUpdate()">등급 및 포인트 관리</li>
+				</ul>
 				<li>
 					<h3>
 						<span class="icon-info"></span>정보수정
@@ -275,7 +300,16 @@ body {
 			location.href = "<%=request.getContextPath()%>/info.com";
 		}
 		function SalesGraph2(){
-			location.href = "<%=request.getContextPath()%>/views/product/prodcutSales.jsp";
+			location.href = "<%=request.getContextPath()%>/views/product/SalesDetailView.jsp";
+		}
+		function QnaView(){
+			location.href = "<%=request.getContextPath()%>/qna.do";
+		}
+		function GradeUpdate(){
+			location.href = "<%=request.getContextPath()%>/grade.me"
+		}
+		function logout(){
+			location.href = '<%= request.getContextPath() %>/logout.me';
 		}
 	</script>
 	

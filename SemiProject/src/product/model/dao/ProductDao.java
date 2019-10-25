@@ -1,6 +1,6 @@
 package product.model.dao;
 
-import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import company.model.dao.CompanyDao;
 import product.model.vo.ProductInfo;
+import product.model.vo.ProductSales;
 
 public class ProductDao {
 
@@ -154,5 +155,37 @@ public class ProductDao {
 		
 		return p;
 	}
+	
+	public int dailySales(Connection conn, String pname) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int num = 0;
+		
+		
+		String query = prop.getProperty("dailySales");
+		System.out.println(pname);
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pname); 
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				num = rs.getInt("SUM(P_PRICE)");
 
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return num;
+	}
+	
 }

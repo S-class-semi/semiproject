@@ -3,7 +3,8 @@
     
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
-	Integer userG = (Integer)session.getAttribute("userG");
+	Integer user_G = (Integer)session.getAttribute("user_G");
+	Member m = (Member)request.getAttribute("member");
 %>
 
 <!DOCTYPE html>
@@ -87,20 +88,20 @@
 
 		</form>
 		
-	<%}else if(loginUser != null && userG == 2){%>	<!-- 판매자 로그인 -->
+	<%}else if(loginUser != null && user_G == 2){%>	<!-- 판매자 로그인 -->
 			<div id = "userInfo">
 				<label>판매자 로그인됨 환영</label><br>
 				<div class = "btns" align = "right">
-					<div id = "myPage" onclick = "location.href = '/SemiProject/mypage.me?userId=<%= loginUser.getUserId() %>'">마이페이지</div>
+					<div id = "myPage" onclick = "location.href = '/SemiProject/mypage.me?userId=<%= loginUser.getUser_Id() %>'">마이페이지</div>
 					<div id = "logoutBtn" onclick = "logout();">로그아웃</div>
 				</div>
 			</div>
 		
-	<%}else if(loginUser != null && userG == 3){%>	<!-- 관리자 로그인 -->
+	<%}else if(loginUser != null && user_G == 3){%>	<!-- 관리자 로그인 -->
 			<div id = "userInfo">
 				<label>관리자 로그인됨 환영</label><br>
 				<div class = "btns" align = "right">
-					<div id = "myPage" onclick = "location.href = '/SemiProject/mypage.me?userId=<%= loginUser.getUserId() %>'">마이페이지</div>
+					<div id = "myPage" onclick = "location.href = '/SemiProject/mypage.me?userId=<%= loginUser.getUser_Id() %>'">마이페이지</div>
 					<div id = "logoutBtn" onclick = "logout();">로그아웃</div>
 				</div>
 			</div>
@@ -108,7 +109,7 @@
 			<div id = "userInfo">
 				<label>소비자 로그인됨 환영</label><br>
 				<div class = "btns" align = "right">
-					<div id = "myPage" onclick = "location.href = '/SemiProject/mypage.me?userId=<%= loginUser.getUserId() %>'">마이페이지</div>
+					<div id = "myPage" onclick = "location.href = '/SemiProject/mypage.me?userId=<%= loginUser.getUser_Id() %>'">마이페이지</div>
 					<div id = "logoutBtn" onclick = "logout();">로그아웃</div>
 				</div>
 			</div>
@@ -120,6 +121,9 @@
 			<div class = "menu" onclick ="goNotich()">공지사항</div>
 			<div class = "menu" onclick ="goProduct()">상품카테고리</div>
 			<div class = "menu" onclick ="goBoard();">자유게시판</div>
+			<%if(loginUser != null && user_G == 3){ %>
+			<div class = "menu" onclick ="goPage()">관리자페이지</div>
+			<%} %>
 			
 			
 		</div>
@@ -163,6 +167,9 @@
 		}
 		function goNotich(){
 			location.href = "<%=request.getContextPath()%>/list.bo";
+		}
+		function goPage(){
+			location.href = "<%=request.getContextPath()%>/views/company/companyMenubar.jsp";
 		}
 	</Script>
 </body>

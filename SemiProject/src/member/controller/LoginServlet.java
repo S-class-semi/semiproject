@@ -39,14 +39,17 @@ public class LoginServlet extends HttpServlet {
 		
 		Member loginUser = new MemberService().loginMember(member);
 		
-		int userG = loginUser.getUserG();
-		
+		System.out.println("로그인 유저 : " +  loginUser);
+		int user_G = loginUser.getUser_G();
+		System.out.println("회원등급 : " +user_G);
 		if(loginUser != null) {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("loginUser", loginUser);
-			session.setAttribute("userG", userG);
+			session.setAttribute("user_G", user_G);
+			session.setMaxInactiveInterval(3600);
 			response.sendRedirect("index.jsp");
+		
 		}else {
 			request.setAttribute("msg", "로그인 실패");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");

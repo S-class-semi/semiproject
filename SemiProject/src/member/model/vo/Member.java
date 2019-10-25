@@ -3,10 +3,10 @@ package member.model.vo;
 import java.sql.Date;
 
 public class Member {
-	private String userId;
-	private int userG;
-	private int userT;
-	private String userPwd;
+	private String user_Id;
+	private int user_G;
+	private int user_T;
+	private String user_Pwd;
 	private String nickname;
 	private int space;
 	private int point;
@@ -15,33 +15,35 @@ public class Member {
 	private String gender;
 	private String status;
 	
-	public Member() {}
-	
-	
-	
-	public Member(String userId, String userPwd) {
+	public Member(String user_Id, String user_Pwd) {
 		super();
-		this.userId = userId;
-		this.userPwd = userPwd;
+		this.user_Id = user_Id;
+		this.user_Pwd = user_Pwd;
 	}
 
-
-
-	public Member(String userId, String userPwd, String nickname, int space) {
+	public Member(int user_G, int point) {
 		super();
-		this.userId = userId;
-		this.userPwd = userPwd;
+		this.user_G = user_G;
+		this.point = point;
+	}
+
+	public Member(String user_Id, String user_Pwd, String nickname, int space) {
+		super();
+		this.user_Id = user_Id;
+		this.user_Pwd = user_Pwd;
 		this.nickname = nickname;
 		this.space = space;
 	}
 
-	public Member(String userId, int userG, int userT, String userPwd, String nickname, int space, int point,
-			String context, Date birth, String gender, String status) {
+	public Member() {}
 
-		this.userId = userId;
-		this.userG = userG;
-		this.userT = userT;
-		this.userPwd = userPwd;
+	public Member(String user_Id, int user_G, int user_T, String user_Pwd, String nickname, int space, int point,
+			String context, Date birth, String gender, String status) {
+		super();
+		this.user_Id = user_Id;
+		this.user_G = user_G;
+		this.user_T = user_T;
+		this.user_Pwd = user_Pwd;
 		this.nickname = nickname;
 		this.space = space;
 		this.point = point;
@@ -51,36 +53,36 @@ public class Member {
 		this.status = status;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getUser_Id() {
+		return user_Id;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUser_Id(String user_Id) {
+		this.user_Id = user_Id;
 	}
 
-	public int getUserG() {
-		return userG;
+	public int getUser_G() {
+		return user_G;
 	}
 
-	public void setUserG(int userG) {
-		this.userG = userG;
+	public void setUser_G(int user_G) {
+		this.user_G = user_G;
 	}
 
-	public int getUserT() {
-		return userT;
+	public int getUser_T() {
+		return user_T;
 	}
 
-	public void setUserT(int userT) {
-		this.userT = userT;
+	public void setUser_T(int user_T) {
+		this.user_T = user_T;
 	}
 
-	public String getUserPwd() {
-		return userPwd;
+	public String getUser_Pwd() {
+		return user_Pwd;
 	}
 
-	public void setUserPwd(String userPwd) {
-		this.userPwd = userPwd;
+	public void setUser_Pwd(String user_Pwd) {
+		this.user_Pwd = user_Pwd;
 	}
 
 	public String getNickname() {
@@ -141,9 +143,11 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [userId=" + userId + ", userG=" + userG + ", userT=" + userT + ", userPwd=" + userPwd
+		return "Member [user_Id=" + user_Id + ", user_G=" + user_G + ", user_T=" + user_T + ", user_Pwd=" + user_Pwd
 				+ ", nickname=" + nickname + ", space=" + space + ", point=" + point + ", context=" + context
 				+ ", birth=" + birth + ", gender=" + gender + ", status=" + status + "]";
 	}
+	
+	
 	
 }
