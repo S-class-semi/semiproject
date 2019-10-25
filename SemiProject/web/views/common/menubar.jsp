@@ -14,54 +14,170 @@
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <style>
-	body{
-		background-color: white;
-	}
-	.mainmenu{
-		align-content: center;
-	}
-	.menu{
-		background: rgb(160, 200, 220);
-		color : white;
-		text-align : center;
-		vertical-align: middle;
-		width :150px;
-		height : 50px;
-		display:table-cell;
-	}
-	.menu:hover{
-		background : rgb(220, 200, 130);
-		font-wight: bold;
-		cursor:pointer;
-	}
-	#loginBtn, #memberJoinBtn, #logoutBtn, #myPage{
-		display: inline-block;
-		vertical-align: middle;
-		text-align: center;
-		background: hotpink;
-		color: white;
-		height: 25px;
-		width: 100px;
-		border-radius: 5px;
-	}
-	#memberJoinBtn, #myPage{
-		background: rgb(160, 200, 220);
-	}
-	#loginBtn:hover, #changeInfo:hover, #logoutBtn:hover, #memberJoinBtn:hover, #myPage:hover{
-		cursor: pointer;
-	}
-	.loginArea > form, #userInfo{
-		float: right;
-	}
-	.loginArea{
-	border: 3px solid black;
-	}
-	#userId, #userPwd{
-		width: 200px;
-	}
-	.btns, #loginBtn{
-		display:inline-block
-	}
+body {
+	background-color: white;
+}
+
+.mainmenu {
+	align-content: center;
+}
+
+.menu {
+	background: rgb(160, 200, 220);
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+	width: 150px;
+	height: 50px;
+	display: table-cell;
+}
+
+.menu:hover {
+	background: rgb(220, 200, 130);
+	font-wight: bold;
+	cursor: pointer;
+}
+
+#logoutBtn, #myPage {
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+	background: hotpink;
+	color: white;
+	height: 25px;
+	width: 100px;
+	border-radius: 5px;
+}
+
+#myPage {
+	background: rgb(160, 200, 220);
+}
+
+#loginBtn:hover, #changeInfo:hover, #logoutBtn:hover, #memberJoinBtn:hover,
+	#myPage:hover {
+	cursor: pointer;
+}
+
+.loginArea>form, #userInfo {
+	float: right;
+	text-align: center;
+}
+
+#userId, #userPwd {
+	width: 200px;
+}
+
+.btns{
+	display: inline-block
+}
+
+#memberJoinBtn {
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	margin-right: -4px;
+}
+
+#loginBtn {
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin-left: -3px;
+}
+
+.btns button {
+	border: 1px solid skyblue;
+	background-color: rgba(0, 0, 0, 0);
+	color: skyblue;
+	padding: 5px;
+	width: 100px;
+}
+
+.btns button:hover {
+	color: white;
+	background-color: skyblue;
+}
+
+/* 체크박스 css */
+.grid .item {
+  align-self: center;
+  user-select: none;
+  transform: translateZ(0);
+}
+.grid .item .cbx {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+  border: 1px solid #c8ccd4;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.grid .item .cbx svg {
+  position: relative;
+  top: -1px;
+  transform: scale(0);
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.grid .item .cbx svg polyline {
+  stroke-width: 2;
+  stroke: #18cda6;
+}
+.grid .item .cbx:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -10px 0 0 -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  background: #18cda6;
+  transform: scale(0);
+}
+.grid .item .cbx:after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 2px;
+  height: 2px;
+  border-radius: 2px;
+  box-shadow: 0 -18px 0 #18cda6, 12px -12px 0 #18cda6, 18px 0 0 #18cda6, 12px 12px 0 #18cda6, 0 18px 0 #18cda6, -12px 12px 0 #18cda6, -18px 0 0 #18cda6, -12px -12px 0 #18cda6;
+  transform: scale(0);
+}
+.grid .item .cbx-lbl {
+  position: relative;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.grid .item input {
+  display: none;
+}
+.grid .item input:checked + .cbx {
+  border-color: transparent;
+}
+.grid .item input:checked + .cbx svg {
+  transform: scale(1);
+  transition: all 0.4s ease;
+  transition-delay: 0.1s;
+}
+.grid .item input:checked + .cbx:before {
+  transform: scale(1);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+.grid .item input:checked + .cbx:after {
+  transform: scale(1);
+  opacity: 0;
+  transition: all 0.6s ease;
+}
+.grid .item input:checked + .cbx:after {
+  width: 100%;
+  transition: all 0.4s ease;
+}
 
 </style>
 </head>
@@ -85,17 +201,28 @@
 					<td><input type="password" name="userPwd" id="userPwd"></td>
 				</tr>
 				<tr>
-					<td colspan="2"><input type="checkbox" name="saveId"
-						id="saveId">&nbsp; <label for="saveId">아이디 저장</label></td>
+					<td colspan="2">
+
+						<div class="grid">
+							<label for="saveId" class="cbx-lbl">아이디 저장</label>
+							<label for="saveId" class="item"> <input type="checkbox" name="saveId" id="saveId" class="hidden" />
+							<label for="saveId" class="cbx">
+							<svg width="14px" height="12px" viewBox="0 0 14 12">
+							<polyline points="1 7.6 5 11 13 1"></polyline>
+							</svg>
+							</label>
+							</label>
+						</div>
+					</td>
 				</tr>
 			</table>
 
-			<div class="btns" align="center">
-				<button type="button" onclick="findingPwd();">비밀번호 찾기</button>
+			<div class="btns">
 				<button type="button" id="memberJoinBtn" onclick="memberJoin();">회원가입</button>
 				<button id="loginBtn" type="submit">로그인</button>				
 			</div>
 			<br>
+				<button type="button" onclick="findingPwd();">비밀번호 찾기</button>			
 			
 			<div id = "kakao">
 			<a id="kakao-login-btn"></a>
@@ -244,6 +371,7 @@
 	// 카카오 로그인 버튼을 생성합니다.
 	Kakao.Auth.createLoginButton({
 		container: '#kakao-login-btn',
+		size: 'small',
 		success: function(authObj) {
 		// 로그인 성공시, API를 호출합니다.
 		Kakao.API.request({

@@ -4,8 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>비밀번호 찾기</title>
 <style>
+body{
+	background: #f2f2f2;
+	align-items: center;
+}
 #outer{
 	width: 400px;
 	height: 700px;
@@ -14,13 +18,44 @@
 	margin-right: auto;
 	margin-top: 50px;
 }
-#findBtn {
-	background: #40e0d0;
-	color: white;
-	display: inline-block;
-	text-align: center;
-	width: 300px;
-	height: 40px;
+
+#findBtn{
+  background:#40e0d0;
+  color:#fff;
+  border:none;
+  border-radius: 5px;
+  position:relative;
+  width: 300px;
+  height:50px;
+  font-size:1.1em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+#findBtn:hover{
+  background:#fff;
+  color:#40e0d0;
+}
+#findBtn:before,#findBtn:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #40e0d0;
+  transition:400ms ease all;
+}
+#findBtn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#findBtn:hover:before,#findBtn:hover:after{
+  width:100%;
+  transition:800ms ease all;
 }
 
 .findBtn {
@@ -100,16 +135,16 @@ form {
   outline: none;
 }
 .inp input:focus + span {
-  color: #07f;		/* 커서 눌렀을 때 이메일 입력 글씨 색 */
+  color: #40e0d0;		/* 커서 눌렀을 때 이메일 입력 글씨 색 */
   transform: translateY(-26px) scale(0.75);
   transition-delay: 0.1s;
 }
 .inp input:focus + span + svg path {
-  stroke: #07f;		/* 커서 눌렀을 때 왼쪽 줄 색 */
+  stroke: #40e0d0;		/* 커서 눌렀을 때 왼쪽 줄 색 */
   animation: elasticInput 0.4s ease forwards;
 }
 .inp input:focus + span + svg + .border {
-  background: #07f;		/* 커서 눌렀을 때 오른쪽 줄 색 */
+  background: #40e0d0;		/* 커서 눌렀을 때 오른쪽 줄 색 */
 }
 @-moz-keyframes elasticInput {
   50% {
@@ -135,25 +170,6 @@ form {
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-	<%-- <div id="outer" align = "center">
-		<form id="findForm" action="<%=request.getContextPath()%>/findpwd.me" method="post">
-			<table>
-				<tr>
-					<td><label>이메일 입력 </label></td>	<!--if로 가입된 이메일이면 발송 아니면 fail페이지 띄우자 -->
-					<td>
-						<input type="email" id="findMail" name="findMail" oninput = "checkId();">
-						<input type = "hidden" id = "randomPwd" name = "randomPwd">
-					</td>
-				</tr>
-				<tr>
-					<td><div id = "checkId"></div></td>				
-				</tr>
-			</table>
-			<br>
-			<button type="button" onclick="find();">이메일로 비밀번호 찾기</button>
-		</form>
-	</div> --%>
-	
 	<div id="outer" align = "center">
 	<br>
 		<h2 align = "center">비밀번호 찾기</h2>

@@ -8,8 +8,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원 가입</title>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
+body{
+	background: #f2f2f2;
+}
 .outer {
 	width: 900px;
 	height: 700px;
@@ -28,13 +32,43 @@ input {
 	margin-top: 2px;
 }
 
-#joinBtn {
-	background: #40e0d0;
-	color: white;
-	display: inline-block;
-	text-align: center;
-	width: 300px;
-	height: 40px;
+#joinBtn{
+  background:#40e0d0;
+  color:#fff;
+  border:none;
+  border-radius: 5px;
+  position:relative;
+  width: 300px;
+  height:50px;
+  font-size:1.1em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+#joinBtn:hover{
+  background:#fff;
+  color:#40e0d0;
+}
+#joinBtn:before,#joinBtn:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #40e0d0;
+  transition:400ms ease all;
+}
+#joinBtn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#joinBtn:hover:before,#joinBtn:hover:after{
+  width:100%;
+  transition:800ms ease all;
 }
 
 .joinBtn {
@@ -241,9 +275,6 @@ form {
 </style>
 </head>
 <body>
-
-	<%@ include file = "../common/menubar.jsp" %>
-	
 	<div class = "outer">
 		<br>
 		<h2 align = "center">추가 정보 입력</h2>
@@ -302,7 +333,7 @@ form {
 			</table>
 			<br><br>
 			<div class="joinBtn">
-				<input type="submit" id="joinBtn" value="가입하기">
+				<button id = "joinBtn" type="submit">가입하기</button>
 			</div>
 		</form>
 	</div>
