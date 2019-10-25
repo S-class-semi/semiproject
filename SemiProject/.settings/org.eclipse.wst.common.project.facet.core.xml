@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <faceted-project>
+<<<<<<< HEAD
+  <runtime name="won"/>
+=======
   <runtime name="Apache Tomcat v8.5"/>
+>>>>>>> branch 'master' of https://github.com/S-class-semi/semiproject.git
   <fixed facet="wst.jsdt.web"/>
   <fixed facet="jst.web"/>
   <fixed facet="java"/>

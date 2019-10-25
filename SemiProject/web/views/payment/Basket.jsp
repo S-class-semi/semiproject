@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
+<script>
+function selectAll(checkFlag) { 
+=======
+>>>>>>> branch 'master' of https://github.com/S-class-semi/semiproject.git
 
 
 		</head>

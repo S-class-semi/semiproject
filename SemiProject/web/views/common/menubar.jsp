@@ -71,7 +71,7 @@
 			<table>
 				<tr>
 					<td><label>아이디(이메일) : </label></td>
-					<td><input type="email" name="userId" id="userId"></td>
+					<td><input type="text" name="userId" id="userId"></td>
 				</tr>
 				<tr>
 					<td><label>비밀번호 : </label></td>

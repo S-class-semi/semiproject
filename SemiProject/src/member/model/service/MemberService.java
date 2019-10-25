@@ -63,4 +63,35 @@ public class MemberService {
 		return member;
 	}
 
+	public int updateMember(Member member) {
+			Connection conn = getConnection();
+			
+			int result = new MemberDao().updateMember(conn, member);
+			
+			if(result > 0)
+				commit(conn);
+			else
+				rollback(conn);
+			
+			close(conn);
+			
+			return result;
+		
+	}
+
+	public int deleteMember(String userId) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().deleteMember(conn, userId);
+		
+		if(result > 0)
+			commit(conn);
+		else
+			rollback(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+
 }
