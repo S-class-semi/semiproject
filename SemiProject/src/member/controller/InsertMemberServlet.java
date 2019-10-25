@@ -56,7 +56,7 @@ public class InsertMemberServlet extends HttpServlet {
 			request.setAttribute("msg", "회원 가입 실패!");
 		}
 		
-		view.forward(request, response);
+		view.forward(request, response); 
 	}
 
 	/**
