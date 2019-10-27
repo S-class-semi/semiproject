@@ -3,7 +3,7 @@
     
 <%
 	Member loginUser = (Member)session.getAttribute("loginUser");
-	Integer userG = (Integer)session.getAttribute("userG");
+	Integer userT = (Integer)session.getAttribute("userT");
 %>
 
 <!DOCTYPE html>
@@ -71,7 +71,7 @@
 			<table>
 				<tr>
 					<td><label>아이디(이메일) : </label></td>
-					<td><input type="email" name="userId" id="userId"></td>
+					<td><input type="text" name="userId" id="userId"></td>
 				</tr>
 				<tr>
 					<td><label>비밀번호 : </label></td>
@@ -87,7 +87,7 @@
 
 		</form>
 		
-	<%}else if(loginUser != null && userG == 2){%>	<!-- 판매자 로그인 -->
+	<%}else if(loginUser != null && userT == 2){%>	<!-- 판매자 로그인 -->
 			<div id = "userInfo">
 				<label>판매자 로그인됨 환영</label><br>
 				<div class = "btns" align = "right">
@@ -96,7 +96,7 @@
 				</div>
 			</div>
 		
-	<%}else if(loginUser != null && userG == 3){%>	<!-- 관리자 로그인 -->
+	<%}else if(loginUser != null && userT == 3){%>	<!-- 관리자 로그인 -->
 			<div id = "userInfo">
 				<label>관리자 로그인됨 환영</label><br>
 				<div class = "btns" align = "right">

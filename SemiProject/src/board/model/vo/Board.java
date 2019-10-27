@@ -21,7 +21,6 @@ public class Board implements Serializable{
 	
 	
 	public Board() {
-		super();
 	}
 
 
@@ -141,7 +140,6 @@ public class Board implements Serializable{
 				+ ", B_TEXT=" + B_TEXT + ", USER_ID=" + USER_ID + ", B_TIME=" + B_TIME + ", B_COUNT=" + B_COUNT
 				+ ", B_FLOG=" + B_FLOG + "]";
 	}
-
 
 		
 }

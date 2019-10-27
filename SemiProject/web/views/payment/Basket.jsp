@@ -7,23 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
+<<<<<<< HEAD
+<script>
 function selectAll(checkFlag) { 
+=======
+>>>>>>> branch 'master' of https://github.com/S-class-semi/semiproject.git
 
-		       var f = document.sendForm; 
-
-		       for(var i=0; i<f.elements.length; i++) { 
-
-		               if(f.elements[i].name == 'checkbox2'){ 
-
-		                       f.elements[i].checked = checkFlag; 
-
-		               } 
-
-		       } 
-
-		} 
-
-		</script>
 
 		</head>
 

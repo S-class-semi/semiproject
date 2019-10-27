@@ -37,7 +37,7 @@ public class MyPageServlet extends HttpServlet {
 		System.out.println(member);
 		RequestDispatcher view = null;
 		if(member != null) {
-			view = request.getRequestDispatcher("마이페이지 jsp파일 써넣을 곳");
+			view = request.getRequestDispatcher("views/member/MileageView.jsp");
 			request.setAttribute("member", member);
 		}else {
 			view = request.getRequestDispatcher("views/common/errorPage.jsp");

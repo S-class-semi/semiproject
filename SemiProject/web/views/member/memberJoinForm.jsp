@@ -4,59 +4,290 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
-	.outer{
-		width: 900px;
-		height: 700px;
-		background: rgb(160, 200, 220);
-		color: white;
-		margin-left: auto;
-		margin-right: auto;
-		margin-top: 50px;
-	}
-	.outer label, .outer td{
-		color: white;
-	}
-	input{
-		margin-top: 2px;
-	}
-	#idCheck, #goMain, #joinBtn{
-		background: rgb(160, 200, 220);
-		border-radius: 5px;
-		width: 80px;
-		height: 25px;
-		text-align: center;
-		color: white;
-	}
-	#joinBtn{
-		background: hotpink;
-		color: white;
-	}
-	#joinBtn, #goMain{
-		display: inline-block;
-	}	
+body{
+	background: #f2f2f2;
+}
+.outer {
+	width: 900px;
+	height: 700px;
+	background: #f2f2f2;
+	color: black;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 50px;
+}
+
+.outer label, .outer td {
+	color: black;
+}
+
+input {
+	margin-top: 2px;
+}
+
+/* 가입버튼 */
+#joinBtn{
+  background:#40e0d0;
+  color:#fff;
+  border:none;
+  border-radius: 5px;
+  position:relative;
+  width: 300px;
+  height:40px;
+  font-size:1em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+}
+#joinBtn:hover{
+  background:#fff;
+  color:#40e0d0;
+}
+#joinBtn:before,#joinBtn:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #40e0d0;
+  transition:400ms ease all;
+}
+#joinBtn:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#joinBtn:hover:before,#joinBtn:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+.joinBtn {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+.join {
+	width: 200px;
+	padding: 12px 20px;
+	margin: 8px 0;
+	box-sizing: border-box;
+	border: 3px solid #ccc;
+	-webkit-transition: 0.5s;
+	transition: 0.5s;
+	outline: none;
+	border-style: hidden;
+	box-shadow : 5px 5px 3px 2px gray;
+	border-radius: 5px;
+}
+.join:focus {
+	box-shadow : 5px 5px 3px 2px #40e0d0;
+	border: 1px solid #40e0d0;
+}
+
+@keyframes click-wave {
+  0% {
+    height: 40px;
+    width: 40px;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 200px;
+    width: 200px;
+    margin-left: -80px;
+    margin-top: -80px;
+    opacity: 0;
+  }
+}
+
+.option-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  position: relative;
+  top: 13.33333px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 40px;
+  width: 40px;
+  transition: all 0.15s ease-out 0s;
+  background: #cbd1d8;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 0.5rem;
+  outline: none;
+  position: relative;
+  z-index: 1000;
+}
+.option-input:hover {
+  background: #9faab7;
+}
+.option-input:checked {
+  background: #40e0d0;
+}
+.option-input:checked::before {
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  content: "✔";
+  display: inline-block;
+  font-size: 26.66667px;
+  text-align: center;
+  line-height: 40px;
+}
+.option-input:checked::after {
+  -webkit-animation: click-wave 0.65s;
+  -moz-animation: click-wave 0.65s;
+  animation: click-wave 0.65s;
+  background: #40e0d0;
+  content: "";
+  display: block;
+  position: relative;
+  z-index: 100;
+}
+.option-input.radio {
+  border-radius: 50%;
+}
+.option-input.radio::after {
+  border-radius: 50%;
+}
+
+/* input */
+form {
+  display: grid;
+  font-family: Avenir;
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden;
+}
+* {
+  box-sizing: border-box;
+}
+.inp {
+  position: relative;
+  margin: auto;
+  width: 100%;
+  max-width: 280px;
+}
+.inp .label {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  font-size: 16px;
+  color: #9098a9;
+  font-weight: 500;
+  transform-origin: 0 0;
+  transition: all 0.2s ease;
+}
+.inp svg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 26px;
+  fill: none;
+}
+.inp svg path {
+  stroke: #c8ccd4;
+  stroke-width: 2;
+}
+.inp svg path d {
+  transition: all 0.2s ease;
+}
+.inp .border {
+  position: absolute;
+  bottom: 0;
+  left: 120px;
+  height: 2px;
+  right: 0;
+  background: #c8ccd4;
+}
+.inp input {
+  -webkit-appearance: none;
+  width: 100%;
+  border: 0;
+  font-family: inherit;
+  padding: 12px 0;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 500;
+  background: none;
+  border-radius: 0;
+  color: #223254;
+  transition: all 0.15s ease;
+}
+.inp input:not(:placeholder-shown) + span {
+  color: #5a667f;
+  transform: translateY(-26px) scale(0.75);
+}
+.inp input:focus {
+  background: none;
+  outline: none;
+}
+.inp input:focus + span {
+  color: #07f;
+  transform: translateY(-26px) scale(0.75);
+  transition-delay: 0.1s;
+}
+.inp input:focus + span + svg path {
+  stroke: #07f;
+  animation: elasticInput 0.4s ease forwards;
+}
+.inp input:focus + span + svg + .border {
+  background: #07f;
+}
+@-moz-keyframes elasticInput {
+  50% {
+    d: path("M2,2 C21,17 46,25 74,25 C102,25 118,25 120,25");
+  }
+}
+@-webkit-keyframes elasticInput {
+  50% {
+    d: path("M2,2 C21,17 46,25 74,25 C102,25 118,25 120,25");
+  }
+}
+@-o-keyframes elasticInput {
+  50% {
+    d: path("M2,2 C21,17 46,25 74,25 C102,25 118,25 120,25");
+  }
+}
+@keyframes elasticInput {
+  50% {
+    d: path("M2,2 C21,17 46,25 74,25 C102,25 118,25 120,25");
+  }
+}
+
 </style>
 </head>
 <body>
-
-	<%@ include file = "../common/menubar.jsp" %>
 	
 	<div class = "outer">
 		<br>
 		<h2 align = "center">회원가입</h2>
 
 		<form id="joinForm" action="<%=request.getContextPath()%>/insert.me" method="post" onsubmit = "toEnabled()">
-			<table>
+			<table align = "center">
 				<tr>
 					<td>* 아이디(이메일)</td>
 				</tr>
 				<tr>
 					<td>
-						<input id="userId1" name="userId1" type="text" oninput = "checkId();" required autofocus> @ 
-						<input id="userId2" name="userId2" type="text" oninput = "checkId();" disabled>
+						<input id="userId1" name="userId1" class = "join" type="text" oninput = "checkId();" placeholder = "아이디" required autofocus> @ 
+						<input id="userId2" name="userId2" class = "join" type="text" oninput = "checkId();" disabled>&nbsp;&nbsp;
 						<input type = "hidden" id = "userId3" name = "userId3">
-						<select id = "email" name = "email" >
+						<select id = "email" name = "email" class = "join">
 							<option value = "naver.com">naver.com</option>
                             <option value = "hanmail.net">hanmail.net</option>
                             <option value = "gmail.com">gmail.com</option>
@@ -64,25 +295,25 @@
 							<option value = "1">직접입력</option>
 						</select>
 					</td>
-					<td><div id = "checkId"></div></td>
 				</tr>
+					<tr><td><div id = "checkId"></div></td></tr>
 				<tr>
 					<td>* 비밀번호</td>
 				</tr>
 				<tr>
-					<td>8자 이상 영문, 숫자, 특수문자를 사용하세요</td>
+					<td>8자 이상 영문, 숫자를 조합하여 입력하세요</td>
 				</tr>
 				<tr>
-					<td><input id="pwd" name="pwd" type="password" required></td>
-					<td><div id = "pwdTest"></div></td>
+					<td><input id="pwd" name="pwd" class = "join" type="password" placeholder = "비밀번호" required></td>
 				</tr>
+					<tr><td><div id = "pwdTest"></div></td></tr>
 				<tr>
 					<td>* 비밀번호 확인</td>
 				</tr>
 				<tr>
-					<td><input id="checkPwd" name="checkPwd" type="password" required></td>
-					<td><div id = "pwdTF"></div></td>
+					<td><input id="checkPwd" name="checkPwd" class = "join" type="password" placeholder = "비밀번호 확인" required></td>
 				</tr>
+					<tr><td><div id = "pwdTF"></div></td></tr>
 				<tr>
 					<td>* 별명</td>
 				</tr>
@@ -90,43 +321,37 @@
 					<td>한글, 영문, 숫자만 입력 가능합니다</td>
 				</tr>
 				<tr>
-					<td><input id="nickname" name="nickname" type="text" required></td>
-					<td><div id = "nickTF"></div></td>
+					<td><input id="nickname" name="nickname" class = "join" type="text" placeholder = "별명" required></td>
 				</tr>
+					<tr><td><div id = "nickTF"></div></td></tr>
 				<tr>
 					<td>* 평수</td>
 				</tr>
 				<tr>
 					<td>
-					<input id="space1" name="space" type="radio" value = "1" checked>
+					<input id="space1" name="space" class="option-input radio" type="radio" value = "1" checked>
 					<label for="space1">1평</label>&nbsp;
-					<input id="space3" name="space" type="radio" value = "3">
+					<input id="space3" name="space" class="option-input radio" type="radio" value = "3">
 					<label for="space3">3평</label>&nbsp;
-					<input id="space5" name="space" type="radio" value = "5">
+					<input id="space5" name="space" class="option-input radio" type="radio" value = "5">
 					<label for="space5">5평</label>&nbsp;
-					<input id="space7" name="space" type="radio" value = "7">
+					<input id="space7" name="space" class="option-input radio" type="radio" value = "7">
 					<label for="space7">7평</label>&nbsp;
-					<input id="space9" name="space" type="radio" value = "9">
+					<input id="space9" name="space" class="option-input radio" type="radio" value = "9">
 					<label for="space9">9평</label>&nbsp;
-					<input id="space10" name="space" type="radio" value = "10">
+					<input id="space10" name="space" class="option-input radio" type="radio" value = "10">
 					<label for="space10">10평</label>
 					</td>
 				</tr>
 			</table>
-
-			<div class="btns" align="center">
-				<input type="button" id="goMain" onclick="goMain();" value = "메인으로">
-				<input type="submit" id="joinBtn" value="가입하기">
-
+			<br><br>
+			<div class="joinBtn">
+				<button id = "joinBtn" type="submit">가입하기</button>
 			</div>
 		</form>
 	</div>
 	
 	<script>
-		// 메인으로
-		function goMain(){
-			location.href = "<%= request.getContextPath() %>/index.jsp";
-		}
 		
 		// 처음 시작할 때 naver.com으로
 		$(function(){
@@ -179,7 +404,7 @@
 							if(data == "fail"){
 								$("#checkId").html('');
 								$("#checkId").html("아이디가 중복됩니다").css("color", "red");
-								userId.focus();
+								idUsable = false;
 							}else{
 								$("#checkId").html('');
 								$("#checkId").html("아이디 사용 가능합니다").css("color", "green");
@@ -227,17 +452,17 @@
 		function checkPassword(password,id){
 		    var checkNumber = password.search(/[0-9]/g);
 		    var checkEnglish = password.search(/[a-z]/ig);
-		    var pattern1 = /^(?=.*[a-zA-Z])(?=.*[`~!@#$%^*()-_+=\|])(?=.*[0-9]).{8,25}$/;
+		    var pattern1 = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
 		    var pattern2 = /(\w)\1\1\1/;
 		    
-		    if(!pattern1.test(password)){            
-		    	$("#pwdTest").html("영문, 숫자, 특수문자 8자 이상 조합을 사용해야 합니다").css("color", "red");
+			if(!pattern1.test(password)){            
+		    	$("#pwdTest").html("영문, 숫자 8자 이상 조합을 사용해야 합니다").css("color", "red");
 		    	
 		    }else if(pattern2.test(password)){
 		    	$("#pwdTest").html("같은 문자를 4번 이상 사용하실 수 없습니다").css("color", "red");
 		    	
 		    }else if(password.search(id) > -1 && id.length > 3){
-		    	$("#pwdTest").html("비밀번호에 아이디가 포함되었습니다").css("color", "red");
+		    	$("#pwdTest").html("비밀번호에 아이디가 포함되어 있습니다").css("color", "red");
 		    	
 		    }else{
 		    	$("#pwdTest").html('');
@@ -262,6 +487,7 @@
 							if(data == "fail"){
 								$("#nickTF").html('');
 								$("#nickTF").html("이미 존재하는 별명입니다").css("color", "red");
+								nickUsable = false;
 							}else{
 								$("#nickTF").html('');
 								$("#nickTF").html("사용 가능한 별명입니다").css("color", "green");
@@ -286,6 +512,9 @@
 		
 		// 가입버튼 클릭했을 때 실행 함수
 		function invalidJoin(){
+			var pattern1 = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
+		    var pattern2 = /(\w)\1\1\1/;
+		    
 			if($("#userId1").val().length == 0){
 				alert("아이디를 입력하세요");
 				$("#userId1").focus();
@@ -358,6 +587,24 @@
 				return false;
 			}
 			
+			if(!pattern1.test($("#pwd").val())){            
+				alert("비밀번호는 영문, 숫자 8자 이상 조합을 사용해야 합니다");
+		    	$("#pwd").focus();
+		    	return false;
+		    }
+			
+			if(pattern2.test($("#pwd").val())){
+				alert("비밀번호에 같은 문자를 4번 이상 사용하실 수 없습니다");
+		    	$("#pwd").focus();
+		    	return false;
+		    }
+			
+			if($("#pwd").val().search($("#userId1").val()) > -1 && $("#userId1").val().length > 3){
+				alert("비밀번호에 아이디가 포함되어 있습니다");
+		    	$("#pwd").focus();
+		    	return false;
+		    }
+			
 			if(!/^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*$/.test($("#nickname").val())){
 				alert("별명은 한글, 영문, 숫자만 입력 가능합니다");
 				$("#nickname").focus();
@@ -373,6 +620,7 @@
 			return true;
 		}
 	</script>
-	
+
+
 </body>
 </html>

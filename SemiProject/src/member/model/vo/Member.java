@@ -19,6 +19,26 @@ public class Member {
 	
 	
 	
+	public Member(String userId, String nickname, String gender) {
+		super();
+		this.userId = userId;
+		this.nickname = nickname;
+		this.gender = gender;
+	}
+
+	
+
+	public Member(String userId, String nickname, int space, String context, String gender) {
+		super();
+		this.userId = userId;
+		this.nickname = nickname;
+		this.space = space;
+		this.context = context;
+		this.gender = gender;
+	}
+
+
+
 	public Member(String userId, String userPwd) {
 		super();
 		this.userId = userId;
@@ -144,6 +164,13 @@ public class Member {
 		return "Member [userId=" + userId + ", userG=" + userG + ", userT=" + userT + ", userPwd=" + userPwd
 				+ ", nickname=" + nickname + ", space=" + space + ", point=" + point + ", context=" + context
 				+ ", birth=" + birth + ", gender=" + gender + ", status=" + status + "]";
+	}
+
+
+
+	public char[] getUserNo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
