@@ -1,29 +1,27 @@
 package member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
-import member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class KakaoCheckServlet
  */
-@WebServlet("/login.me")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/kakaocheck.me")
+public class KakaoCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public KakaoCheckServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,28 +30,21 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		String kakaoId = request.getParameter("kakaoId");
 		
-		Member member = new Member(userId, userPwd);
+		int result = new MemberService().kakaoCheck(kakaoId);
 		
-		Member loginUser = new MemberService().loginMember(member);
+		PrintWriter out = response.getWriter();
 		
-		response.setContentType("text/html;charset=utf-8");
-		
-		int userT = 0;
-		if(loginUser != null) {
-			userT = loginUser.getUserT();
-			HttpSession session = request.getSession();
-			
-			session.setAttribute("loginUser", loginUser);
-			session.setAttribute("userT", userT);
-			response.sendRedirect("index.jsp");
+		if(result > 0) {
+			out.append("o");	// print 대신 append 해도 된다
 		}else {
-			request.setAttribute("msg", "로그인 실패");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
+			out.append("x");
 		}
+		
+		out.flush();
+		out.close();
+	
 	}
 
 	/**

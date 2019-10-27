@@ -14,16 +14,16 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class KakaoLoginServlet
  */
-@WebServlet("/login.me")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/kakaologin.me")
+public class KakaoLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public KakaoLoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,12 +32,11 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		String kakaoId = request.getParameter("kakaoId");
 		
-		Member member = new Member(userId, userPwd);
+		Member member = new Member(kakaoId);
 		
-		Member loginUser = new MemberService().loginMember(member);
+		Member loginUser = new MemberService().kakaoLogin(member);
 		
 		response.setContentType("text/html;charset=utf-8");
 		

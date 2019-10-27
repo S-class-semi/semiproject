@@ -14,16 +14,16 @@ import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class FindPwdServlet
  */
-@WebServlet("/login.me")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/findpwd.me")
+public class FindPwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public FindPwdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,28 +32,26 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
 		
-		Member member = new Member(userId, userPwd);
+		String userId = request.getParameter("findMail");
+		String userPwd = request.getParameter("randomPwd");
 		
-		Member loginUser = new MemberService().loginMember(member);
+		int result = new MemberService().findPwd(new Member(userId, userPwd));
 		
-		response.setContentType("text/html;charset=utf-8");
-		
-		int userT = 0;
-		if(loginUser != null) {
-			userT = loginUser.getUserT();
+		if(result > 0) {
 			HttpSession session = request.getSession();
+			session.setAttribute("findMail", userId);
+			session.setAttribute("randomPwd", userPwd);
+			session.setMaxInactiveInterval(10);
 			
-			session.setAttribute("loginUser", loginUser);
-			session.setAttribute("userT", userT);
-			response.sendRedirect("index.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("sendmail.me");
+			view.forward(request, response);
 		}else {
-			request.setAttribute("msg", "로그인 실패");
+			request.setAttribute("msg", "임시 비밀번호 생성 실패");
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
+		
 	}
 
 	/**
