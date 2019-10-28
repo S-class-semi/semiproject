@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="member.model.vo.Member" %>
+<%
+	Member m = (Member)request.getAttribute("member");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,12 +46,22 @@
 		font-weight: bold;
 		font-size:20px;
 	}
-	
+	#content{
+		padding:30px;
+		margin-top:10px;
+		margin:30px auto;
+		max-width:1000px;
+		width:100%;
+		box-sizing:border-box;
+		box-shadow:0 1px 3px 0 rgba(0,0,0,0.2);
+		background-color:#ffffff;
+	}
 	
 </style>
 </head>
 <body>
 <%@ include file = "/views/member/mypageMenuView.jsp" %>
+<form id="updateForm" action="<%=request.getContextPath() %>/update.me" method="post">
 <div id = "content">
 	<div class="title">회원탈퇴 신청</div>
 	<br>
@@ -58,10 +71,10 @@
 	<div class="box">
 		<div class="title">회원탈퇴 시 처리내용</div>
 			<ul class="text">
-				<li>난혼자산다 포인트.쿠폰은 소멸되며 환불되지 않습니다.</li>
-				<li>난혼자산다 구매 정보가 삭제됩니다.</li>
+				<li>난혼자산다 포인트.쿠폰은 소멸되며 환불되지 않습니다.</li><br>
+				<li>난혼자산다 구매 정보가 삭제됩니다.</li><br>
 				<li>
-				"소비자보호에 관한 법률 제6조에 의거,계약 또는 청약철회 등에 관한기록은 5년,<br>
+				"소비자보호에 관한 법률 제6조에 의거,<br>계약 또는 청약철회 등에 관한기록은 5년,<br>
 				대금결제 및 재화등의 공급에 관한 기록은 5년, <br>
 				소비자의 불만 또는 분쟁처리에 관한 기록은 3년 동안 보관됩니다.<br>
 				개인정보는 법률에 의한 보유 목적 외에 다른 목적으로는 <br>
@@ -128,8 +141,22 @@
 		</div>
 	</div>
 </div>
-</div>
-<input type="submit" name="commit" value="탈퇴신청" class="button" data-disable-with="탈퇴신청">
+
+<div id="deleteBtn" onclick="deleteMember();">탈퇴하기</div>
 <a class="cancel-button" href="https://www.naver.com/">취소하기</a>
+</div>
+</form>
+<script>
+// 회원 탈퇴하기
+		function deleteMember(){
+			var bool = confirm("정말루 탈퇴 할꼬얌?");
+			
+			if(bool){
+				$("#updateForm").attr("action", "<%=request.getContextPath()%>/delete.me");
+				$("#updateForm").submit();
+				// DeleteMemberServlet 만들러 ㄱㄱ씽!
+			}
+		}
+</script>
 </body>
 </html>

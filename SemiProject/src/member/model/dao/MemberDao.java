@@ -299,5 +299,53 @@ public class MemberDao {
 		
 		return loginUser;
 	}
+	///정원이꺼
+	
+	public int updateMember(Connection conn, Member member) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, member.getNickname());
+			pstmt.setInt(2, member.getSpace());
+			pstmt.setString(3,  member.getContext());
+			pstmt.setString(4,  member.getGender());
+			pstmt.setString(5,  member.getUserId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int deleteMember(Connection conn, String userId) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteMember");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1,  userId);
+			
+			result = pstmt.executeUpdate();
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
 
+}
 }

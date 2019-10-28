@@ -17,9 +17,7 @@ public class Member {
 	private String kakao;
 	
 	public Member() {}
-	
-	
-	
+
 	public Member(String kakao) {
 		super();
 		this.kakao = kakao;
@@ -31,6 +29,7 @@ public class Member {
 		this.userPwd = userPwd;
 	}
 
+	
 	public Member(String userId, String nickname, int space, String kakao) {
 		super();
 		this.userId = userId;
@@ -49,7 +48,24 @@ public class Member {
 		this.space = space;
 	}
 
+	//////정원이꺼
+	public Member(String userId, String nickname, String gender) {
+		super();
+		this.userId = userId;
+		this.nickname = nickname;
+		this.gender = gender;
+	}
 
+	
+	public Member(String userId, String nickname, int space, String context, String gender) {
+		super();
+		this.userId = userId;
+		this.nickname = nickname;
+		this.space = space;
+		this.context = context;
+		this.gender = gender;
+	}
+	//////
 
 	public Member(String userId, int userG, int userT, String userPwd, String nickname, int space, int point,
 			String context, Date birth, String gender, String status, String kakao) {

@@ -20,11 +20,13 @@
 	}
 	#password_form{
 		padding:30px;
+		margin-top:10px;
+		margin:30px auto;
 		max-width:360px;
 		width:100%;
 		box-sizing:border-box;
+		box-shadow:0 1px 3px 0 rgba(0,0,0,0.2);
 		background-color:#ffffff;
-		box-shadow:1px 3px rgba(0,0,0,0.2);
 	}
 	#password_form>form>.notice{
 		margin-top:5px;
@@ -44,7 +46,7 @@
 		text-align:center;
 		cursor:pointer;
 	}
-	
+
 </style>
 </head>
 <body>
@@ -62,7 +64,12 @@
 		</form>
 		
 	</div>
-	
+	<script>
+	function updateMember(){
+			$("#updateForm").submit();
+			// UpdateMemberServlet 만들러 ㄱㄱ씽!
+		}
+	</script>
 	
 </body>
 </html>

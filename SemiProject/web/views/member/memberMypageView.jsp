@@ -7,9 +7,13 @@
 <title>Insert title here</title>
 
 <style>
+hr{
+	border: 1px solid #D5D5D5;
+}
 ul {
+  width:600px;
   list-style-type: none;
-  margin: 0px;
+  margin: 0;
   padding: 0;
   overflow: hidden;
   background-color: #ffffff;
@@ -36,27 +40,29 @@ li a:hover {
   color:#35c5f0;
   position:relative;
   font-weight:bold;
+  border-bottom:3px solid #35c5f0;
 }
 #myPagediv{
-width:550px;
-margin:0 auto;
-padding:5px 20px;
-text-align:center;
-display:inline-center;
-border-bottom:3px solid #35c5f0;
+	display:table;
+	width:300px;
+	height:60px;
+	margin:0 auto;
+	margin-top:100px;
+	
 }
 </style>
 </head>
 <body>
 
 <%@ include file = "/views/common/menubar.jsp" %> 
-<hr>
 <div id = "myPagediv">
 <ul>
   <li><a class="active" href="<%=request.getContextPath()%>/views/member/pwdUpdateView.jsp">비밀번호변경</a></li>
   <li><a class="active" href="<%=request.getContextPath()%>/views/member/UpdatememberView.jsp">회원정보수정</a></li>
   <li><a class="active" href="<%=request.getContextPath()%>/views/member/myClaimView.jsp">취소/교환/환불</a></li>
-  <li><a class="active" href="">나의리뷰</a></li>
-</ul></div>
+  <li><a class="active" href="#">나의리뷰</a></li>
+</ul>
+</div>
+<hr>
 </body>
 </html>
