@@ -15,16 +15,16 @@ import board.model.vo.Board;
 import board.model.vo.PageInfo;
 
 /**
- * Servlet implementation class BoardListServlet
+ * Servlet implementation class QNAListServlet
  */
-@WebServlet("/list.do")
-public class BoardListServlet extends HttpServlet {
+@WebServlet("/qna.do")
+public class QNAListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardListServlet() {
+    public QNAListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,7 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BoardService bService = new BoardService();
+BoardService bService = new BoardService();
 		
 		int listCount = bService.getListCount();
 		
@@ -64,22 +64,25 @@ public class BoardListServlet extends HttpServlet {
 		
 		PageInfo pi = new PageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
 		
-		ArrayList<Board> list = bService.selectList(currentPage,limit);
+		ArrayList<Board> list = bService.selectQNAList(currentPage,limit);
 		
 		RequestDispatcher view = null;
+		System.out.println(list);
 		if(list != null) {
 			view = request.getRequestDispatcher("views/board/QNAListView.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		}else {
-			view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			request.setAttribute("msg", "게시판 리스트 조회 실패");
+			view = request.getRequestDispatcher("views/admin/adminMenuView.jsp");
 		}
 		view.forward(request,response);
 		
 		// boardListView.jsp 만들러 ㄱㄱ씽
-	}
+		}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

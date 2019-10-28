@@ -2,7 +2,6 @@ package product.model.dao;
 
 import static common.JDBCTemplate.close;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -15,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import company.model.dao.CompanyDao;
+import product.model.vo.Order;
 import product.model.vo.ProductImgFile;
 import product.model.vo.ProductInfo;
 
@@ -373,5 +373,112 @@ public class ProductDao {
 		
 		return result;
 	}
+	
+	public int dailySales(Connection conn, String pname) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int num = 0;
+		
+		
+		String query = prop.getProperty("dailySales");
+		System.out.println(pname);
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, pname); 
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				num = rs.getInt("SUM(P_PRICE)");
+
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return num;
+	}
+	public ArrayList<Order> selectOrderList(Connection conn, int currentPage, int limit) {
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		
+		ArrayList<Order> list =null;
+		
+		String query = prop.getProperty("selectOrderList");
+		
+		int startRow = (currentPage -1) * limit + 1;
+		
+		int endRow = startRow + limit -1;
+		
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			pstmt.setString(3, "N");
+			
+			rs=pstmt.executeQuery();
+			
+			list = new ArrayList<Order>();
+			//초기값 잡아 놓자
+			
+			while(rs.next()) {
+//				private int ono;
+//				private int pno;
+//				private int quantity;
+//				private Date buydate;
+//				private String status;
+//				private String user_Id;
+				
+				Order o = new Order(rs.getInt("ono"),
+												rs.getInt("pno"),
+												rs.getString("pname"),
+												rs.getInt("quantity"),
+												rs.getDate("buydate"),
+												rs.getString("status"),
+												rs.getString("user_Id"));
+												
+			
+				list.add(o);
+			}
+		} catch (SQLException e) {		
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return list;
+	}
+	public int getOrderListCount(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		int listCount = 0;
+		
+		String query = prop.getProperty("getOrderListCount");
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			if(rs.next()) {
+				listCount = rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(stmt);
+			close(rs);
+		}
+		return listCount;
+	}
+	//찬화꺼
 
 }

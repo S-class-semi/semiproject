@@ -66,6 +66,18 @@ public class Member {
 		this.gender = gender;
 	}
 	//////
+	
+	//찬화
+	
+	public Member(String userId, int userG, String nickname, int point, String gender) {
+		super();
+		this.userId = userId;
+		this.userG = userG;
+		this.nickname = nickname;
+		this.point = point;
+		this.gender = gender;
+	}
+
 
 	public Member(String userId, int userG, int userT, String userPwd, String nickname, int space, int point,
 			String context, Date birth, String gender, String status, String kakao) {
@@ -83,6 +95,9 @@ public class Member {
 		this.status = status;
 		this.kakao = kakao;
 	}
+
+
+
 
 
 

@@ -1,13 +1,15 @@
 package product.model.service;
 
-import static common.JDBCTemplate.*;
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.commit;
+import static common.JDBCTemplate.getConnection;
+import static common.JDBCTemplate.rollback;
 
-import java.io.File;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import board.model.vo.Board;
 import product.model.dao.ProductDao;
+import product.model.vo.Order;
 import product.model.vo.ProductImgFile;
 import product.model.vo.ProductInfo;
 
@@ -181,6 +183,40 @@ public class ProductService {
 		return result;
 	}
 
+	
+
+	
+
+	public int dailySales(String pname) {
+		
+		Connection conn = getConnection();
+		
+		int num = 0;
+		num = new ProductDao().dailySales(conn, pname);
+		
+		close(conn);
+		
+		return num;
+	}
+
+	public ArrayList<Order> selectList(int currentPage, int limit) {
+		Connection conn = getConnection();
+		ArrayList<Order> list = new ProductDao().selectOrderList(conn,currentPage,limit);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public int getOrderListCount() {
+		Connection conn = getConnection();
+		int listCount = new ProductDao().getOrderListCount(conn);
+		
+		close(conn);
+		return listCount;
+	}
+
+	//찬화꺼
 
 
 

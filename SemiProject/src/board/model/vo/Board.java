@@ -9,15 +9,15 @@ public class Board implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = -5219066150385199445L;
-	private int B_NO;//게시판 고유번호
-	private String B_TYPE;//게시판카테고리
-	private	int B_NAME;//게시판 종류
-	private String B_TITLE;//게시판 제목
-	private String B_TEXT;//게시판 내용
-	private	String USER_ID;//게시판 작성자
-	private Date B_TIME;//작성일자
-	private int B_COUNT;//조회수
-	private String B_FLOG;//삭제여부
+	private int bId;//게시판 고유번호
+	private String bType;//게시판카테고리
+	private	int bName;//게시판 종류
+	private String bTitle;//게시판 제목
+	private String bText;//게시판 내용
+	private	String bWritter;//게시판 작성자
+	private Date bTime;//작성일자
+	private int bCount;//조회수
+	private String Status;//삭제여부
 	
 	
 	public Board() {
@@ -25,108 +25,108 @@ public class Board implements Serializable{
 	}
 
 
-	public Board(int b_NO, String b_TYPE, int b_NAME, String b_TITLE, String b_TEXT, String uSER_ID, Date b_TIME,
-			int b_COUNT, String b_FLOG) {
+	public Board(int bId, String bType, int bName, String bTitle, String bText, String bWritter, Date bTime, int bCount,
+			String status) {
 		super();
-		B_NO = b_NO;
-		B_TYPE = b_TYPE;
-		B_NAME = b_NAME;
-		B_TITLE = b_TITLE;
-		B_TEXT = b_TEXT;
-		USER_ID = uSER_ID;
-		B_TIME = b_TIME;
-		B_COUNT = b_COUNT;
-		B_FLOG = b_FLOG;
+		this.bId = bId;
+		this.bType = bType;
+		this.bName = bName;
+		this.bTitle = bTitle;
+		this.bText = bText;
+		this.bWritter = bWritter;
+		this.bTime = bTime;
+		this.bCount = bCount;
+		Status = status;
 	}
 
 
-	public int getB_NO() {
-		return B_NO;
+	public int getbId() {
+		return bId;
 	}
 
 
-	public void setB_NO(int b_NO) {
-		B_NO = b_NO;
+	public void setbId(int bId) {
+		this.bId = bId;
 	}
 
 
-	public String getB_TYPE() {
-		return B_TYPE;
+	public String getbType() {
+		return bType;
 	}
 
 
-	public void setB_TYPE(String b_TYPE) {
-		B_TYPE = b_TYPE;
+	public void setbType(String bType) {
+		this.bType = bType;
 	}
 
 
-	public int getB_NAME() {
-		return B_NAME;
+	public int getbName() {
+		return bName;
 	}
 
 
-	public void setB_NAME(int b_NAME) {
-		B_NAME = b_NAME;
+	public void setbName(int bName) {
+		this.bName = bName;
 	}
 
 
-	public String getB_TITLE() {
-		return B_TITLE;
+	public String getbTitle() {
+		return bTitle;
 	}
 
 
-	public void setB_TITLE(String b_TITLE) {
-		B_TITLE = b_TITLE;
+	public void setbTitle(String bTitle) {
+		this.bTitle = bTitle;
 	}
 
 
-	public String getB_TEXT() {
-		return B_TEXT;
+	public String getbText() {
+		return bText;
 	}
 
 
-	public void setB_TEXT(String b_TEXT) {
-		B_TEXT = b_TEXT;
+	public void setbText(String bText) {
+		this.bText = bText;
 	}
 
 
-	public String getUSER_ID() {
-		return USER_ID;
+	public String getbWritter() {
+		return bWritter;
 	}
 
 
-	public void setUSER_ID(String uSER_ID) {
-		USER_ID = uSER_ID;
+	public void setbWritter(String bWritter) {
+		this.bWritter = bWritter;
 	}
 
 
-	public Date getB_TIME() {
-		return B_TIME;
+	public Date getbTime() {
+		return bTime;
 	}
 
 
-	public void setB_TIME(Date b_TIME) {
-		B_TIME = b_TIME;
+	public void setbTime(Date bTime) {
+		this.bTime = bTime;
 	}
 
 
-	public int getB_COUNT() {
-		return B_COUNT;
+	public int getbCount() {
+		return bCount;
 	}
 
 
-	public void setB_COUNT(int b_COUNT) {
-		B_COUNT = b_COUNT;
+	public void setbCount(int bCount) {
+		this.bCount = bCount;
 	}
 
 
-	public String getB_FLOG() {
-		return B_FLOG;
+	public String getStatus() {
+		return Status;
 	}
 
 
-	public void setB_FLOG(String b_FLOG) {
-		B_FLOG = b_FLOG;
+	public void setStatus(String status) {
+		Status = status;
 	}
 
 
@@ -137,10 +137,12 @@ public class Board implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Board [B_NO=" + B_NO + ", B_TYPE=" + B_TYPE + ", B_NAME=" + B_NAME + ", B_TITLE=" + B_TITLE
-				+ ", B_TEXT=" + B_TEXT + ", USER_ID=" + USER_ID + ", B_TIME=" + B_TIME + ", B_COUNT=" + B_COUNT
-				+ ", B_FLOG=" + B_FLOG + "]";
+		return "Board [bId=" + bId + ", bType=" + bType + ", bName=" + bName + ", bTitle=" + bTitle + ", bText=" + bText
+				+ ", bWritter=" + bWritter + ", bTime=" + bTime + ", bCount=" + bCount + ", Status=" + Status + "]";
 	}
+
+
+	
 
 
 		

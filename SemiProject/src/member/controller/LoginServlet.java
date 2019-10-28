@@ -51,7 +51,13 @@ public class LoginServlet extends HttpServlet {
 		
 
 		if(loginUser != null){
-			if(userT==2) {
+			if(userT==3) {
+				session = request.getSession();
+				session.setAttribute("loginUser", loginUser);
+				view = request.getRequestDispatcher("views/admin/adminMenuView.jsp");
+				view.forward(request, response);
+			}
+			else if(userT==2) {
 				Company companyinfo  = new CompanyService().companyInfo(userId);
 				session = request.getSession();
 				session.setAttribute("companyinfo",companyinfo);
