@@ -605,14 +605,14 @@ form {
 		    	return false;
 		    }
 			
-			if(!/^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*$/.test($("#nickname").val())){
-				alert("별명은 한글, 영문, 숫자만 입력 가능합니다");
+			if($("#nickname").val().indexOf(" ") >= 0){
+				alert("별명에 공백은 입력할 수 없습니다");
 				$("#nickname").focus();
 				return false;
 			}
 			
-			if($("#nickname").val().indexOf(" ") >= 0){
-				alert("별명에 공백은 입력할 수 없습니다");
+			if(!/^[a-zA-Z0-9ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*$/.test($("#nickname").val())){
+				alert("별명은 한글, 영문, 숫자만 입력 가능합니다");
 				$("#nickname").focus();
 				return false;
 			}
