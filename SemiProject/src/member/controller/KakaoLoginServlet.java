@@ -10,22 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import company.model.service.CompanyService;
-import company.model.vo.Company;
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class LoginServlet
+ * Servlet implementation class KakaoLoginServlet
  */
-@WebServlet("/login.me")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/kakaologin.me")
+public class KakaoLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LoginServlet() {
+    public KakaoLoginServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,38 +32,25 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
-		String userPwd = request.getParameter("userPwd");
+		String kakaoId = request.getParameter("kakaoId");
 		
-		Member member = new Member(userId, userPwd);
+		Member member = new Member(kakaoId);
 		
-		Member loginUser = new MemberService().loginMember(member);
+		Member loginUser = new MemberService().kakaoLogin(member);
 		
 		response.setContentType("text/html;charset=utf-8");
 		
-		System.out.println(loginUser);
-		int userT = loginUser.getUserT();
-		
-		RequestDispatcher view= null;
-		HttpSession session =null;
-		
-
-		if(loginUser != null){
-			if(userT==2) {
-				Company companyinfo  = new CompanyService().companyInfo(userId);
-				session = request.getSession();
-				session.setAttribute("companyinfo",companyinfo);
-				view = request.getRequestDispatcher("views/company/companyMenubar.jsp");
-				view.forward(request, response);
-			}else if(userT==1){
-				session = request.getSession();
-				session.setAttribute("loginUser", loginUser);
-				session.setAttribute("userT", userT);
-				response.sendRedirect("index.jsp");	
-			}
-		}else{
+		int userT = 0;
+		if(loginUser != null) {
+			userT = loginUser.getUserT();
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("loginUser", loginUser);
+			session.setAttribute("userT", userT);
+			response.sendRedirect("index.jsp");
+		}else {
 			request.setAttribute("msg", "로그인 실패");
-			view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			view.forward(request, response);
 		}
 	}

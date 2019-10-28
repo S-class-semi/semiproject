@@ -195,7 +195,7 @@ body {
 			<label>회사명 : </label><input type= "text" id = "c_name" name = "c_name" value="<%=companyinfo.getC_name() %>" readonly="readonly" disabled><br>
 			<label>담당자 : </label><input type= "text" id = "c_manager" name = "c_manager" value="<%=companyinfo.getC_manager() %>" readonly="readonly" disabled><br> 
 			<label>연락처 : </label><input type= "text" id= "c_contact" name = "c_contact" value="<%=companyinfo.getC_contact() %>" readonly="readonly" disabled><br>
-			<button id="rogout" >로그아웃</button>
+			<button id="rogout" onclick= "logout();" >로그아웃</button>
 		</fieldset>
 		</div>
 	</div>
@@ -269,6 +269,10 @@ body {
 		}
 		function SalesGraph2(){
 			location.href = "<%=request.getContextPath()%>/views/product/prodcutSales.jsp";
+		}
+		// 로그아웃
+		function logout(){
+			location.href = '<%= request.getContextPath() %>/logout.me';
 		}
 	</script>
 

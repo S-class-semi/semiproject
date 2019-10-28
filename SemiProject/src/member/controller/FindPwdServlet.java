@@ -8,21 +8,22 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import member.model.service.MemberService;
 import member.model.vo.Member;
 
 /**
- * Servlet implementation class MyPageServlet
+ * Servlet implementation class FindPwdServlet
  */
-@WebServlet("/mypage.me")
-public class MyPageServlet extends HttpServlet {
+@WebServlet("/findpwd.me")
+public class FindPwdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MyPageServlet() {
+    public FindPwdServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,20 +32,26 @@ public class MyPageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String userId = request.getParameter("userId");
 		
-		Member member = new MemberService().selectMember(userId);
-		System.out.println(member);
-		RequestDispatcher view = null;
-		if(member != null) {
-			view = request.getRequestDispatcher("마이페이지 연결 주소");
-			request.setAttribute("member", member);
+		String userId = request.getParameter("findMail");
+		String userPwd = request.getParameter("randomPwd");
+		
+		int result = new MemberService().findPwd(new Member(userId, userPwd));
+		
+		if(result > 0) {
+			HttpSession session = request.getSession();
+			session.setAttribute("findMail", userId);
+			session.setAttribute("randomPwd", userPwd);
+			session.setMaxInactiveInterval(10);
+			
+			RequestDispatcher view = request.getRequestDispatcher("sendmail.me");
+			view.forward(request, response);
 		}else {
-			view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			request.setAttribute("msg", "조회에 실패했습니다.");
+			request.setAttribute("msg", "임시 비밀번호 생성 실패");
+			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view.forward(request, response);
 		}
 		
-		view.forward(request, response);
 	}
 
 	/**
