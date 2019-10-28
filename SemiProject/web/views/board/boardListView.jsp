@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="board.model.vo.*, java.util.ArrayList" %>
     
 <%
@@ -20,14 +20,14 @@
    .outer{
       width:900px;
       height:500px;
-      background:black;
-      color:white;
+      background:white;
+      color:black;
       margin-left:auto;
       margin-right:auto;
       margin-top:50px;
    }
    table {
-      border:1px solid white;
+      border:1px solid black;
       text-align:center;
    }
    .tableArea {
@@ -65,14 +65,12 @@
 				<%}else{ %>
 					<% for(Board b : list){ %>
 						<tr>
-							<input type="hidden" value="<%=b.getbNo() %>">
-							<td><%=b.getbNo() %></td>
-							<td><%=b.getbType() %></td>
-							<td><%=b.getbTitle() %></td>
-							<td><%=b.getbText() %></td>
+							<input type="hidden" value="<%=b.getUserId() %>">
 							<td><%=b.getUserId() %></td>
+							<td><%=b.getbTitle() %></td>
+							<td><%=b.getUserId() %></td>
+							<td><%=b.getbTime() %></td>
 							<td><%=b.getbCount() %></td>
-							
 						</tr>
 					<%} %>
 				<%} %>
@@ -136,9 +134,9 @@
 		// 게시판 상세보기 기능 구현하기
 		$(function(){
 			$("#listArea td").mouseenter(function(){
-				$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+				$(this).parent().css({"background":"light skyblue","cursor":"pointer"});
 			}).mouseout(function(){
-				$(this).parent().css({"background":"black"});
+				$(this).parent().css({"background":"gray"});
 			}).click(function(){
 				var bid=$(this).parent().children("input").val();
 				
@@ -163,4 +161,3 @@
 
 
 </body>
-</html>

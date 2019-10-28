@@ -148,7 +148,9 @@
 		function logout(){
 			location.href = '<%= request.getContextPath() %>/logout.me';
 		}
-		
+		function goBoard(){
+			location.href = '<%= request.getContextPath() %>/list.th';
+		}
 		function memberJoin(){
 			location.href = '<%= request.getContextPath() %>/views/member/memberJoinForm.jsp';
 		}
@@ -158,8 +160,8 @@
 		function goNotich(){
 			location.href = "<%=request.getContextPath()%>/list.no";
 		}
-		function goFboard(){
-			location.href="<%=request.getContextPath()%>/list.th";
+		function goBoard(){
+			location.href="<%=request.getContextPath()%>/list.bo";
 		
 		}
 	</Script>
