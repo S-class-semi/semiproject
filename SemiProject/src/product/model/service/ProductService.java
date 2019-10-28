@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import product.model.dao.ProductDao;
+import product.model.vo.Order;
 import product.model.vo.ProductInfo;
 import product.model.vo.ProductSales;
 
@@ -67,6 +68,23 @@ public class ProductService {
 		close(conn);
 		
 		return num;
+	}
+
+	public ArrayList<Order> selectList(int currentPage, int limit) {
+		Connection conn = getConnection();
+		ArrayList<Order> list = new ProductDao().selectOrderList(conn,currentPage,limit);
+		
+		close(conn);
+		
+		return list;
+	}
+
+	public int getOrderListCount() {
+		Connection conn = getConnection();
+		int listCount = new ProductDao().getOrderListCount(conn);
+		
+		close(conn);
+		return listCount;
 	}
 
 

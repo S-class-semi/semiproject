@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="member.model.vo.*"%>
-    
- 
-    
+    <% Member member = (Member)request.getAttribute("member");
+    %>
     
 <!DOCTYPE html>
 <html>
@@ -60,29 +59,29 @@
 			<table>
 				<tr>
 					<td width="200px">아이디</td>
-					<td><input type ="text" maxlength="20" name ="userId" value="<%=m.getUser_Id() %>" readonly></td>		
+					<td><input type ="text" maxlength="20" name ="userId" value="<%=member.getUser_Id() %>" readonly></td>		
 				</tr>
 				
 				<tr>
 					<td>비밀번호</td>
-					<td><input type="password" maxlength="20" name="userPwd" value="<%=m.getUser_Pwd() %>" readonly></td>
+					<td><input type="password" maxlength="20" name="userPwd" value="<%=member.getUser_Pwd() %>" readonly></td>
 				</tr>
 				
 				<tr>
 					<td>이름</td>
-					<td><input type="text" maxlength="6" name="userName" value="<%=m.getNickname() %>"></td>
+					<td><input type="text" maxlength="6" name="userName" value="<%=member.getNickname() %>"></td>
 				</tr>
 				<tr>
 					<td>회원등급</td>
-					<td><input type="text" maxlength="5" name="userGrade" value ="<%=m.getUser_G() %>"></td>
+					<td><input type="text" maxlength="5" name="userGrade" value ="<%=member.getUser_G() %>"></td>
 				</tr>
 				<tr>
 					<td>포인트</td>
-					<td><input type="text" maxlength="10" name="point" value ="<%=m.getPoint() %>"></td>
+					<td><input type="text" maxlength="10" name="point" value ="<%=member.getPoint() %>"></td>
 				</tr>
 				<tr>
 					<td>성별</td>
-					<td><input type="text" maxlength="3" name="gender" value="<%=m.getGender() %>"></td>
+					<td><input type="text" maxlength="3" name="gender" value="<%=member.getGender() %>"></td>
 				</tr>	
 			</table>
 			<br>

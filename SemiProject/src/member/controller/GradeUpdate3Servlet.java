@@ -31,15 +31,21 @@ public class GradeUpdate3Servlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
-		String userId = request.getParameter("user_Id");
-		int user_G = Integer.parseInt(request.getParameter("user_G"));
-		String nickname = request.getParameter("nickname");
+		System.out.println("update부분");
+		request.setCharacterEncoding("UTF-8");
+		
+		String userId = request.getParameter("userId");
+		int user_G = Integer.parseInt(request.getParameter("userGrade"));
+		String nickname = request.getParameter("userName");
 		int point = Integer.parseInt(request.getParameter("point"));
 		String gender = request.getParameter("gender");
 		
+		Member m = new Member(userId,user_G,nickname,point,gender);
+		System.out.println(m);
+		
+		
 		int result = new MemberService().updateGrade(new Member(userId,user_G,nickname,point,gender));
-		System.out.println(result);
+		System.out.println("ID : " + result);
 		String page = "";
 		
 		if(result >0) {
@@ -51,6 +57,7 @@ public class GradeUpdate3Servlet extends HttpServlet {
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
+		
 	}
 
 	/**

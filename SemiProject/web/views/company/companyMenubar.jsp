@@ -257,7 +257,7 @@ body {
 					<span class="icon-info"></span>정보확인
 				</h3>
 				<ul>
-					<li>주문내역 관리</li>
+					<li onclick = "OrderList()">주문내역 관리</li>
 					<li onclick = "GradeUpdate()">등급 및 포인트 관리</li>
 				</ul>
 				<li>
@@ -306,7 +306,10 @@ body {
 			location.href = "<%=request.getContextPath()%>/qna.do";
 		}
 		function GradeUpdate(){
-			location.href = "<%=request.getContextPath()%>/grade.me"
+			location.href = "<%=request.getContextPath()%>/grade.me";
+		}
+		function OrderList(){
+			location.href = "<%=request.getContextPath()%>/order.or";
 		}
 		function logout(){
 			location.href = '<%= request.getContextPath() %>/logout.me';
