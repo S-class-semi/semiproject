@@ -176,7 +176,6 @@ body {
 </head>
 <body>
 	<div id="homemenu">
-		
 			<div id="homeimg" onclick = "C_home();">
 			<%-- <a href="<%=request.getContextPath()%>/views/company/companyView.jsp">
  --%>				<img id="homeicon" src="<%=request.getContextPath()%>/images/home.png" width="80px" height="80px">
