@@ -19,11 +19,21 @@
 		margin-right:auto;
 		margin-top:50px;
 	}
-	table{
-		border:1px solid black;
-	}
+	input {
+	border-radius:5px;
+  -webkit-appearance: none;
+ 
+​}
+textarea{
+border-radius:10px;
+}
+tr{
+    border-bottom:10px solid white;
+    padding: 10px;
+  }
+	
 	.tableArea{
-		width:450px;
+		width:500px;
 		height:350px;
 		margin-left:auto;
 		margin-right:auto;
@@ -39,17 +49,13 @@
 <div class="tableArea">
 <table>
 					<tr>
-						<td>제목</td>
-						<td colspan="3"><input type="text" size="50" name="title" value="<%= n.getB_TITLE() %>" readonly></td>
-						</tr>
-					<tr>
 						
-						<td>작성일</td>
-						<td><input type="date" name="date" value="<%= n.getB_TIME() %>" readonly></td>
+						<td><%= n.getB_TITLE() %></td>
+						
+						
+						<td style="text-align:right"><%= n.getB_TIME() %></td>
 					</tr>
-					<tr>
-						<td>내용</td>
-					</tr>
+					
 					<tr>
 						<td colspan="4">
 							<textarea name="content" cols="60" rows="15" style="resize:none" readonly><%= n.getB_TEXT() %></textarea>
@@ -57,7 +63,7 @@
 					</tr>
 				</table>
 				<br>
-		<%-- 		<div>
+		<%--<div>
 				<%{ %>
 				<button type="submit" onclick="location.href='<%=request.getContextPath()%>/updateView.no?no=<%=n.getB_NO()%>'">수정하기</button>				
 				<%} %>

@@ -10,31 +10,28 @@ public class Board implements Serializable{
 	 */
 	private static final long serialVersionUID = -5219066150385199445L;
 	private int bNo;//게시판 고유번호
-	private String bType;//게시판카테고리
+	private int bType;//게시판카테고리
 	private String bTitle;//게시판 제목
 	private String bText;//게시판 내용
 	private	String userId;//게시판 작성자
-	private Date bTime;//작성일자
 	private int bCount;//조회수
+	private Date bTime;//작성일자
 	private String bFlog;//삭제여부
+	
 	public Board() {
-		super();
+	
 	}
-	
-	
-	public Board(int bNo, String bType, String bTitle, String bText, String userId, Date bTime, int bCount) {
+	public Board(int bNo,  String bTitle, String bText,String userId, int bCount, Date bTime) {
 		super();
 		this.bNo = bNo;
-		this.bType = bType;
 		this.bTitle = bTitle;
 		this.bText = bText;
 		this.userId = userId;
-		this.bTime = bTime;
 		this.bCount = bCount;
+		this.bTime = bTime;
+		
 	}
-
-
-	public Board(int bNo, String bType, String bTitle, String bText, String userId, Date bTime, int bCount,
+	public Board(int bNo,  int bType, String bTitle, String bText,String userId,  int bCount, Date bTime,
 			String bFlog) {
 		super();
 		this.bNo = bNo;
@@ -42,8 +39,8 @@ public class Board implements Serializable{
 		this.bTitle = bTitle;
 		this.bText = bText;
 		this.userId = userId;
-		this.bTime = bTime;
 		this.bCount = bCount;
+		this.bTime = bTime;
 		this.bFlog = bFlog;
 	}
 	public int getbNo() {
@@ -52,10 +49,10 @@ public class Board implements Serializable{
 	public void setbNo(int bNo) {
 		this.bNo = bNo;
 	}
-	public String getbType() {
+	public int getbType() {
 		return bType;
 	}
-	public void setbType(String bType) {
+	public void setbType(int bType) {
 		this.bType = bType;
 	}
 	public String getbTitle() {
@@ -76,17 +73,17 @@ public class Board implements Serializable{
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public Date getbTime() {
-		return bTime;
-	}
-	public void setbTime(Date bTime) {
-		this.bTime = bTime;
-	}
 	public int getbCount() {
 		return bCount;
 	}
 	public void setbCount(int bCount) {
 		this.bCount = bCount;
+	}
+	public Date getbTime() {
+		return bTime;
+	}
+	public void setbTime(Date bTime) {
+		this.bTime = bTime;
 	}
 	public String getbFlog() {
 		return bFlog;
@@ -100,8 +97,12 @@ public class Board implements Serializable{
 	@Override
 	public String toString() {
 		return "Board [bNo=" + bNo + ", bType=" + bType + ", bTitle=" + bTitle + ", bText=" + bText + ", userId="
-				+ userId + ", bTime=" + bTime + ", bCount=" + bCount + ", bFlog=" + bFlog + "]";
+				+ userId + ", bCount=" + bCount + ", bTime=" + bTime + ", bFlog=" + bFlog + "]";
 	}
+	
+	
+	
+	
 	
 	
 }

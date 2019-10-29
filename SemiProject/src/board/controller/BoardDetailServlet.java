@@ -1,4 +1,4 @@
-package notice.controller;
+package board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,20 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import notice.model.service.NoticeService;
-import notice.model.vo.Notice;
+import board.model.service.BoardService;
+import board.model.vo.Board;
 
 /**
- * Servlet implementation class NoticeListServlet
+ * Servlet implementation class BoardDetailServlet
  */
-@WebServlet("/list.no")
-public class NoticeListServlet extends HttpServlet {
+@WebServlet("/detail.bo")
+public class BoardDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeListServlet() {
+    public BoardDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,19 +32,21 @@ public class NoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArrayList<Notice> arr = new NoticeService().selectList();
+		int bno = Integer.valueOf(request.getParameter("no"));
+		
+		Board board = new BoardService().selectBoard(bno);
 		RequestDispatcher view = null;
-		
-		if(arr != null) {	//값이 제대로 넘어 왔다면
-			view = request.getRequestDispatcher("views/notice/noticeListView.jsp");
-			request.setAttribute("arr", arr);
+		if(board != null) {
+			request.setAttribute("board", board);
+			
+			request.getRequestDispatcher("views/board/boardDetailView.jsp").forward(request, response);
 		}else {
-			view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			request.setAttribute("msg", "공지사항 조회 실패");
+			request.setAttribute("msg", "게사판 상세조회 실패!");
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 		}
-		view.forward(request, response);
-		
-	}
+		view.forward(request,response);
+}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

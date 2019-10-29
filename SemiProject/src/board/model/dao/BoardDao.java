@@ -34,77 +34,42 @@ public class BoardDao {
 		}
 	}
 
-	public int getListCount(Connection conn) {
-		Statement stmt = null;
+	
+
+	
+
+	
+	
+	
+	public Board selectBoard(Connection conn, int bid) {
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
-		int listCount = 0;
-
-		String query = prop.getProperty("getListCount");
-
+		
+		Board b = null;
+		
+		String query = prop.getProperty("selectBoard");
+		
 		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(query);
-
-			if(rs.next()) {
-				listCount=rs.getInt(1);	
+			pstmt = conn.prepareStatement(query);
+			pstmt.setInt(1, bid);
+			
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				b = new Board();
 			}
-
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
-			close(stmt);
-			close(rs);
-		}
-		return listCount;
-	}
-
-	public ArrayList<Board> selectList(Connection conn, int currentPage, int limit) {
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-
-		ArrayList<Board>list = null;
-
-		String query = prop.getProperty("selectList");
-
-		// 쿼리문 실행시 조건절에 넣을 변수들(rownum에 대한 조건 시 필요)
-		int startRow = (currentPage-1)*limit +1;	
-		// ex) 2page면 시작 번호가 11번일 것이다.
-		int endRow = startRow + limit -1;
-
-		try {
-			pstmt = conn.prepareStatement(query);
-
-			pstmt.setInt(1, startRow);
-			pstmt.setInt(2, endRow);
-			pstmt.setInt(3, 1); 	// 1은 게시판 타입을 의미함 -> 1=일반게시판, 2=사진게시판
-
-			rs=pstmt.executeQuery();
-
-			list = new ArrayList<Board>();	// 컬렉션(ArrayList)는 반드시 기본생성자로 초기화 해놓고 활용하자!!
-
-			while(rs.next()) {
-				Board b = new Board(rs.getInt("bNo"),
-						rs.getString("bType"),
-						rs.getString("bTitle"),
-						rs.getString("bText"),
-						rs.getString("userId"),
-						rs.getDate("bTime"),
-						rs.getInt("bCount")
-						);
-				list.add(b);
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rs);
 			close(pstmt);
+			close(rs);
 		}
-
-		return list;
+		
+		return b;
 	}
-
+	
 	public int updateCount(Connection conn, int bid) {
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -114,7 +79,6 @@ public class BoardDao {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, bid);
-
 			result = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -126,39 +90,55 @@ public class BoardDao {
 		return result;
 	}
 
-	public Board selectBoard(Connection conn, int bid) {
 
 
-		return null;
+
+
+
+
+
+	public ArrayList<Board> selectList(Connection conn) {
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<Board> list = null;
+		
+		String query = prop.getProperty("selectList");
+		
+		try {
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(query);
+			
+			list = new ArrayList<Board>();	// ArrayList는 기본 생성자로 항상 객체 만들어서 초기화 하자
+			
+			while(rs.next()) {
+				Board b = new Board(rs.getInt("B_NO"),
+						rs.getInt("B_TYPE"),
+						rs.getString("B_TITLE"),
+						rs.getString("B_TEXT"),
+						rs.getString("USER_ID"),
+						rs.getInt("B_COUNT"),
+						rs.getDate("B_TIME"),
+						rs.getString("B_FLOG")
+						);
+				list.add(b);		
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(stmt);
+		}
+
+		return list;
+		
 	}
+
 
 	
 
 
-	public ArrayList selectFList(Connection conn) {
-		Statement stmt = null;
-		ResultSet rs = null;
-
-		ArrayList list = null;
-
-		String query = prop.getProperty("selectFList");
-
-		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(query);
-
-			list=new ArrayList();
-
-			while(rs.next()) {
-				list.add(new Attachment(rs.getInt("bid"),
-						rs.getString("change_name")));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return list;
-	}
 
 
 

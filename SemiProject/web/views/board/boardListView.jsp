@@ -3,13 +3,7 @@
     
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("list");
-	PageInfo pi = (PageInfo)request.getAttribute("pi");
 	
-	int listCount = pi.getListCount();
-	int currentPage = pi.getCurrentPage();
-	int maxPage = pi.getMaxPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
 %>    
 <!DOCTYPE html>
 <html>
@@ -52,7 +46,6 @@
 			<table align="center" id="listArea">
 				<tr>
 					<th width="100px">글번호</th>
-					<th width="100px">카테고리</th>
 					<th width="300px">글제목</th>
 					<th width="100px">작성자</th>
 					<th width="100px">조회수</th>
@@ -66,11 +59,11 @@
 					<% for(Board b : list){ %>
 						<tr>
 							<input type="hidden" value="<%=b.getUserId() %>">
-							<td><%=b.getUserId() %></td>
+							<td><%=b.getbNo() %></td>
 							<td><%=b.getbTitle() %></td>
 							<td><%=b.getUserId() %></td>
-							<td><%=b.getbTime() %></td>
 							<td><%=b.getbCount() %></td>
+							<td><%=b.getbTime() %></td>
 						</tr>
 					<%} %>
 				<%} %>
@@ -80,33 +73,28 @@
 		<!-- 페이징 처리 시작 -->
 		<div class="pagingArea" align="center">
 			<!-- 맨 처음으로(<<) -->
-			<button onclick="location.href='<%=request.getContextPath() %>/list.bo?currentPage=1'"> << </button>
+			<button > << </button>
 			
 			<!-- 이전 페이지로(<) -->
-			<%if(currentPage <= 1) {%>
-				<button disabled> < </button>
-			<%} else{ %>
-				<button onclick="location.href='<%=request.getContextPath() %>/list.bo?currentPage=<%=currentPage-1 %>'"> < </button>
-			<%} %>
+
+			<button> < </button>
+			
 			
 			<!-- 10개의 페이지 목록 -->
-			<%for(int p = startPage; p<=endPage; p++){ %>
-				<% if(p == currentPage){ %>
-					<button disabled><%=p %></button>
-				<%} else{%>
-					<button onclick="location.href='<%=request.getContextPath() %>/list.bo?currentPage=<%=p %>'"><%=p %></button>
-				<%} %>
-			<%} %>
 			
+				
+		
+			<button> 1 </button>
+			<button> 2 </button>
+			<button> 3 </button>
 			<!-- 다음 페이지로(>) -->
-			<%if(currentPage >= maxPage){ %>
-				<button disabled> > </button>
-			<%}else{ %>
-				<button onclick="location.href='<%=request.getContextPath() %>/list.bo?currentPage=<%=currentPage+1 %>'"> > </button>
-			<%} %>
+			
+			
+			<button > > </button>
+		
 			
 			<!-- 맨 끝으로(>>) -->
-			<button onclick="location.href='<%=request.getContextPath() %>/list.bo?currentPage=<%=maxPage %>'"> >> </button>
+			<button > >> </button>
 			
 		</div>
 		
@@ -114,7 +102,6 @@
 		<div class="searchArea" align="center">
 			<select id="searchCondition" name="searchCondition">
 				<option>----</option>
-				<option value="category">카테고리</option>
 				<option value="writer">작성자</option>
 				<option value="title">제목</option>
 				<option value="content">내용</option>
@@ -133,11 +120,7 @@
 	<script>
 		// 게시판 상세보기 기능 구현하기
 		$(function(){
-			$("#listArea td").mouseenter(function(){
-				$(this).parent().css({"background":"light skyblue","cursor":"pointer"});
-			}).mouseout(function(){
-				$(this).parent().css({"background":"gray"});
-			}).click(function(){
+			$("#listArea td").click(function(){
 				var bid=$(this).parent().children("input").val();
 				
 				//로그인 한 사람만 이용하도록 하자!

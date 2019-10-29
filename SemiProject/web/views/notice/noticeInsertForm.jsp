@@ -18,6 +18,13 @@
 	table{
 		border:1px solid black;
 	}
+	input {
+	border-radius:5px;
+  -webkit-appearance: none;
+​}
+textarea{
+border-radius:5px;
+}
 	.tableArea{
 		width:550px;
 		height:350px;

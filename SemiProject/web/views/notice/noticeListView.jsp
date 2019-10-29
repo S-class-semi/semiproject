@@ -16,16 +16,20 @@
 		width:800px;
 		height:600px;
 		background:white;
-		color:black;
+		
 		margin-left:auto;
 		margin-right:auto;
-		margin-top:60px;
+		margin-top:50px;
 	}
 	table{
-		border:1px solid black;
+	 border-collapse: collapse;
 		text-align:center;
 		
 	}
+	th, td {
+    border-bottom: 1px solid #444444;
+    padding: 10px;
+  }
 	.tableArea{
 		width:650px;
 		height:400px;
@@ -51,7 +55,7 @@
 			<!-- 조회가 잘 되어 출력되는지 확인 -->
 			<table align="center" id="listArea">
 				<tr>
-					<th>글번호</th>
+					<th>No.</th>
 					<th width="300px">제목</th>
 					
 					<th>조회수</th>
@@ -64,9 +68,9 @@
 				<%}else{ %>
 					<%for(Notice no : list){ %>
 					<tr>
-						<td><%= no.getB_NO() %></td>
-						<td style="text-align:left"><%= no.getB_TITLE() %></td>
 					
+						<td style="t"><%= no.getB_NO() %></td>
+						<td style="text-align:left"><%= no.getB_TITLE() %></td>
 						<td><%= no.getB_COUNT() %></td>
 						<td><%= no.getB_TIME() %></td>
 					</tr>
@@ -80,7 +84,6 @@
 		<form>
 			<select id="searchCondition" name="searchCondition">
 				<option>----</option>
-				<option value="writer">작성자</option>
 				<option value="title">제목</option>
 				<option value="content">내용</option>
 			</select>

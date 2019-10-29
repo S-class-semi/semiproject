@@ -15,27 +15,42 @@ public class BoardService {
 
 	
 
-	public int getListCount() {
+	
+
+	
+
+	
+	
+	public Board selectBoard(int bid) {
 		Connection conn = getConnection();
 		
-		int listCount = new BoardDao().getListCount(conn);
+		
+		Board b = new Board();
+		BoardDao bDao = new BoardDao();
+		int result = bDao.updateCount(conn,bid);
+		
+		if(result>0) {
+			commit(conn);
+			b=bDao.selectBoard(conn,bid);
+		}else {
+			rollback(conn);
+		}
 		
 		close(conn);
 		
-		return listCount;
+		return b;
 	}
 
-	public ArrayList<Board> selectList(int currentPage, int limit) {
+	public ArrayList<Board> selectList() {
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new BoardDao().selectList(conn, currentPage, limit);
+		ArrayList<Board> list = new BoardDao().selectList(conn); 
 		
 		close(conn);
-		
+
 		return list;
+	
 	}
-	
-	
 	
 	
 	

@@ -19,6 +19,7 @@ public class Notice implements Serializable{
 	private String B_FLOG;//삭제여부
 	
 	public Notice() {
+		
 	}
 	
 	public Notice(String USER_ID,String b_TITLE,  String b_TEXT) {
