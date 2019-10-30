@@ -267,7 +267,7 @@ table tr:nth-child(2n+1) {
 </div>
 
 <script>
-//게시판 상세보기 기능 구현하기
+
 $(function(){
 	$("#listArea td").mouseenter(function(){
 		$(this).parent().css({"background":"#ebeced","cursor":"pointer"});

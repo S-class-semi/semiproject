@@ -190,7 +190,7 @@ table tr:nth-child(2n+1) {
 				<tr>
 				<input type = "hidden" name="bid" value= "<%=b.getbId() %>">
 					<th>카테고리</th>
-					<td><span><%=b.getbType() %></span></td>
+					<td><span><%=b.getbName() %></span></td>
 					<th>제목</td>
 					<td colsapn="3"><span><%=b.getbTitle() %></span></td>
 				</tr>
