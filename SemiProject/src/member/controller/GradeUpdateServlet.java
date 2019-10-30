@@ -73,7 +73,7 @@ public class GradeUpdateServlet extends HttpServlet {
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		}else {
-			view = request.getRequestDispatcher("/views/common/errorPage.jsp");
+			view = request.getRequestDispatcher("/views/admin/errorPage.jsp");
 			request.setAttribute("msg", "회원 등급 조회 실패");
 		}
 		

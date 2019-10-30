@@ -45,7 +45,7 @@ public class GradeUpdate2Servlet extends HttpServlet {
 			view = request.getRequestDispatcher("views/member/UpdateGradePage.jsp");
 			request.setAttribute("member", member);
 		}else {
-			view=request.getRequestDispatcher("views/common/errorPage.jsp");
+			view=request.getRequestDispatcher("views/admin/errorPage.jsp");
 			request.setAttribute("msg", "회원 조회에 실패했습니다.");
 		}
 		view.forward(request, response);

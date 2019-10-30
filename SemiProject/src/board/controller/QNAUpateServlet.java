@@ -49,10 +49,10 @@ public class QNAUpateServlet extends HttpServlet {
 		RequestDispatcher view =null;
 		if(result>0) {
 			
-			view = request.getRequestDispatcher("views/board/QnaDetailView.jsp");
+			view = request.getRequestDispatcher("/qna.do");
 			request.setAttribute("board", new BoardService().selectQna(bid));
 		}else {
-			view = request.getRequestDispatcher("views/common/errorPage.jsp");
+			view = request.getRequestDispatcher("views/admin/errorPage.jsp");
 			request.setAttribute("msg", "처리 완료 실패");
 		}
 		view.forward(request, response);
