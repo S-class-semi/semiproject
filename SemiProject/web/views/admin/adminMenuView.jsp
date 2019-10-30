@@ -193,7 +193,8 @@ body {
          <div id="hometext" onclick = "C_home();">
             <h4>(관리자)</h4>
          </div>
-   <!--    </a> -->      <div class="CompanyInfo1">
+   <!--    </a> -->      
+   		<div class="CompanyInfo1">
       <fieldset id = "roginuser">
       <legend aling ="center">관리자님 환영합니다.</legend>
       <button id="rogout" onclick="logout();" >로그아웃</button>
@@ -207,18 +208,6 @@ body {
    <div id="bodybase">
       <div id="accordian">
          <ul>
-            <li>
-               <h3>
-                  <span class="icon-category"></span>상품카테고리
-               </h3>
-               <ul>
-                  <li onclick = "ProdcutList()">상품조회</li>
-                  <li onclick = "ProductInsert()">상품등록</li>
-                  <li onclick = "ProductChange()">상품수정</li>
-                  <li onclick = "ProdcutDelete()">상품삭제</li>
-                  <li onclick = "ProdcutCount()">상품재고</li>
-               </ul>
-            </li>
             <li class="active">
                <h3>
                   <span class="icon-money"></span>매출확인
@@ -250,9 +239,7 @@ body {
                   <span class="icon-info"></span>정보수정
                </h3>
                <ul>
-                  <li onclick = "C_info()">정보수정</li>
                   <li onclick = "SellerUpdate()">판매자 관리</li>
-                  <li>탈퇴</li>
                </ul>
             </li>
          </ul>
@@ -262,25 +249,7 @@ body {
   <!--  String c_name = "프로젝트"; -->
    <script>
       function C_home(){
-         location.href = "<%=request.getContextPath()%>/views/company/companyMenubar.jsp";
-      }
-      function ProductInsert(){
-         location.href = "<%=request.getContextPath()%>/views/product/prodcutInsertView.jsp";
-      }
-      function ProductChange(){
-         location.href = "<%=request.getContextPath()%>/views/product/prodcutChangeView.jsp";
-      }
-      function ProdcutDelete(){
-         location.href = "<%=request.getContextPath()%>/views/product/prodcutDeleteView.jsp";
-      }
-      function ProdcutCount(){
-         location.href = "<%=request.getContextPath()%>/views/product/prodcutCountView.jsp";
-      }
-      function ProdcutList(){
-         location.href = "<%=request.getContextPath()%>/list.pro";
-      }
-      function C_info(){
-         location.href = "<%=request.getContextPath()%>/info.com";
+         location.href = "<%=request.getContextPath()%>/views/admin/adminMenuView.jsp";
       }
       function SalesGraph2(){
          location.href = "<%=request.getContextPath()%>/views/product/SalesDetailView.jsp";

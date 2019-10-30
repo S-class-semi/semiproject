@@ -1,10 +1,4 @@
-/board/
-/product/
-<<<<<<< HEAD
-/company/
-/sql/
 /member/
-=======
-/sql/
+/notice/
 /payment/
->>>>>>> branch 'Company' of https://github.com/S-class-semi/semiproject.git
+/product/
