@@ -212,7 +212,7 @@ table tr:nth-child(2n+1) {
 			</table>
 			<br>
 				<div align="center">		
-			<button type="submit" onclick ="updateMemberGrade()">처리하기</button>
+			<button type="submit" onclick ="updateMemberGrade()">수정하기</button>
 		</div>
 		</form>
 			<div align ="center">

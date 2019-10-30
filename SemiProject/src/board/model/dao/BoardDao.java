@@ -71,13 +71,13 @@ public class BoardDao {
 		
 		System.out.println(startRow);
 		System.out.println(endRow);
-		Member member = new Member();
+		/* Member member = new Member(); */
 		
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			/* pstmt.setString(4, member.getUserId()); */
+			
 			
 			rs=pstmt.executeQuery();
 			
