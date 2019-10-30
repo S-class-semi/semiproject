@@ -16,9 +16,9 @@ import member.model.vo.Member;
 /**
  * Servlet implementation class FindPwdServlet
  */
-@WebServlet("/findpwd.me")
+@WebServlet(urlPatterns = "/findpwd.me", name = "FindPwdServlet")
 public class FindPwdServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -28,38 +28,39 @@ public class FindPwdServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String userId = request.getParameter("findMail");
-		String userPwd = request.getParameter("randomPwd");
-		
-		int result = new MemberService().findPwd(new Member(userId, userPwd));
-		
-		if(result > 0) {
-			HttpSession session = request.getSession();
-			session.setAttribute("findMail", userId);
-			session.setAttribute("randomPwd", userPwd);
-			session.setMaxInactiveInterval(10);
-			
-			RequestDispatcher view = request.getRequestDispatcher("sendmail.me");
-			view.forward(request, response);
-		}else {
-			request.setAttribute("msg", "임시 비밀번호 생성 실패");
-			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
-		}
-		
-	}
+   /**
+    * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      String userId = request.getParameter("userId");
+      String userPwd = request.getParameter("userPwd");
+      
+      int result = new MemberService().findPwd(new Member(userId, userPwd));
+      
+      if(result > 0) {
+         /*
+          * HttpSession session = request.getSession(); session.setAttribute("findMail",
+          * userId); session.setAttribute("randomPwd", userPwd);
+          * session.setMaxInactiveInterval(10);
+          * 
+          * RequestDispatcher view = request.getRequestDispatcher("sendmail.me");
+          * view.forward(request, response);
+          */
+            response.sendRedirect("index.jsp");
+      }else {
+         request.setAttribute("msg", "임시 비밀번호 생성 실패");
+         RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
+         view.forward(request, response);
+      }
+      
+   }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   /**
+    * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+    */
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }

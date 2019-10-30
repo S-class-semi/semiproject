@@ -179,7 +179,7 @@ form {
    <br>
       <h2 align = "center">비밀번호 찾기</h2>
       <br><br>
-   <form id="findForm" action="<%=request.getContextPath()%>/findpwd.me" method="post">
+   <form id="findForm" action="<%=request.getContextPath()%>/sendmail.me" method="post">
    <label for="findMail" class="inp">
       <input type="email" id="findMail" name="findMail" oninput = "checkId();" placeholder="&nbsp;">
       <span class="label">이메일 입력</span>
@@ -196,8 +196,7 @@ form {
    </div>
    </form>
    </div>
-   
-   
+   <%@include file="../common/footer.jsp" %>
    <script>
    
       // 임시 비밀번호 생성

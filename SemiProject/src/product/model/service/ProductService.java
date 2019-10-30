@@ -39,11 +39,11 @@ public class ProductService {
 		return result;
 	}
 
-	public int insertProduct(String p_code, String c_name, ArrayList<ProductImgFile> imgList) {
+	public int insertProduct(String p_code, String c_name, ArrayList<ProductImgFile> imgList, String pro_code) {
 		Connection conn = getConnection();
 		
 		System.out.println("업데이트 부분입니다.");
-		int result = new ProductDao().inserimgFile(conn, imgList, c_name, p_code);
+		int result = new ProductDao().inserimgFile(conn, c_name, p_code, pro_code,imgList);
 		System.out.println("S - c_name : " + c_name);
 		System.out.println("S - p_code : " + p_code);
 		System.out.println("S - imgList : " + imgList);

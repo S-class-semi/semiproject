@@ -230,7 +230,7 @@ body {
 					</h3>
 					<ul>
 						<li>1:1 QnA 확인</li>
-						<li>공지사항 등록</li>
+						<li onclick = "Noticelist()">공지사항 등록</li>
 						<li>블랙컨슈머</li>
 					</ul>
 				</li>
@@ -246,11 +246,8 @@ body {
 			</ul>
 		</div>
 		
-<!--  		<div id = "centerbody">
- 		<h1> </h1>
-		</div>  -->
 	</div>
-	<%@ include file = "/views/common/footer.jsp" %>
+
 	<script>
 		function C_home(){
 			location.href = "<%=request.getContextPath()%>/views/company/companyMenubar.jsp";
@@ -273,6 +270,10 @@ body {
 		// 로그아웃
 		function logout(){
 			location.href = '<%= request.getContextPath() %>/logout.me';
+		}
+		
+		function Noticelist(){
+			location.href = '<%= request.getContextPath() %>/list.ng';
 		}
 	</script>
 

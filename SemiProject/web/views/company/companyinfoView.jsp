@@ -52,7 +52,7 @@
 				</tr>
 				<tr>
 					<td><label> 회사연락처 : </label></td>
-					<td><input type="text" name="c_phone" id="c_phone" value="<%=c_info.getC_phone()%>">
+					<td><input type="text" name="c_phone" id="c_phone" value="<%=c_info.getC_phon()%>">
 					<td><div id="c_phoneCheck">변경된 값이 없습니다.</div></td>
 
 
@@ -82,7 +82,7 @@
 		</form>
 
 	</div>
-<%@ include file = "/views/common/footer.jsp" %>
+
 	<script>
 		function on_click() {
 			new daum.Postcode(

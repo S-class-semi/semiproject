@@ -100,7 +100,6 @@
 	function CheckProductInfo(){
 		if (confirm("수정하시겠습니까?")) {
 			alert("상품수정 페이지로 이동합니다.");
-			
 		}
 		 else {
 			alert("상품조회로 이동합니다.");
@@ -109,9 +108,5 @@
 	}
 	
 </script>
-
-
-
-
 
 </html>

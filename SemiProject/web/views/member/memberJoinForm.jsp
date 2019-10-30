@@ -324,7 +324,7 @@ form {
                <td><h3>* 별명</h3></td>
             </tr>
             <tr>
-               <td class = "check">한글, 영문, 숫자만 입력 가능합니다</td>
+               <td class = "check">한글, 영문, 숫자로 15자 이하 입력 가능합니다</td>
             </tr>
             <tr>
                <td><input id="nickname" name="nickname" class = "join" type="text" placeholder = "별명" required></td>
@@ -356,7 +356,7 @@ form {
          </div>
       </form>
    </div>
-   
+   <%@include file="../common/footer.jsp" %>
    <script>
       
       // 처음 시작할 때 naver.com으로
@@ -461,7 +461,10 @@ form {
           var pattern1 = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
           var pattern2 = /(\w)\1\1\1/;
           
-         if(!pattern1.test(password)){            
+          if(password.length > 25){
+             $("#pwdTest").html("비밀번호는 25자 이하만 가능합니다").css("color", "red");
+             
+          }else if(!pattern1.test(password)){
              $("#pwdTest").html("영문, 숫자 8자 이상 조합을 사용해야 합니다").css("color", "red");
              
           }else if(pattern2.test(password)){
@@ -535,6 +538,12 @@ form {
          
          if($("#pwd").val().length < 8){
             alert("비밀번호는 8자 이상이어야 합니다");
+            $("#pwd").focus();
+            return false;
+         }
+         
+         if($("#pwd").val().length > 25){
+            alert("비밀번호는 25자 이하여야 합니다");
             $("#pwd").focus();
             return false;
          }
@@ -622,6 +631,12 @@ form {
             $("#nickname").focus();
             return false;
          }
+         
+         if($("#nickname").val().length > 15){
+             alert("별명은 15자 이하여야 합니다");
+             $("#nickname").focus();
+             return false;
+          }
          
          return true;
       }

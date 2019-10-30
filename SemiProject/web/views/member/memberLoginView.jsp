@@ -255,6 +255,15 @@ form {
    height:25px;
    border-radius: 5px;
 }
+
+#mainImg:hover{
+   cursor:pointer;
+}
+
+a {
+   text-decoration:none;
+   color : black;
+} 
 </style>
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -262,7 +271,12 @@ form {
 <body>
    
    <div id="outer" align = "center">
-   <br>
+   
+      <div id="mainImg" onclick="goHome()">
+      <img id="maini-con" src="<%=request.getContextPath()%>/images/mainIcon.png" width="80px" height="80px">
+         <h1 align = "center"><a href="<%=request.getContextPath()%>/index.jsp">난 혼자 산다</a></h1>
+         </div>
+         <br>
       <div id = "wrongId"></div>
       <script>
       <%if(msg != null) {%>
@@ -275,7 +289,6 @@ form {
             });
       <%}%>
       </script>
-      <h1 align = "center">난 혼자 산다</h1>
       <br><br>
    <form id=loginForm " action="<%=request.getContextPath()%>/login.me" onsubmit="return validate();" method="post">
    <label for="userId" class="inp">
@@ -323,9 +336,14 @@ form {
    <p>비밀번호를 잊으셨나요?<p><a href='<%= request.getContextPath() %>/views/member/findPwdView.jsp'>비밀번호 찾기</a>
    
    </div>
-   
-   
+   <%@include file="../common/footer.jsp" %>
    <script>
+
+   //홈으로
+   function goHome(){
+      location.href ="<%=request.getContextPath() %>/index.jsp";
+   }
+   
    function validate(){
       if($("#userId").val().trim().length == 0){
          alert("아이디를 입력하세요");

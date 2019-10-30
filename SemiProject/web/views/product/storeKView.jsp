@@ -14,10 +14,17 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   max-width: 300px;
   margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
   text-align: center;
   font-family: arial;
   display: inline-block;
 }
+
+#footerhr{
+border: 1px solid white;
+}
+
 
 
 #category{
@@ -69,8 +76,8 @@ padding-left: 20px;
 }
 
 #c_proinfo #p_Name{
+font-size: 20px;
 font-weight: bold;
-
 }
 
 #c_proinfo #p_Price{
@@ -80,16 +87,12 @@ text-align: right;
 margin-left: 150px;
 }
 
-
 #categorymenu{
-
 display:inline-block;
 margin-top: 50px;
 width: 250px;
 position: absolute;
 height: 100%;
-
-
 }
 
 #categorymenu ul li{
@@ -125,6 +128,11 @@ background-color: white;
 font-size: 20px;
 cursor: default;
 }
+
+#footer{
+height: 300px;
+}
+
 }
 </style>
 </head>
@@ -161,6 +169,7 @@ cursor: default;
 	<%} %>
 <%} %>
 </div>
+<hr id="footerhr" >
 <%@ include file = "/views/common/footer.jsp" %>
 <script>
 //의자

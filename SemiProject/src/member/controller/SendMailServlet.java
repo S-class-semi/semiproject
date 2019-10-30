@@ -9,6 +9,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,13 +38,15 @@ public class SendMailServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
-        HttpSession session = request.getSession();
+        
+        String userId = request.getParameter("findMail");
+        String userPwd = request.getParameter("randomPwd");
         
         String m_name = "리성호";
-        String m_email = (String)session.getAttribute("findMail");
+      String m_email = /* (String)session.getAttribute("findMail"); */userId;
         String m_title = "임시비밀번호는?";
         String m_text = "임시비밀번호 : ";
-        String randomPwd = (String)session.getAttribute("randomPwd");
+        String randomPwd = /*(String)session.getAttribute("randomPwd");*/userPwd;
         
         try {
             String mail_from = "livealone1199@gmail.com";
@@ -77,8 +80,10 @@ public class SendMailServlet extends HttpServlet {
             msg.setHeader("Content-type", "text/html; charset=UTF-8");
  
             Transport.send(msg);
- 
-            response.sendRedirect("index.jsp");
+
+         RequestDispatcher view = request.getRequestDispatcher("findpwd.me?userId="+userId+"&userPwd="+userPwd);
+         view.forward(request, response);
+         
         } catch (Exception e) {
             response.sendRedirect("views/common/errorPage.jsp");
         } finally {
@@ -91,7 +96,7 @@ public class SendMailServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-    	doGet(request, response);
+       doGet(request, response);
     }
  
 }

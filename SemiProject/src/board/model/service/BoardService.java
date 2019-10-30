@@ -72,16 +72,36 @@ public class BoardService {
 		return result;
 	}
 
-	/*
-	 * public Board updateQNA(int bid) { Connection conn = getConnection();
-	 * 
-	 * Board b = new Board(); BoardDao bDao = new BoardDao(); int result =
-	 * bDao.updateQNA(conn,bid);
-	 * 
-	 * if(result>0) { commit(conn); b=bDao.selectQna(conn, bid); }else {
-	 * rollback(conn); } close(conn); return b; }
-	 */
+	public Board selectBoard(int bid) {
+		Connection conn = getConnection();
+		
+		
+		Board b = new Board();
+		BoardDao bDao = new BoardDao();
+		int result = bDao.updateCount(conn,bid);
+		
+		if(result>0) {
+			commit(conn);
+			b=bDao.selectBoard(conn,bid);
+		}else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return b;
+	}
+
+	public ArrayList<Board> selectList() {
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new BoardDao().selectList(conn); 
+		
+		close(conn);
+
+		return list;
 	
+	}
 	
 
 }

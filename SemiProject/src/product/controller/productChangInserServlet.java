@@ -130,7 +130,7 @@ public class productChangInserServlet extends HttpServlet {
 			int updatepro = new ProductService().updateProduct(p_info);
 			System.out.println("changeInset의 result 값 : "+updatepro);
 			
-			int insertimg = new ProductService().insertProduct(p_code,c_name, imgList);
+			int insertimg = new ProductService().insertProduct(p_code,c_name, imgList,pro_code);
 			System.out.println("changinsert result 2:" +insertimg);
 			
 			

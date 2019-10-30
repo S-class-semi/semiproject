@@ -162,6 +162,8 @@ margin-right: auto;
 }
 
 #imgstyle{
+align-content: center;
+align:center;
 width: 100%;
 }
 }
@@ -219,7 +221,7 @@ width: 100%;
 		
 		<%for(int i=1;i<imgList.size();i++) {%>
 		<div id = "imgstyle">
-		<div id = "contentImgArea<%=i%>">
+		<div id = "contentImgArea<%=i%>" style="width:100%;, magin-left:20px;, magin-right:20px;">
 		<img id = "contentImg<%=i%>" name = "contentImg<%=i %>" src ="<%=request.getContextPath() %>/images/productimg/<%=imgList.get(i).getChange_name() %>" width="100%">
 		</div>
 		</div>
@@ -231,6 +233,8 @@ width: 100%;
 		
 		</div>
 </div>
+<hr id="footerhr" >
+<%@ include file = "/views/common/footer.jsp" %>
 <script>
 function goStoreC(){
 	 location.href='<%=request.getContextPath() %>/storeC.pro';
@@ -255,13 +259,11 @@ function goStoreC(){
 		var p_code = $("#p_codelabel").val();
 		var c_name = $("#C_namediv").html();
 		var c_count = $("#c_count").val();
-		alert(p_code);
-		alert(c_name);
-		alert(c_count);
 		var payinfoview = p_code + "/" + c_name + "/" +c_count ;
 		 location.href='<%=request.getContextPath() %>/list.pay?payinfoview='+payinfoview;
 	<% } else{ %>
-		alert("로그인 해야 구매페이지로 이동합니다..");		
+		alert("로그인 해야 구매페이지로 이동합니다.")	;
+		 location.href='<%=request.getContextPath() %>/views/member/memberLoginView.jsp';
 	<%} %>
 	}
 	
@@ -270,6 +272,6 @@ function goStoreC(){
 	
 	
 </script>
-<%@ include file = "/views/common/footer.jsp" %>
+
 </body>
 </html>

@@ -327,7 +327,7 @@ margin-top: 30px;
             <img id="maini-con" src="<%=request.getContextPath()%>/images/mainIcon.png" width="80px" height="80px">
          </div>
          <div class="mainmenu">
-         <div class="menu" onclick="#">공지사항
+         <div class="menu" onclick="goNotice()">공지사항
                         <hr id="menuhr">
                         </div>
          <div class="menu">스토어
@@ -339,10 +339,10 @@ margin-top: 30px;
          <!--    <input type="hidden" name="procodeinfo" id = "procodeinfo" value ="prot"> -->
             책상</div>
             <div class = "submenu" onclick ="StoreK()">
-            <!-- <input type="hidden" name="procodeinfo" id = "procodeinfo" value ="pork"> -->
+
             주방용품</div>
             <div class = "submenu" onclick ="StoreB()">
-            <!-- <input type="hidden" name="procodeinfo" id= "procodeinfo" value ="prob"> -->
+ 
             침구류</div>
          </div>
          </div>
@@ -396,6 +396,13 @@ margin-top: 30px;
                   </div>
             </td>
          </tr>
+         <tr>
+         <td>
+         	<div class="btns">
+         		<button id = "companyinfo" onclick="c_insertInfo()">판매자등록</button>
+         	</div>
+         </td>
+         </tr>
       </table>
    
    <%} %>
@@ -431,22 +438,10 @@ margin-top: 30px;
        location.href='<%=request.getContextPath() %>/storeB.pro';
       }
       
-     /*  function validate(){
-         if($("#userId").val().trim().length == 0){
-            alert("아이디를 입력하세요");
-            $("#userId").focus();
-            
-            return false;   // return값이 false면 submit이 되지 않는다
-         }
-         if($("#userPwd").val().trim().length == 0){
-            alert("비밀번호를 입력하세요");
-            $("#userPwd").focus();
-            
-            return false;
-         }
-         
-         return true;
-      } */
+      function goNotice(){
+    	  location.href="<%=request.getContextPath()%>/list.no";
+      }
+      
       
       // 로그아웃
       function logout(){
@@ -494,10 +489,8 @@ margin-top: 30px;
                data:{kakaoId:kakaoId},
                success:function(data){
                   if(data == "o"){
-                     alert("이미가입");
                      location.href = '<%= request.getContextPath() %>/kakaologin.me?kakaoId='+kakaoId;
                   }else{
-                     alert("가입안됨");
                      location.href = '<%= request.getContextPath() %>/views/member/kakaoJoinForm.jsp?kakaoId='+kakaoId;
                   }
                },

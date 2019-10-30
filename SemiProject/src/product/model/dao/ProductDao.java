@@ -182,7 +182,7 @@ public class ProductDao {
 		return result;
 	}
 	
-	public int inserimgFile(Connection conn, ArrayList<ProductImgFile> imgList, String c_name, String p_code,String pro_code) {
+	public int inserimgFile(Connection conn, String c_name, String p_code, String pro_code, ArrayList<ProductImgFile> imgList) {
 		PreparedStatement pstmt = null;
 		
 		int result = 0;
@@ -219,7 +219,42 @@ public class ProductDao {
 		}
 		
 	}
-	
+	public int inserimgFile(Connection conn, ArrayList<ProductImgFile> imgList, String c_name, String p_code, String pro_code) {
+		PreparedStatement pstmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("insetImgFile");
+		
+		try {
+			for(int i=0; i<imgList.size();i++) {
+				ProductImgFile file = imgList.get(i);
+				
+				pstmt=conn.prepareStatement(query);
+				
+				pstmt.setString(1, c_name);
+				pstmt.setString(2, p_code);
+				pstmt.setString(3, pro_code);
+				pstmt.setString(4, file.getOrigin_name());
+				pstmt.setString(5, file.getChange_name());
+				pstmt.setString(6, file.getFile_path());
+				pstmt.setInt(7, file.getFile_level());
+				
+				result += pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		System.out.println("삽입분   result값 : " +result);
+		if(result == imgList.size()) {
+			return result;
+		}else {
+			return 0;
+		}
+	}
 	
 	public ArrayList<ProductImgFile> selectImgList(Connection conn, String p_code, String c_name) {
 		PreparedStatement pstmt = null;
@@ -259,6 +294,8 @@ public class ProductDao {
 		
 		return  filelist;
 	}
+	
+
 	public int deleteImgFile(Connection conn, String p_code, String c_name) {
 		PreparedStatement pstmt = null;
 		
@@ -753,6 +790,8 @@ public class ProductDao {
 		
 		return  CList;
 	}
+	
+
 	
 	
 	

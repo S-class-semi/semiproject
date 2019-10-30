@@ -39,12 +39,11 @@
            opener.location.replace('Order_complete.jsp');
            window.close();
            location.href = "<%= request.getContextPath() %>/views/common/menubar.jsp";
-           
+d
        } else {
            var msg = '결제에 실패하였습니다.';
            msg += '에러내용 : ' + rsp.error_msg;
            location.href = "<%= request.getContextPath() %>/views/common/menubar.jsp";
-           
        }
        alert(msg);
    });

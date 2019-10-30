@@ -69,7 +69,6 @@
 		</form>
 
 	</div>
-	<%@ include file = "/views/common/footer.jsp" %>
 	<!-- 주소 스크립트 -->
 <script>
 function on_click(){
