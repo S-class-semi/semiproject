@@ -82,7 +82,7 @@
 		</form>
 
 	</div>
-
+<%@ include file = "/views/common/footer.jsp" %>
 	<script>
 		function on_click() {
 			new daum.Postcode(

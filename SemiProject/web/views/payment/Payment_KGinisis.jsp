@@ -15,7 +15,7 @@
 var IMP = window.IMP;
 IMP.init('imp17318197');
 IMP.request_pay({
-    pg : 'inicis',
+    pg : 'inisis',
     pay_method : 'card',
     merchant_uid : 'merchant_' + new Date().getTime(),
     name : '주문명:결제테스트',

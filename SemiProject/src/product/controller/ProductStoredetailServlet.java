@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import member.model.vo.Member;
 import product.model.service.ProductService;
 import product.model.vo.ProductImgFile;
 import product.model.vo.ProductInfo;
@@ -45,11 +47,16 @@ public class ProductStoredetailServlet extends HttpServlet {
 		//img 값 확인하기
 		ArrayList<ProductImgFile> imgList = new ProductService().selectImgList(p_code,c_name);
 		
+		
+		HttpSession user = request.getSession();
+		Member loginUser = (Member)user.getAttribute("loginUser");
+		
 		  System.out.println(prodcutinfo);
 		  System.out.println(imgList);
 		  if(prodcutinfo != null && imgList != null ) { 
 	      request.setAttribute("prodcutinfo", prodcutinfo);
 	      request.setAttribute("imgList", imgList);
+	      request.setAttribute("loginUser", loginUser);
 		  request.getRequestDispatcher("views/product/storeDetailView.jsp").forward(request, response);
 		  }else {
 			  System.out.println("실패");

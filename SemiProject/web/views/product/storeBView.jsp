@@ -161,6 +161,7 @@ cursor: default;
 	<%} %>
 <%} %>
 </div>
+<%@ include file = "/views/common/footer.jsp" %>
 <script>
 //의자
 function goStoreC(){

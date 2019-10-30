@@ -44,13 +44,13 @@ public class LoginServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		
 		System.out.println(loginUser);
-		int userT = loginUser.getUserT();
 		
 		RequestDispatcher view= null;
 		HttpSession session =null;
 		
 
 		if(loginUser != null){
+			int userT = loginUser.getUserT();
 			if(userT==3) {
 				session = request.getSession();
 				session.setAttribute("loginUser", loginUser);
@@ -70,9 +70,10 @@ public class LoginServlet extends HttpServlet {
 				response.sendRedirect("index.jsp");	
 			}
 		}else{
-			request.setAttribute("msg", "로그인 실패");
-			view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			view.forward(request, response);
+			session =request.getSession();
+			session.setAttribute("msg", "이메일 주소나 비밀번호가 틀립니다");
+	        session.setMaxInactiveInterval(3);
+	        response.sendRedirect("views/member/memberLoginView.jsp");	
 		}
 	}
 

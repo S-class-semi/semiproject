@@ -21,7 +21,7 @@
 				</tr>
 				<tr>
 				<td><label> 사업증 번호 : </label></td>
-				<td><input type="text" name="c_number" id="c_number"required autofocus></td>
+				<td><input type="text" name="c_number" id="c_number" required autofocus></td>
 				<td><div id = "c_numCheck"></div></td>
 				</tr>
 				<tr>
@@ -69,6 +69,7 @@
 		</form>
 
 	</div>
+	<%@ include file = "/views/common/footer.jsp" %>
 	<!-- 주소 스크립트 -->
 <script>
 function on_click(){

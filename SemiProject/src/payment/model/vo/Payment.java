@@ -1,6 +1,7 @@
 package payment.model.vo;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class Payment implements Serializable{
 
@@ -9,4 +10,89 @@ public class Payment implements Serializable{
 	 */
 	private static final long serialVersionUID = -9136359375880192792L;
 
-}
+	private String user_id;
+	private String o_name;
+	private String o_phone;
+	private String Address;
+	private String box;
+	private String email;
+	private String payselect;
+	private String totalprice;
+	public Payment() {
+		super();
+	}
+	public Payment(String user_id, String o_name, String o_phone, String address, String box, String email,
+			String payselect, String totalprice) {
+		super();
+		this.user_id = user_id;
+		this.o_name = o_name;
+		this.o_phone = o_phone;
+		Address = address;
+		this.box = box;
+		this.email = email;
+		this.payselect = payselect;
+		this.totalprice = totalprice;
+	}
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+	public String getO_name() {
+		return o_name;
+	}
+	public void setO_name(String o_name) {
+		this.o_name = o_name;
+	}
+	public String getO_phone() {
+		return o_phone;
+	}
+	public void setO_phone(String o_phone) {
+		this.o_phone = o_phone;
+	}
+	public String getAddress() {
+		return Address;
+	}
+	public void setAddress(String address) {
+		Address = address;
+	}
+	public String getBox() {
+		return box;
+	}
+	public void setBox(String box) {
+		this.box = box;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPayselect() {
+		return payselect;
+	}
+	public void setPayselect(String payselect) {
+		this.payselect = payselect;
+	}
+	public String getTotalprice() {
+		return totalprice;
+	}
+	public void setTotalprice(String totalprice) {
+		this.totalprice = totalprice;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	@Override
+	public String toString() {
+		return "Payment [user_id=" + user_id + ", o_name=" + o_name + ", o_phone=" + o_phone + ", Address=" + Address
+				+ ", box=" + box + ", email=" + email + ", payselect=" + payselect + ", totalprice=" + totalprice + "]";
+	}
+	
+	
+	
+	 
+	 
+	 
+	}

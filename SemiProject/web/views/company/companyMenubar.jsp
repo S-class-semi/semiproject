@@ -250,6 +250,7 @@ body {
  		<h1> </h1>
 		</div>  -->
 	</div>
+	<%@ include file = "/views/common/footer.jsp" %>
 	<script>
 		function C_home(){
 			location.href = "<%=request.getContextPath()%>/views/company/companyMenubar.jsp";

@@ -132,11 +132,12 @@ cursor: default;
 <%@ include file = "/views/common/menubar.jsp" %>
 
 <div id ="categorymenu">
+
  <ul>
  	<li id="categoryname">상품 카테고리</li>
  	<li onclick = "goStoreC()">의자</li>
- 	<li id="categoryCheck" onclick = "goStoreT()">책상</li>
- 	<li onclick = "goStoreK()">주방용품</li>
+ 	<li onclick = "goStoreT()">책상</li>
+ 	<li id="categoryCheck" onclick = "goStoreK()">주방용품</li>
  	<li onclick = "goStoreB()">침구류</li>
  </ul> 
 </div>
@@ -160,6 +161,7 @@ cursor: default;
 	<%} %>
 <%} %>
 </div>
+<%@ include file = "/views/common/footer.jsp" %>
 <script>
 //의자
 function goStoreC(){
@@ -178,6 +180,24 @@ function goStoreK(){
 function goStoreB(){
  location.href='<%=request.getContextPath() %>/storeB.pro';
 }
+
+function proinfo(){
+	location.href="<%=request.getContextPath() %>/storedetail.pro";
+}
+
+$(function(){
+	$(".card").click(function(){
+		console.log("실행되는가?");
+		var c_name=$(this).find("input").val();
+		var p_code = $(this).find("input").eq(1).val();
+		var p_name = $(this).find("input").eq(2).val();
+		console.log(c_name);
+		console.log(p_code);
+		console.log(p_name);
+		var codeinfo = c_name + "/" +p_code + "/" + p_name;
+	 	location.href= " <%=request.getContextPath() %>/storedetail.pro?codeinfo=" + codeinfo;	
+	});
+});
 </script>
 </body>
 </html>

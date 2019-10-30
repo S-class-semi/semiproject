@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
+
+<%
+   String msg = (String)session.getAttribute("msg");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비밀번호 찾기</title>
+<title>로그인</title>
 <style>
 body{
    background: #f2f2f2;
@@ -12,7 +16,7 @@ body{
 }
 #outer{
    width: 400px;
-   height: 1000px;
+   height: 800px;
    color: black;
    margin-left: auto;
    margin-right: auto;
@@ -32,6 +36,7 @@ body{
   cursor:pointer;
   transition:800ms ease all;
   outline:none;
+  font-weight: 600;
 }
 #loginBtn:hover{
   background:#fff;
@@ -170,7 +175,7 @@ form {
 }
 .grid .item .cbx {
   position: relative;
-  top: 1px;
+  top: 5px;
   display: inline-block;
   width: 14px;
   height: 14px;
@@ -181,7 +186,7 @@ form {
 }
 .grid .item .cbx svg {
   position: relative;
-  top: -1px;
+  top: -5px;
   transform: scale(0);
   fill: none;
   stroke-linecap: round;
@@ -244,13 +249,32 @@ form {
   width: 100%;
   transition: all 0.4s ease;
 }
+
+#wrongId{
+   width: 300px;
+   height:25px;
+   border-radius: 5px;
+}
 </style>
 <script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
+   
    <div id="outer" align = "center">
    <br>
+      <div id = "wrongId"></div>
+      <script>
+      <%if(msg != null) {%>
+      $(function(){         
+      $("#wrongId").html("이메일 주소나 비밀번호가 틀립니다").css({'background-color':'#ffcccc', color:'red'});
+      });
+      <%}else{ %>
+      $(function(){         
+            $("#wrongId").html("");
+            });
+      <%}%>
+      </script>
       <h1 align = "center">난 혼자 산다</h1>
       <br><br>
    <form id=loginForm " action="<%=request.getContextPath()%>/login.me" onsubmit="return validate();" method="post">
@@ -273,7 +297,7 @@ form {
    </label>
    <br><br>
    <div class="grid">
-      <label for="saveId" class="cbx-lbl">아이디 저장</label>&nbsp;&nbsp;
+      <label for="saveId" class="cbx-lbl">아이디 저장</label>&nbsp;
       <label for="saveId" class="item"> <input type="checkbox" name="saveId" id="saveId" class="hidden" />
       <label for="saveId" class="cbx">
       <svg width="14px" height="12px" viewBox="0 0 14 12">
@@ -300,7 +324,7 @@ form {
    
    </div>
    
-
+   
    <script>
    function validate(){
       if($("#userId").val().trim().length == 0){
