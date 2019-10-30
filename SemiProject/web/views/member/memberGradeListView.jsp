@@ -185,10 +185,12 @@ table tr:nth-child(2n+1) {
 <body>
 
 <%@ include file = "/views/admin/adminMenuView.jsp" %> 
-<div class="outer">
-	<br>
-	<h2 align = "center">회원정보</h2>
-	<div id = "centerbody">
+<div class = "outer">
+
+<div id="centerbody">
+
+<div class="table-users">
+   <div class="header">회원 정보 확인</div>
 	<div class = "tableArea">
 
 		<table align ="center" id="listArea">
@@ -255,24 +257,13 @@ table tr:nth-child(2n+1) {
 </div>
 </div>
 <script>
-		// 게시판 상세보기 기능 구현하기
-		<%-- $(function(){
-			$("#listArea td").mouseenter(function(){
-				$(this).parent().css({"background":"darkgray","cursor":"pointer"});
-			}).mouseout(function(){
-				$(this).parent().css({"background":"#dcdcdc"});
-			}).click(function(){
-				var bid=$(this).parent().children("input").val();
-				location.href="<%=request.getContextPath()%>/myPage.me?userId=<%=m.getUser_Id() %>"
-					
-			});
-		}); --%>
+		
 		
 		$(function(){
 			$("#listArea td").mouseenter(function(){
-				$(this).parent().css({"background":"darkgray","cursor":"pointer"});
+				$(this).parent().css({"background":"#ebeced","cursor":"pointer"});
 			}).mouseout(function(){
-				$(this).parent().css({"background":"#dcdcdc"});
+				$(this).parent().css({"background":"white"});
 			}).click(function(){
 				var user_Id=$(this).parent().children("input").val();
 				location.href="<%=request.getContextPath()%>/updateGrade.me?user_Id="+ user_Id;
