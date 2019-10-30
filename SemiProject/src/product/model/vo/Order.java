@@ -1,9 +1,14 @@
 package product.model.vo;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Order {
+public class Order implements Serializable{
 	
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4531729822786885808L;
 //	ONO	NUMBER
 //	PNO	NUMBER
 //	QUANTITY	NUMBER
@@ -21,7 +26,7 @@ public class Order {
 	public Order() {
 		
 	}
-	
+
 	public Order(int ono, int pno, String pname, int quantity, Date buydate, String status, String user_Id) {
 		super();
 		this.ono = ono;
@@ -89,14 +94,14 @@ public class Order {
 		this.user_Id = user_Id;
 	}
 
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+
 	@Override
 	public String toString() {
 		return "Order [ono=" + ono + ", pno=" + pno + ", pname=" + pname + ", quantity=" + quantity + ", buydate="
 				+ buydate + ", status=" + status + ", user_Id=" + user_Id + "]";
 	}
 	
-
-	
-	
 }
-	

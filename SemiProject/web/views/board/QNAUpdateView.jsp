@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import = "board.model.vo.*"%>
     
     <%
-    	Board b = (Board)request.getAttribute("board");
+    	QNA b = (QNA)request.getAttribute("board");
     %>
     
    

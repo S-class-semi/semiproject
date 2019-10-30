@@ -24,13 +24,13 @@ body {
 }
 
 /* 메뉴와 작성할 구간 스타일*/
-#bodybase {
+ #bodybase {
    position: absolute;
    display: inline-block;
    width: 100%;
    height: 100%;
 }
-
+ 
 /* 작성할 구간*/
 /* #centerbody {
    display: inline-block;
@@ -251,6 +251,7 @@ body {
                </h3>
                <ul>
                   <li onclick = "C_info()">정보수정</li>
+                  <li onclick = "SellerUpdate()">판매자 관리</li>
                   <li>탈퇴</li>
                </ul>
             </li>
@@ -258,7 +259,7 @@ body {
       </div>
    
    </div>
-   String c_name = "프로젝트";
+  <!--  String c_name = "프로젝트"; -->
    <script>
       function C_home(){
          location.href = "<%=request.getContextPath()%>/views/company/companyMenubar.jsp";
@@ -292,6 +293,9 @@ body {
       }
       function OrderList(){
          location.href = "<%=request.getContextPath()%>/order.or";
+      }
+      function SellerUpdate(){
+    	  location.href = "<%=request.getContextPath()%>/seller.co";
       }
       function logout(){
          location.href = '<%= request.getContextPath() %>/logout.me';

@@ -392,7 +392,7 @@ public class MemberDao {
 			
 			pstmt.setInt(1, 1);
 			pstmt.setInt(2, 3);
-			pstmt.setString(3, "N");
+			pstmt.setString(3, "Y");
 			
 			rs=pstmt.executeQuery();
 			
@@ -502,6 +502,32 @@ public class MemberDao {
 			pstmt.setInt(3, member.getPoint());
 			pstmt.setString(4, member.getGender());
 			pstmt.setString(5, member.getUserId());
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int updateUserT(Connection conn, Member member) {
+		PreparedStatement pstmt = null;
+		int result=0;
+		
+		String query = prop.getProperty("updateUserT");
+	
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setInt(1, 2);
+			pstmt.setString(2, member.getUserId());
 			
 			result = pstmt.executeUpdate();
 			

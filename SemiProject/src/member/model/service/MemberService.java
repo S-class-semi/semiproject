@@ -194,4 +194,19 @@ public int updateGrade(Member member) {
 	
 	return result;
 }
+
+public int updateUserT(Member member) {
+	Connection conn = getConnection();
+	
+	int result = new MemberDao().updateUserT(conn,member);
+	System.out.println(result);
+	if(result > 0)
+		commit(conn);
+	else
+		rollback(conn);
+	
+	close(conn);
+	
+	return result;
+}
 }

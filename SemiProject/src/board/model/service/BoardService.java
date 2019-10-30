@@ -10,26 +10,27 @@ import java.util.ArrayList;
 
 import board.model.dao.BoardDao;
 import board.model.vo.Board;
+import board.model.vo.QNA;
 
 public class BoardService {
 
 	
 	
 	
-	public int getListCount() {
+	public int getQNAListCount() {
 		Connection conn = getConnection();
 		
-		int listCount = new BoardDao().getListCount(conn);
+		int listCount = new BoardDao().getQNAListCount(conn);
 		
 		close(conn);
 		
 		return listCount;
 	}
 
-	public ArrayList<Board> selectQNAList(int currentPage, int limit) {
+	public ArrayList<QNA> selectQNAList(int currentPage, int limit) {
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new BoardDao().selectQNAList(conn,currentPage,limit);
+		ArrayList<QNA> list = new BoardDao().selectQNAList(conn,currentPage,limit);
 		
 		close(conn);
 		
@@ -42,21 +43,21 @@ public class BoardService {
 	}
 	
 
-	public Board selectQna(int bid) {
+	public QNA selectQna(int bid) {
 		Connection conn = getConnection();
 		
 		
 		
-		Board board = new BoardDao().selectQna(conn,bid);
+		QNA qna = new BoardDao().selectQna(conn,bid);
 		
 		
 		close(conn);
 		
 		
-		return board;
+		return qna;
 	}
 
-	public int updateQNA(Board b) {
+	public int updateQNA(QNA b) {
 		Connection conn = getConnection();
 		
 		int result = new BoardDao().updateQNA(conn, b);

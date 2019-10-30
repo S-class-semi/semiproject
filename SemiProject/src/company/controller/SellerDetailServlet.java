@@ -1,4 +1,4 @@
-package board.controller;
+package company.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.BoardService;
-import board.model.vo.QNA;
+import company.model.service.CompanyService;
+import company.model.vo.Company;
 
 /**
- * Servlet implementation class QNAUpdateViewServlet
+ * Servlet implementation class UpdateSellerServlet
  */
-@WebServlet("/updateviewqna.do")
-public class QNAUpdateViewServlet extends HttpServlet {
+@WebServlet("/sellerupdate.se")
+public class SellerDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QNAUpdateViewServlet() {
+    public SellerDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,18 +31,23 @@ public class QNAUpdateViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int bid = Integer.valueOf(request.getParameter("bId"));
 		
-		QNA board = new BoardService().selectQna(bid);
+		//System.out.println("어서 넘어오라구~~~");
+		request.setCharacterEncoding("utf-8");
+		String user_Id = request.getParameter("userId");
+		
+		Company company = new CompanyService().sellerdetail(user_Id);
+		
+		System.out.println(company);
+		System.out.println(user_Id);
 		
 		RequestDispatcher view = null;
-		if(board != null) {
-			view = request.getRequestDispatcher("views/board/QNAUpdateView.jsp");
-			request.setAttribute("board", board);
+		if(company != null) {
+			view = request.getRequestDispatcher("views/admin/SellerDetailView.jsp");
+			request.setAttribute("company", company);
 		}else {
-			view=request.getRequestDispatcher("views/common/errorPage.jsp");
-			request.setAttribute("msg", "1:1문의 조회 실패");
+			view=request.getRequestDispatcher("views/admin/errorPage.jsp");
+			request.setAttribute("msg", "판매자 정보 조회 실패.");
 		}
 		view.forward(request, response);
 	

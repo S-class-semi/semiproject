@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.model.service.BoardService;
-import board.model.vo.Board;
+import board.model.vo.QNA;
 
 /**
  * Servlet implementation class QNAUpateServlet
@@ -31,12 +31,12 @@ public class QNAUpateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 request.setCharacterEncoding("utf-8"); 
+		 
 		
 		
 		int bid = Integer.parseInt(request.getParameter("bid"));
 		
-		Board b = new Board();
+		QNA b = new QNA();
 		b.setbId(bid);
 		
 		int result = new BoardService().updateQNA(b);

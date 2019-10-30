@@ -49,11 +49,11 @@ public class GradeUpdate3Servlet extends HttpServlet {
 		String page = "";
 		
 		if(result >0) {
-			page = "views/common/successPage.jsp";
-			request.setAttribute("msg", "회원등급 수정 성공");
+			page = "/grade.me";
+			
 		}else {
-			page="views/common/errorPage.jsp";
-			request.setAttribute("msg", "회원등급 수정 실패");
+			page="views/admin/adminMenuView.jsp";
+			
 		}
 		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);

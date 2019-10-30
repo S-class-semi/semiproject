@@ -1,4 +1,4 @@
-package board.controller;
+package company.controller;
 
 import java.io.IOException;
 
@@ -9,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.BoardService;
-import board.model.vo.QNA;
+import company.model.service.CompanyService;
+import company.model.vo.Company;
+import member.model.service.MemberService;
+import member.model.vo.Member;
 
 /**
- * Servlet implementation class QNAUpdateViewServlet
+ * Servlet implementation class SellerUpdateServlet
  */
-@WebServlet("/updateviewqna.do")
-public class QNAUpdateViewServlet extends HttpServlet {
+@WebServlet("/updatesellerview.se")
+public class SellerUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QNAUpdateViewServlet() {
+    public SellerUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +33,36 @@ public class QNAUpdateViewServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		int bid = Integer.valueOf(request.getParameter("bId"));
 		
-		QNA board = new BoardService().selectQna(bid);
+		request.setCharacterEncoding("UTF-8");
+		String userId = request.getParameter("userid");
 		
-		RequestDispatcher view = null;
-		if(board != null) {
-			view = request.getRequestDispatcher("views/board/QNAUpdateView.jsp");
-			request.setAttribute("board", board);
+		System.out.println(userId);
+		
+		
+		Company c = new Company(userId);
+		
+		
+		
+		int update = new CompanyService().updateGrade1(new Company(userId));
+		int result = new CompanyService().updateGrade(new Company(userId));
+		
+		System.out.println("컴패니 : " + result);
+		System.out.println("업데이트 : " + update);
+		String page = "";
+		
+		if(result >0 && update > 0) {
+			page = "/seller.co";
+			
 		}else {
-			view=request.getRequestDispatcher("views/common/errorPage.jsp");
-			request.setAttribute("msg", "1:1문의 조회 실패");
+			page="views/admin/adminMenuView.jsp";
+			
 		}
+		RequestDispatcher view = request.getRequestDispatcher(page);
 		view.forward(request, response);
-	
+		
+		
+		
 	}
 
 	/**

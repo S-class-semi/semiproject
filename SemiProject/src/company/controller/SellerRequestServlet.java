@@ -1,4 +1,4 @@
-package board.controller;
+package company.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import board.model.service.BoardService;
-import board.model.vo.PageInfo;
-import board.model.vo.QNA;
+import company.model.service.CompanyService;
+import company.model.vo.Company;
+import company.model.vo.SellerPageInfo;
 
 /**
- * Servlet implementation class QNAListServlet
+ * Servlet implementation class SellerApprovalServlet
  */
-@WebServlet("/qna.do")
-public class QNAListServlet extends HttpServlet {
+@WebServlet("/seller.co")
+public class SellerRequestServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QNAListServlet() {
+    public SellerRequestServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,9 +33,9 @@ public class QNAListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BoardService bService = new BoardService();
+		CompanyService cService = new CompanyService();
 		
-		int listCount = bService.getQNAListCount();
+		int listCount = cService.getListCount();
 		
 		//-------------페이징 처리 추가----------------
 				// 페이지 수 처리용 변수 선언
@@ -62,14 +62,14 @@ public class QNAListServlet extends HttpServlet {
 			endPage = maxPage;
 		}
 		
-		PageInfo pi = new PageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
+		SellerPageInfo pi = new SellerPageInfo(currentPage,listCount,limit,maxPage,startPage,endPage);
 		
-		ArrayList<QNA> list = bService.selectQNAList(currentPage,limit);
+		ArrayList<Company> list = cService.selectSellerList(currentPage,limit);
 		
 		RequestDispatcher view = null;
-		System.out.println(list);
+		System.out.println("list : "+list);
 		if(list != null) {
-			view = request.getRequestDispatcher("views/board/QNAListView.jsp");
+			view = request.getRequestDispatcher("views/admin/SellerListView.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		}else {
@@ -78,7 +78,8 @@ public class QNAListServlet extends HttpServlet {
 		view.forward(request,response);
 		
 		// boardListView.jsp 만들러 ㄱㄱ씽
-		}
+	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

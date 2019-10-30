@@ -65,7 +65,7 @@
 					<th width="100px">닉네임</th>
 					<th width="100px">보유포인트</th>
 					<th width="100px">생일</th>
-					<th width="150px">탈퇴여부</th>
+					<th width="150px">회원여부</th>
 			</tr>
 			<%if(list.isEmpty()){ %>
 			<tr>

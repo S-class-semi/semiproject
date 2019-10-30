@@ -1,17 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="product.model.vo.*,java.util.ArrayList"%>
+    pageEncoding="UTF-8" import = "company.model.vo.*"%>
 
-<%
-    	ArrayList<Order> list = (ArrayList<Order>)request.getAttribute("list");
-    	ProductPage pi = (ProductPage)request.getAttribute("pi");
-    
-    	int listCount = pi.getpListCount();
-    	int currentPage = pi.getCurrentPage();
-    	int maxPage = pi.getMaxPage();
-    	int startPage = pi.getStartPage();
-    	int endPage = pi.getEndPage();
+ 	<%
+    	Company c = (Company)request.getAttribute("company");
+ 		
     %>
-
 
 <!DOCTYPE html>
 <html>
@@ -113,6 +106,7 @@ table tr:nth-child(2n+1) {
     position: absolute;
   }
   
+
   tr {
     padding: 10px 0;
     position: relative;
@@ -188,94 +182,63 @@ table tr:nth-child(2n+1) {
 <div id="centerbody">
 
 <div class="table-users">
-   <div class="header">주문 내역</div>
-	<div class = "tableArea">
-	
-		<table align ="center" id="listArea">
-			<tr>
-				<th width="100px">결제번호</th>
-					<th width="100px">구매회원</th>
-					<th width="100px">상품이름</th>
-					<th width="100px">구매수량</th>
-					<th width="100px">구매날짜</th>
-					<th width="150px">구매취소여부</th>
-			</tr>
-			<%if(list.isEmpty()){ %>
-			<tr>
-				<td colspan = "6">조회된 리스트가 없습니다.</td>
-			</tr>
-			<%}else{ %>
-				<%for(Order o : list){ %>
+   <div class="header">판매자 신청 회원 상세보기</div>
+		<div class = "tableArea">
+		<form id = "updateForm" method="post">
+			<table align = "center" width="800px">
 				<tr>
-					<input type="hidden" value = "<%=o.getOno() %>">
-					<td><%=o.getOno() %></td>
-					<td><%=o.getUser_Id() %></td>
-					<td><%=o.getPname() %></td>
-					<td><%=o.getQuantity() %></td>
-					<td><%=o.getBuydate() %></td>
-					<td><%=o.getStatus() %></td>
-					
-				</tr>
-				<%} %>
-				<%} %>
-		</table>
-
-	</div>
-	<!-- 페이징처리 -->
-	<div class = "pagingArea" align = "center">
-		<!-- 맨 처음으로(<<) -->
-		<button onclick="location.href='<%=request.getContextPath() %>/order.or?currentPage=1'"> << </button>
-		<!-- 이전 페이지로(<) -->
-		<%if(currentPage <=1){ %>
-			<button disabled> < </button>
-		<%}else{ %>
-			<button onclick="location.href='<%=request.getContextPath() %>/order.or?currentPage=<%=currentPage-1 %>'"> < </button>
-		<%} %>
-		
-		<!-- 10개의 페이지 목록 -->
-		<%for(int p = startPage; p<=endPage; p++){ %>
-			<%if(p==currentPage){ %>
-				<button disabled><%=p %></button>
-			<%}else{ %>
-				<button onclick="location.href='<%=request.getContextPath() %>/order.or?currentPage=<%=p %>'"><%=p %></button>
-			<%} %>
-			<%} %>
-			
-		<!-- 다음 페이지로(>) -->
-		<%if(currentPage>=maxPage){ %>
-			<button disabled> > </button>
-		<%}else{ %>
-			<button onclick="location.href='<%=request.getContextPath() %>/order.or?currenPage=<%=currentPage+1 %>'"> > </button>
-		<%} %>
-		
-		<!-- 맨 끝으로(>>) -->
-		<button onclick="location.href='<%=request.getContextPath() %>/order.or?currentPage=<%=maxPage %>'"> >> </button>	
-			
-	</div>
+				<input type = "hidden" name="userid" value= "<%=c.getUserid() %>">
 	
-</div>
+					<th>회원 아이디</th>
+					<td><span><%=c.getUserid() %></span></td>
+					<th>사업증번호</th>
+					<td colsapn="3"><span><%=c.getC_number() %></span></td>
+				</tr>
+				<tr>
+					<th>회사 이름</th>
+					<td><span><%=c.getC_name() %></span></td>
+					<th>담당자 이름</th>
+					<td><span><%=c.getC_manager() %></span></td>
+					<th>회원 등급</th>
+					<td><span><%=c.getUser_t() %></span></td>
+				</tr>
+				<tr>
+					<th>회사 연락처</th>
+					<td><span><%=c.getC_phon() %></span></td>
+					<th>담당자 연락처</th>
+					<td><span><%=c.getC_contact() %></span></td>
+				</tr>
+				<tr>
+					<th>회사 주소</th>
+					<td colspan="6"><span><%=c.getC_add() %></span></td>
+				</tr>
+				
+				
+			</table>
+		<div align ="center">
+			<button type="submit" onclick ="update()">승인하기</button>
+		</div>
+		</form>
+		<div align = "center">
+			<button onclick = "Goback()">메뉴로 돌아가기</button>
+		</div>
+		</div>
+			
+		</div>
+	</div>
 </div>
 
 <script>
-		
-		
-		$(function(){
-			$("#listArea td").mouseenter(function(){
-				$(this).parent().css({"background":"#ebeced","cursor":"pointer"});
-			}).mouseout(function(){
-				$(this).parent().css({"background":"white"});
-			}).click(function(){
-				var user_Id=$(this).parent().children("input").val();
-			
-				 
-				 
-				
-			
-				
-				
-			});
-		});
+	
+	function Goback(){
+		location.href = "<%=request.getContextPath()%>/seller.co";
+	}
+	function update(){
+		$("#updateForm").attr("action","<%=request.getContextPath()%>/updatesellerview.se");
+	}
 </script>
+
+
 
 </body>
 </html>

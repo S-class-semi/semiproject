@@ -89,7 +89,7 @@
 </style>
 </head>
 <body>
- <%@ include file = "/views/company/companyMenubar.jsp" %> 
+<%@ include file = "/views/admin/adminMenuView.jsp" %> 
 
 <div id="centerbody">
 	<div id = chart_div>

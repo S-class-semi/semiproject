@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import board.model.service.BoardService;
-import board.model.vo.Board;
+import board.model.vo.QNA;
 
 /**
  * Servlet implementation class QNADetailServlet
@@ -32,7 +32,7 @@ public class QNADetailServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int bid = Integer.parseInt(request.getParameter("bid"));
 		
-		Board board = new BoardService().selectQna(bid);
+		QNA board = new BoardService().selectQna(bid);
 		System.out.println(bid);
 		System.out.println(board);
 		if(board !=null) {

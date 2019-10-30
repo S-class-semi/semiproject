@@ -15,16 +15,16 @@ import board.model.vo.PageInfo;
 import board.model.vo.QNA;
 
 /**
- * Servlet implementation class QNAListServlet
+ * Servlet implementation class AdminBoardServlet
  */
-@WebServlet("/qna.do")
-public class QNAListServlet extends HttpServlet {
+@WebServlet("/admin.ad")
+public class AdminBoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QNAListServlet() {
+    public AdminBoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,7 +33,7 @@ public class QNAListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		BoardService bService = new BoardService();
+BoardService bService = new BoardService();
 		
 		int listCount = bService.getQNAListCount();
 		
@@ -50,7 +50,7 @@ public class QNAListServlet extends HttpServlet {
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
-		limit = 10;
+		limit = 5;
 		
 		maxPage = (int)((double)listCount/limit + 0.9);
 		
@@ -69,16 +69,14 @@ public class QNAListServlet extends HttpServlet {
 		RequestDispatcher view = null;
 		System.out.println(list);
 		if(list != null) {
-			view = request.getRequestDispatcher("views/board/QNAListView.jsp");
+			view = request.getRequestDispatcher("views/admin/adminBoardView.jsp");
 			request.setAttribute("list", list);
 			request.setAttribute("pi", pi);
 		}else {
 			view = request.getRequestDispatcher("views/admin/adminMenuView.jsp");
 		}
 		view.forward(request,response);
-		
-		// boardListView.jsp 만들러 ㄱㄱ씽
-		}
+			}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

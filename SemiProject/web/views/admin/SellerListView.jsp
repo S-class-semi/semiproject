@@ -1,23 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="product.model.vo.*,java.util.ArrayList"%>
-
-<%
-    	ArrayList<Order> list = (ArrayList<Order>)request.getAttribute("list");
-    	ProductPage pi = (ProductPage)request.getAttribute("pi");
+    pageEncoding="UTF-8" import="company.model.vo.*,java.util.ArrayList"%>
     
-    	int listCount = pi.getpListCount();
+    
+    <%
+    	ArrayList<Company> list = (ArrayList<Company>)request.getAttribute("list");
+    	SellerPageInfo pi = (SellerPageInfo)request.getAttribute("pi");
+    
+    	int listCount = pi.getListCount();
     	int currentPage = pi.getCurrentPage();
     	int maxPage = pi.getMaxPage();
     	int startPage = pi.getStartPage();
     	int endPage = pi.getEndPage();
     %>
-
-
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <style>
 #centerbody {
 	display: inline-block;
@@ -188,32 +185,33 @@ table tr:nth-child(2n+1) {
 <div id="centerbody">
 
 <div class="table-users">
-   <div class="header">주문 내역</div>
+   <div class="header">판매자 승인</div>
 	<div class = "tableArea">
-	
+
 		<table align ="center" id="listArea">
 			<tr>
-				<th width="100px">결제번호</th>
-					<th width="100px">구매회원</th>
-					<th width="100px">상품이름</th>
-					<th width="100px">구매수량</th>
-					<th width="100px">구매날짜</th>
-					<th width="150px">구매취소여부</th>
+				<th width="100px">아이디</th>
+					<th width="100px">회원등급</th>
+					<th width="120px">회사 이름</th>
+					<th width="110px">사업자번호</th>
+					<th width="100px">담당자</th>
+					<th width="150px">담당자 연락처</th>
+					
 			</tr>
 			<%if(list.isEmpty()){ %>
 			<tr>
 				<td colspan = "6">조회된 리스트가 없습니다.</td>
 			</tr>
 			<%}else{ %>
-				<%for(Order o : list){ %>
+				<%for(Company c : list){ %>
 				<tr>
-					<input type="hidden" value = "<%=o.getOno() %>">
-					<td><%=o.getOno() %></td>
-					<td><%=o.getUser_Id() %></td>
-					<td><%=o.getPname() %></td>
-					<td><%=o.getQuantity() %></td>
-					<td><%=o.getBuydate() %></td>
-					<td><%=o.getStatus() %></td>
+					<input type="hidden" value = "<%=c.getUserid() %>">
+					<td><%=c.getUserid() %></td>
+					<td><%=c.getUser_t() %></td>
+					<td><%=c.getC_name() %></td>
+					<td><%=c.getC_number() %></td>
+					<td><%=c.getC_manager() %></td>
+					<td><%=c.getC_phon() %></td>
 					
 				</tr>
 				<%} %>
@@ -221,15 +219,17 @@ table tr:nth-child(2n+1) {
 		</table>
 
 	</div>
+	</div>
+	
 	<!-- 페이징처리 -->
 	<div class = "pagingArea" align = "center">
 		<!-- 맨 처음으로(<<) -->
-		<button onclick="location.href='<%=request.getContextPath() %>/order.or?currentPage=1'"> << </button>
+		<button onclick="location.href='<%=request.getContextPath() %>/seller.co?currentPage=1'"> << </button>
 		<!-- 이전 페이지로(<) -->
 		<%if(currentPage <=1){ %>
 			<button disabled> < </button>
 		<%}else{ %>
-			<button onclick="location.href='<%=request.getContextPath() %>/order.or?currentPage=<%=currentPage-1 %>'"> < </button>
+			<button onclick="location.href='<%=request.getContextPath() %>/seller.co?currentPage=<%=currentPage-1 %>'"> < </button>
 		<%} %>
 		
 		<!-- 10개의 페이지 목록 -->
@@ -237,7 +237,7 @@ table tr:nth-child(2n+1) {
 			<%if(p==currentPage){ %>
 				<button disabled><%=p %></button>
 			<%}else{ %>
-				<button onclick="location.href='<%=request.getContextPath() %>/order.or?currentPage=<%=p %>'"><%=p %></button>
+				<button onclick="location.href='<%=request.getContextPath() %>/seller.co?currentPage=<%=p %>'"><%=p %></button>
 			<%} %>
 			<%} %>
 			
@@ -245,19 +245,17 @@ table tr:nth-child(2n+1) {
 		<%if(currentPage>=maxPage){ %>
 			<button disabled> > </button>
 		<%}else{ %>
-			<button onclick="location.href='<%=request.getContextPath() %>/order.or?currenPage=<%=currentPage+1 %>'"> > </button>
+			<button onclick="location.href='<%=request.getContextPath() %>/seller.co?currenPage=<%=currentPage+1 %>'"> > </button>
 		<%} %>
 		
 		<!-- 맨 끝으로(>>) -->
-		<button onclick="location.href='<%=request.getContextPath() %>/order.or?currentPage=<%=maxPage %>'"> >> </button>	
+		<button onclick="location.href='<%=request.getContextPath() %>/seller.co?currentPage=<%=maxPage %>'"> >> </button>	
 			
 	</div>
 	
 </div>
 </div>
-
 <script>
-		
 		
 		$(function(){
 			$("#listArea td").mouseenter(function(){
@@ -266,7 +264,7 @@ table tr:nth-child(2n+1) {
 				$(this).parent().css({"background":"white"});
 			}).click(function(){
 				var user_Id=$(this).parent().children("input").val();
-			
+			 	location.href="<%=request.getContextPath()%>/sellerupdate.se?userId="+ user_Id;
 				 
 				 
 				
@@ -276,6 +274,7 @@ table tr:nth-child(2n+1) {
 			});
 		});
 </script>
+
 
 </body>
 </html>
