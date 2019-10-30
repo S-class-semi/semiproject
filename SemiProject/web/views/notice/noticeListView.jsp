@@ -57,7 +57,6 @@
 				<tr>
 					<th>No.</th>
 					<th width="300px">제목</th>
-					
 					<th>조회수</th>
 					<th width="100px">작성일</th>
 				</tr>
@@ -68,8 +67,8 @@
 				<%}else{ %>
 					<%for(Notice no : list){ %>
 					<tr>
-					
-						<td style="t"><%= no.getB_NO() %></td>
+						
+						<td><%= no.getB_NO() %></td>
 						<td style="text-align:left"><%= no.getB_TITLE() %></td>
 						<td><%= no.getB_COUNT() %></td>
 						<td><%= no.getB_TIME() %></td>
