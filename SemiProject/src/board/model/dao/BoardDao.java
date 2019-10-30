@@ -211,11 +211,6 @@ public class BoardDao {
 
 
 
-
-
-
-
-
 	public ArrayList<Board> selectList(Connection conn) {
 		Statement stmt = null;
 		ResultSet rs = null;
