@@ -182,7 +182,7 @@ public class ProductDao {
 		return result;
 	}
 	
-	public int inserimgFile(Connection conn, ArrayList<ProductImgFile> imgList, String c_name, String p_code) {
+	public int inserimgFile(Connection conn, ArrayList<ProductImgFile> imgList, String c_name, String p_code,String pro_code) {
 		PreparedStatement pstmt = null;
 		
 		int result = 0;
@@ -197,10 +197,11 @@ public class ProductDao {
 				
 				pstmt.setString(1, c_name);
 				pstmt.setString(2, p_code);
-				pstmt.setString(3, file.getOrigin_name());
-				pstmt.setString(4, file.getChange_name());
-				pstmt.setString(5, file.getFile_path());
-				pstmt.setInt(6, file.getFile_level());
+				pstmt.setString(3, pro_code);
+				pstmt.setString(4, file.getOrigin_name());
+				pstmt.setString(5, file.getChange_name());
+				pstmt.setString(6, file.getFile_path());
+				pstmt.setInt(7, file.getFile_level());
 				
 				result += pstmt.executeUpdate();
 			}
@@ -239,6 +240,7 @@ public class ProductDao {
 			while(rs.next()) {
 				ProductImgFile file = new ProductImgFile(rs.getString("C_NAME"),
 														rs.getString("P_CODE"),
+														rs.getString("PRO_CODE"),
 														rs.getString("ORIGIN_NAME"),
 														rs.getString("CHANGE_NAME"),
 														rs.getString("FILE_PATH"),
@@ -480,5 +482,279 @@ public class ProductDao {
 		return listCount;
 	}
 	//찬화꺼
+	public ArrayList<ProductInfo> selectProductC(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		
+		String query = prop.getProperty("selectproductClist");
+		ArrayList<ProductInfo> all_pro = new ArrayList<ProductInfo>();
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductInfo p = new ProductInfo(rs.getString("P_CODE"),
+												rs.getString("PRO_CODE"),
+												rs.getString("P_NAME"),
+												rs.getString("P_PRICE"),
+												rs.getString("P_INFO"),
+												rs.getString("C_NAME"));
+				all_pro.add(p);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return all_pro;
+	}
+	
+	public ArrayList<ProductInfo> selectProductB(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		
+		String query = prop.getProperty("selectproductBlist");
+		ArrayList<ProductInfo> all_pro = new ArrayList<ProductInfo>();
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductInfo p = new ProductInfo(rs.getString("P_CODE"),
+												rs.getString("PRO_CODE"),
+												rs.getString("P_NAME"),
+												rs.getString("P_PRICE"),
+												rs.getString("P_INFO"),
+												rs.getString("C_NAME"));
+				all_pro.add(p);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return all_pro;
+	}
+	
+	public ArrayList<ProductInfo> selectProductK(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		
+		String query = prop.getProperty("selectproductKlist");
+		ArrayList<ProductInfo> all_pro = new ArrayList<ProductInfo>();
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductInfo p = new ProductInfo(rs.getString("P_CODE"),
+												rs.getString("PRO_CODE"),
+												rs.getString("P_NAME"),
+												rs.getString("P_PRICE"),
+												rs.getString("P_INFO"),
+												rs.getString("C_NAME"));
+				all_pro.add(p);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return all_pro;
+	}
+	
+	public ArrayList<ProductInfo> selectProductT(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		
+		String query = prop.getProperty("selectproductTlist");
+		ArrayList<ProductInfo> all_pro = new ArrayList<ProductInfo>();
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ProductInfo p = new ProductInfo(rs.getString("P_CODE"),
+												rs.getString("PRO_CODE"),
+												rs.getString("P_NAME"),
+												rs.getString("P_PRICE"),
+												rs.getString("P_INFO"),
+												rs.getString("C_NAME"));
+				all_pro.add(p);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		return all_pro;
+	}
+	
+	public ArrayList<ProductImgFile> selectImgListC(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<ProductImgFile> CList = null;
+		
+		String query = prop.getProperty("selectImgCList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			
+			CList = new ArrayList<ProductImgFile>();
+			
+			while(rs.next()) {
+				ProductImgFile file = new ProductImgFile(rs.getString("C_NAME"),
+														rs.getString("P_CODE"),
+														rs.getString("PRO_CODE"),
+														rs.getString("ORIGIN_NAME"),
+														rs.getString("CHANGE_NAME"),
+														rs.getString("FILE_PATH"),
+														rs.getDate("UPLOAD_DATE"),
+														rs.getInt("FILE_LEVEL"),
+														rs.getString("STATUS"));
+				CList.add(file);
+				System.out.println("파일이 출력되니?" +file);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return  CList;
+	}
+	
+	public ArrayList<ProductImgFile> selectImgListB(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<ProductImgFile> CList = null;
+		
+		String query = prop.getProperty("selectImgBList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			
+			CList = new ArrayList<ProductImgFile>();
+			
+			while(rs.next()) {
+				ProductImgFile file = new ProductImgFile(rs.getString("C_NAME"),
+														rs.getString("P_CODE"),
+														rs.getString("PRO_CODE"),
+														rs.getString("ORIGIN_NAME"),
+														rs.getString("CHANGE_NAME"),
+														rs.getString("FILE_PATH"),
+														rs.getDate("UPLOAD_DATE"),
+														rs.getInt("FILE_LEVEL"),
+														rs.getString("STATUS"));
+				CList.add(file);
+				System.out.println("파일이 출력되니?" +file);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return  CList;
+	}
+	
+	public ArrayList<ProductImgFile> selectImgListK(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<ProductImgFile> CList = null;
+		
+		String query = prop.getProperty("selectImgKList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			
+			CList = new ArrayList<ProductImgFile>();
+			
+			while(rs.next()) {
+				ProductImgFile file = new ProductImgFile(rs.getString("C_NAME"),
+														rs.getString("P_CODE"),
+														rs.getString("PRO_CODE"),
+														rs.getString("ORIGIN_NAME"),
+														rs.getString("CHANGE_NAME"),
+														rs.getString("FILE_PATH"),
+														rs.getDate("UPLOAD_DATE"),
+														rs.getInt("FILE_LEVEL"),
+														rs.getString("STATUS"));
+				CList.add(file);
+				System.out.println("파일이 출력되니?" +file);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return  CList;
+	}
+	
+	public ArrayList<ProductImgFile> selectImgListT(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		ArrayList<ProductImgFile> CList = null;
+		
+		String query = prop.getProperty("selectImgTList");
+		
+		try {
+			pstmt = conn.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			
+			CList = new ArrayList<ProductImgFile>();
+			
+			while(rs.next()) {
+				ProductImgFile file = new ProductImgFile(rs.getString("C_NAME"),
+														rs.getString("P_CODE"),
+														rs.getString("PRO_CODE"),
+														rs.getString("ORIGIN_NAME"),
+														rs.getString("CHANGE_NAME"),
+														rs.getString("FILE_PATH"),
+														rs.getDate("UPLOAD_DATE"),
+														rs.getInt("FILE_LEVEL"),
+														rs.getString("STATUS"));
+				CList.add(file);
+				System.out.println("파일이 출력되니?" +file);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(rs);
+		}
+		
+		return  CList;
+	}
+	
+	
+	
 
 }

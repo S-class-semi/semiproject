@@ -22,9 +22,10 @@ public class ProductService {
 		ProductDao pDao = new ProductDao();
 		String c_name = p_info.getC_name();
 		String p_code = p_info.getP_code();
+		String pro_code = p_info.getPro_code();
 		
 		int result1 = pDao.insertProduct(conn,p_info);
-		int result2 = pDao.inserimgFile(conn,imgList,c_name,p_code); 
+		int result2 = pDao.inserimgFile(conn,imgList,c_name,p_code,pro_code); 
 		
 		int result = 0;
 		if(result1 >0 && result2 >0) {
@@ -215,6 +216,88 @@ public class ProductService {
 		close(conn);
 		return listCount;
 	}
+
+	public ArrayList<ProductInfo> selectProListC() {
+		Connection conn = getConnection();
+		
+		ArrayList<ProductInfo> all_pro = new ProductDao().selectProductC(conn);
+		
+		close(conn);
+		return all_pro;
+	}
+	
+	public ArrayList<ProductInfo> selectProListB() {
+		Connection conn = getConnection();
+		
+		ArrayList<ProductInfo> all_pro = new ProductDao().selectProductB(conn);
+		
+		close(conn);
+		
+		return all_pro;
+	}
+	
+	public ArrayList<ProductInfo> selectProListK() {
+		Connection conn = getConnection();
+		
+		ArrayList<ProductInfo> all_pro = new ProductDao().selectProductK(conn);
+		
+		close(conn);
+		
+		return all_pro;
+	}
+	
+	public ArrayList<ProductInfo> selectProListT() {
+		Connection conn = getConnection();
+		
+		ArrayList<ProductInfo> all_pro = new ProductDao().selectProductT(conn);
+		
+		close(conn);
+		
+		return all_pro;
+	}
+
+
+	public ArrayList<ProductImgFile> selectImgListC() {
+		Connection conn = getConnection();
+		
+		ArrayList<ProductImgFile> imgList = new ProductDao().selectImgListC(conn);
+		
+		close(conn);
+		return imgList;
+	}
+
+	
+	public ArrayList<ProductImgFile> selectImgListB() {
+		Connection conn = getConnection();
+		
+		ArrayList<ProductImgFile> imgList = new ProductDao().selectImgListB(conn);
+		
+		close(conn);
+		return imgList;
+	}
+
+	
+	public ArrayList<ProductImgFile> selectImgListK() {
+		Connection conn = getConnection();
+		
+		ArrayList<ProductImgFile> imgList = new ProductDao().selectImgListK(conn);
+		
+		close(conn);
+		return imgList;
+	}
+
+	
+	public ArrayList<ProductImgFile> selectImgListT() {
+		Connection conn = getConnection();
+		
+		ArrayList<ProductImgFile> imgList = new ProductDao().selectImgListT(conn);
+		
+		close(conn);
+		return imgList;
+	}
+
+
+
 
 	//찬화꺼
 

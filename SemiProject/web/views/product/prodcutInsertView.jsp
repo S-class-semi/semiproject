@@ -66,7 +66,7 @@ text-align: center;
 					<select name = "pro_code" id ="pro_code1">
 							<option value="C">의자</option>
 							<option value="T">책상</option>
-							<option value="A">주방용품</option>
+							<option value="K">주방용품</option>
 							<option value="B">침구류</option>
 					</select></td>
 				</tr>

@@ -176,7 +176,6 @@ body {
 </head>
 <body>
 	<div id="homemenu">
-		
 			<div id="homeimg" onclick = "C_home();">
 			<%-- <a href="<%=request.getContextPath()%>/views/company/companyView.jsp">
  --%>				<img id="homeicon" src="<%=request.getContextPath()%>/images/home.png" width="80px" height="80px">
@@ -251,6 +250,7 @@ body {
  		<h1> </h1>
 		</div>  -->
 	</div>
+	<%@ include file = "/views/common/footer.jsp" %>
 	<script>
 		function C_home(){
 			location.href = "<%=request.getContextPath()%>/views/company/companyMenubar.jsp";
