@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import company.model.vo.Company;
 import notice.model.service.NoticeService;
 import notice.model.vo.Notice;
 
@@ -32,19 +34,22 @@ public class NoticeUpdateViewServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int nno = Integer.valueOf(request.getParameter("no"));
+		HttpSession user = request.getSession();
+		Company cominfo = (Company) user.getAttribute("companyinfo");
+		String c_name = cominfo.getC_name();
 		
-		Notice notice = new NoticeService().selectNotice(nno);
+		Notice notice = new NoticeService().selectNotice(nno,c_name);
 		
-		
-		RequestDispatcher view = null;
-		if(notice != null) {
-			view=request.getRequestDispatcher("views/notice/noticeUpdateView.jsp");
+
+		  RequestDispatcher view = null; 
+		if (notice != null) {
+			view = request.getRequestDispatcher("views/notice/noticeUpdateView.jsp");
 			request.setAttribute("notice", notice);
-		}else {
-			view=request.getRequestDispatcher("views/common/errorPage.jsp");
+		} else {
+			view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			request.setAttribute("msg", "공지사항  실패");
 		}
-		view.forward(request, response);
+		view.forward(request, response);	
 
 	}
 

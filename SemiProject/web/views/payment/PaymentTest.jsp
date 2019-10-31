@@ -3,6 +3,9 @@
     <%
     Payment pay = (Payment)request.getAttribute("paymentinfo");
     String payselect = pay.getPayselect();
+    String add[] = pay.getAddress().split("/");
+    String postcode = add[0];
+    String addr = add[1];
     %>
 
 <!DOCTYPE html>
@@ -22,13 +25,13 @@
        pg : 'inicis', // version 1.1.0부터 지원.
        pay_method : '<%=pay.getPayselect()%>',
        merchant_uid : 'merchant_' + new Date().getTime(),
-       name : '주문명:결제테스트',
+       name : '<%=pay.getP_name()%>',
        amount : <%=pay.getTotalprice()%>,
        buyer_email : 'iamport@siot.do',
        buyer_name : '<%=pay.getO_name()%>',
        buyer_tel : '<%=pay.getO_phone()%>',
-       buyer_addr : '서울특별시 강남구 삼성동',
-       buyer_postcode : '123-456',
+       buyer_addr : 'addr',
+       buyer_postcode : 'postcode',
    }, function(rsp) {
        if ( rsp.success ) {
            var msg = '결제가 완료되었습니다.';
@@ -36,14 +39,17 @@
            msg += '상점 거래ID : ' + rsp.merchant_uid;
            msg += '결제 금액 : ' + rsp.paid_amount;
            msg += '카드 승인번호 : ' + rsp.apply_num;
-           opener.location.replace('Order_complete.jsp');
-           window.close();
-           location.href = "<%= request.getContextPath() %>/views/common/menubar.jsp";
-d
+           location.href = "<%=request.getContextPath() %>/views/payment/Order_complete.jsp";       
+          /*  opener.location.replace('Order_complete.jsp'); */
+           /* window.close(); */
+          
        } else {
            var msg = '결제에 실패하였습니다.';
+           p_code;
+           c_name;
+           cou
            msg += '에러내용 : ' + rsp.error_msg;
-           location.href = "<%= request.getContextPath() %>/views/common/menubar.jsp";
+           location.href = "<%=request.getContextPath() %>/index.jsp";
        }
        alert(msg);
    });

@@ -42,9 +42,9 @@ public class SendMailServlet extends HttpServlet {
         String userId = request.getParameter("findMail");
         String userPwd = request.getParameter("randomPwd");
         
-        String m_name = "리성호";
+        String m_name = "난혼자산다";
       String m_email = /* (String)session.getAttribute("findMail"); */userId;
-        String m_title = "임시비밀번호는?";
+        String m_title = "난혼자산다 임시비밀번호입니다";
         String m_text = "임시비밀번호 : ";
         String randomPwd = /*(String)session.getAttribute("randomPwd");*/userPwd;
         

@@ -30,6 +30,34 @@ public class Notice implements Serializable{
 	
 	}
 	
+	
+	
+
+	public Notice(int b_NO, int b_TYPE, String b_TITLE, String b_TEXT, String uSER_ID, Date b_TIME, String b_FLOG) {
+		super();
+		B_NO = b_NO;
+		B_TYPE = b_TYPE;
+		B_TITLE = b_TITLE;
+		B_TEXT = b_TEXT;
+		USER_ID = uSER_ID;
+		B_TIME = b_TIME;
+		B_FLOG = b_FLOG;
+	}
+
+	public Notice(int b_NO, String b_TITLE, String b_TEXT, String uSER_ID) {
+		super();
+		B_NO = b_NO;
+		B_TITLE = b_TITLE;
+		B_TEXT = b_TEXT;
+		USER_ID = uSER_ID;
+	}
+
+	public Notice(int b_NO, String b_TITLE, String b_TEXT) {
+		super();
+		B_NO = b_NO;
+		B_TITLE = b_TITLE;
+		B_TEXT = b_TEXT;
+	}
 
 	public Notice(int b_NO, int b_TYPE, String b_TITLE, String b_TEXT, String uSER_ID, int b_COUNT, Date b_TIME) {
 		super();

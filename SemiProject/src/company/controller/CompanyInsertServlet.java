@@ -70,7 +70,7 @@ public class CompanyInsertServlet extends HttpServlet {
 		
 		
 		if (companyResult > 0) {
-			request.getRequestDispatcher("views/common/menubar.jsp").forward(request, response);
+			request.getRequestDispatcher("views/common/mainView.jsp").forward(request, response);
 		}else {
 			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
 			request.setAttribute("msg", "실패 했습니다.");

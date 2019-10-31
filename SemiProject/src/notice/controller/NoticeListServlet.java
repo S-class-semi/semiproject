@@ -32,7 +32,11 @@ public class NoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	
 		ArrayList<Notice> arr = new NoticeService().selectList();
+		
+		System.out.println(arr);
 		RequestDispatcher view = null;
 		
 		if(arr != null) {	//값이 제대로 넘어 왔다면

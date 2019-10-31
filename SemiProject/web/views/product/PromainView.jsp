@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
 * {box-sizing: border-box
 body {font-family: Verdana, sans-serif; margin:0}
@@ -110,38 +111,32 @@ img {vertical-align: middle;}
 
 <div class="mySlides fade">
   <div class="numbertext">1 / 6</div>
-  <img src="img1.jpg" style="width:100%">
-  <div class="text">Caption Text</div>
+  <img src="<%=request.getContextPath()%>/images/maining1.jpeg">
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">2 / 6</div>
-  <img src="img2.jpg" style="width:100%">
-  <div class="text">Caption Two</div>
+  <img src="<%=request.getContextPath()%>/images/maining2.jpeg"> 
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">3 / 6</div>
-  <img src="img3.jpg" style="width:100%">
-  <div class="text">Caption Three</div>
+  <img src="<%=request.getContextPath()%>/images/maining3.jpeg">
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">4 / 6</div>
-  <img src="img4.jpg" style="width:100%">
-  <div class="text">Caption Three</div>
+  <img src="<%=request.getContextPath()%>/images/maining4.jpeg">
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">5 / 6</div>
-  <img src="img5.jpg" style="width:100%">
-  <div class="text">Caption Three</div>
+  <img src="<%=request.getContextPath()%>/images/maining5.jpeg">
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">6 / 6</div>
-  <img src="img6.jpg" style="width:100%">
-  <div class="text">Caption Three</div>
+  <img src="<%=request.getContextPath()%>/images/maining6.jpeg">
 </div>
 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 <a class="next" onclick="plusSlides(1)">&#10095;</a>

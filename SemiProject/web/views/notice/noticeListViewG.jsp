@@ -3,7 +3,6 @@
     
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("arr");
-	
 %>
 <!DOCTYPE html>
 <html>
@@ -12,6 +11,15 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <style>
+
+#centerbody {
+	display: inline-block;
+	position: relative;
+	width: 85%;
+	height: 100%;
+	border: 1px solid red;
+	margin-left: 250px;
+}
 	.outer{
 		width:800px;
 		height:600px;
@@ -46,7 +54,9 @@
 </head>
 <body>
 <%@ include file = "/views/company/companyMenubar.jsp" %> 
-	<div class="outer">
+
+
+	<div id="centerbody">
 		<br>
 		
 		<h2 align="center">공지사항</h2>
@@ -56,9 +66,9 @@
 			<table align="center" id="listArea">
 				<tr>
 					<th>No.</th>
-					<th width="300px">제목</th>
-					<th>조회수</th>
-					<th width="100px">작성일</th>
+					<th width="500px">제목</th>
+					<th width="100px">작성자</th>
+					<th width="200px">작성일</th>
 				</tr>
 			 	 <%if(list.isEmpty()){ %>
 					<tr>
@@ -67,10 +77,9 @@
 				<%}else{ %>
 					<%for(Notice no : list){ %>
 					<tr>
-						
 						<td><%= no.getB_NO() %></td>
-						<td style="text-align:left"><%= no.getB_TITLE() %></td>
-						<td><%= no.getB_COUNT() %></td>
+						<td style="text-align:left;"><%= no.getB_TITLE() %></td>
+						<td><%= no.getUSER_ID() %></td>
 						<td><%= no.getB_TIME() %></td>
 					</tr>
 					<%} %>
@@ -88,18 +97,27 @@
 			</select>
 			<input type="search">
 			<button type="submit">검색하기</button>
-			<button onclick="location.href='views/notice/noticeInsertForm.jsp'">작성하기</button>
+			<button type="button" onclick="noticeinsertView()">작성하기</button>
 		</form>
 		</div>
 	</div>
 	
 	<script>
+	function noticeinsertView(){
+		location.href = "<%=request.getContextPath()%>/views/notice/noticeInsertForm.jsp";
+	}
 	$(function(){
-		$("#listArea td").click(function(){
-			var num = $(this).parent().children().eq(0).text();	
-			
-			location.href="<%=request.getContextPath()%>/detail.no?no="+num;
-		});
+			$("#listArea td").click(function(){
+				var name = $(this).parent().children().eq(2).text();
+				var no = $(this).parent().children().eq(0).text();
+				var info = name +"/" + no;
+				if(name==[]){
+					
+				}else{
+					location.href = "<%=request.getContextPath()%>/detail.ng?info="+info;
+				}
+					
+		 		});
 	});
 	</script>
 		

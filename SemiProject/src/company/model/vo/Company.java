@@ -24,6 +24,22 @@ public class Company implements Serializable{
 	
 
 
+	public Company(String userid, String c_name, String c_add, String c_phon, String c_manager, String c_contact,
+			String c_email) {
+		super();
+		this.userid = userid;
+		this.c_name = c_name;
+		this.c_add = c_add;
+		this.c_phon = c_phon;
+		this.c_manager = c_manager;
+		this.c_contact = c_contact;
+		this.c_email = c_email;
+	}
+
+
+
+
+
 	public Company() {
 		super();
 	}
@@ -55,6 +71,10 @@ public class Company implements Serializable{
 		this.c_email = c_email;
 		this.c_flog = c_flog;
 	}
+
+
+
+
 
 
 

@@ -23,7 +23,7 @@
 	position: relative;
 	width: 85%;
 	height: 100%;
-	border: 1px solid black;
+
 	margin-left: 250px;
 }
 </style>
@@ -52,26 +52,24 @@
 				</tr>
 				<tr>
 					<td><label> 회사연락처 : </label></td>
-					<td><input type="text" name="c_phone" id="c_phone" value="<%=c_info.getC_phon()%>">
-					<td><div id="c_phoneCheck">변경된 값이 없습니다.</div></td>
+					<td><input type="text" name="c_phone" id="c_phone" value="<%=c_info.getC_phon()%>"><div id="c_phoneCheck">변경된 값이 없습니다.</div>
+					
 
 
 				</tr>
 				<tr>
 					<td><label> 담당자 : </label></td>
-					<td><input type="text" name="c_manager" id="c_manager1" value="<%=c_info.getC_manager()%>"></td>
-					<td><div id="c_managerCheck">변경된 값이 없습니다.</div></td>
+					<td><input type="text" name="c_manager" id="c_manager1" value="<%=c_info.getC_manager()%>"><div id="c_managerCheck">변경된 값이 없습니다.</div></td>
 				</tr>
 				<tr>
 					<td><label> 담당자 연락처 : </label></td>
-					<td><input type="text" name="c_contact" id="c_contact1" value="<%=c_info.getC_contact()%>"></td>
-					<td><div id="c_contactCheck">변경된 값이 없습니다.</div></td>
+					<td><input type="text" name="c_contact" id="c_contact1" value="<%=c_info.getC_contact()%>"><div id="c_contactCheck">변경된 값이 없습니다.</div></td>
+					
 				</tr>
 				<tr>
 					<td><label> 담당자 이메일 : </label></td>
-					<td><input type="text" name="c_email" id="c_eamil1" value="<%=c_info.getC_email()%>">
-					<td><div id="c_emailCheck"></div>변경된값이 없습니다.</td>
-					</td>
+					<td><input type="text" name="c_email" id="c_eamil1" value="<%=c_info.getC_email()%>"><div id="c_emailCheck">변경된값이 없습니다.</div></td>
+				
 
 				</tr>
 				<tr>

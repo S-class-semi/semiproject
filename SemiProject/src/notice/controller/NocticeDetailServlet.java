@@ -32,8 +32,17 @@ public class NocticeDetailServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		int nno =Integer.valueOf(request.getParameter("no"));
-		Notice notice=new NoticeService().selectNotice(nno);
+		
+		String info = request.getParameter("info");
+		String sub[] = info.split("/");
+		int nno =Integer.valueOf(sub[1]);
+		String c_name = sub[0];
+		
+		System.out.println(nno);
+		System.out.println(c_name);
+		
+		Notice notice=new NoticeService().selectNotice(nno,c_name);
+		System.out.println(notice);
 		
 		RequestDispatcher view = null;
 		if(notice!=null) {

@@ -790,6 +790,41 @@ public class ProductDao {
 		
 		return  CList;
 	}
+	public ProductImgFile selecttodayimg(Connection conn, String imgnum) {
+		PreparedStatement pstmt = null;
+		ResultSet rs =null;
+		
+		String query = prop.getProperty("selecttodayimg");
+		ProductImgFile img = null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			
+			pstmt.setString(1, imgnum);
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+			img = 	new ProductImgFile(rs.getString("C_NAME"),
+						rs.getString("P_CODE"),
+						rs.getString("PRO_CODE"),
+						rs.getString("ORIGIN_NAME"),
+						rs.getString("CHANGE_NAME"),
+						rs.getString("FILE_PATH"),
+						rs.getDate("UPLOAD_DATE"),
+						rs.getInt("FILE_LEVEL"),
+						rs.getString("STATUS"));	
+			}
+			 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		
+		return img;
+	}
 	
 
 	

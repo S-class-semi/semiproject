@@ -39,6 +39,7 @@ public class ProdudctDetailServlet extends HttpServlet {
 		String p_code = p_infomaction[0];
 		String c_name = p_infomaction[1];
 		
+		
 		//상품 정보 값
 		ProductInfo prodcutinfo = new ProductService().selectProduct(p_code);
 		

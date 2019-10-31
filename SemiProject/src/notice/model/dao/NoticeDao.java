@@ -32,19 +32,20 @@ public class NoticeDao {
 		}
 	}
 
-	public ArrayList<Notice> selectList(Connection conn) {
+	public ArrayList<Notice> selectNoticeList(Connection conn,String c_name) {
 		
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-
 		ArrayList<Notice> arr = null;
 
-		String query = prop.getProperty("selectList");
+		String query = prop.getProperty("selectNoiceList");
 
 		try {
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(query);
-
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, c_name);
+			
+			rs = pstmt.executeQuery();
+			
 			arr = new ArrayList<Notice>();	
 
 
@@ -64,7 +65,7 @@ public class NoticeDao {
 			e.printStackTrace();
 		} finally {
 			close(rs);
-			close(stmt);
+			close(pstmt);
 		}
 
 		return arr;
@@ -78,14 +79,14 @@ public class NoticeDao {
 		String query = prop.getProperty("insertNotice");
 
 		try { 
+			
 		pstmt = conn.prepareStatement(query); 
 		pstmt.setString(1,n.getB_TITLE());
 		pstmt.setString(2,n.getB_TEXT());
 		pstmt.setString(3,n.getUSER_ID());
 		
-
 		result = pstmt.executeUpdate();
-
+		
 		} catch (SQLException e) { 
 			e.printStackTrace(); 
 		}finally { 
@@ -94,7 +95,7 @@ public class NoticeDao {
 		return result;
 		}
 
-	public Notice selectNotice(Connection conn, int nno) {
+	public Notice selectNotice(Connection conn, int nno, String c_name) {
 		PreparedStatement pstmt =null;
 		ResultSet rs =null;
 		Notice notice =null;
@@ -102,6 +103,7 @@ public class NoticeDao {
 		try {
 			pstmt=conn.prepareStatement(query);
 			pstmt.setInt(1, nno);
+			pstmt.setString(2, c_name);
 			rs =pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -135,6 +137,7 @@ public class NoticeDao {
 			pstmt.setString(1,  n.getB_TITLE());
 			pstmt.setString(2,  n.getB_TEXT());
 			pstmt.setInt(3,  n.getB_NO());
+			pstmt.setString(4, n.getUSER_ID());
 
 			
 			result = pstmt.executeUpdate();
@@ -148,7 +151,8 @@ public class NoticeDao {
 		return result;
 	}
 
-	public int deleteNotice(Connection conn, int nno) {
+	
+	public int deleteNotice(Connection conn, int nno, String c_name) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
@@ -157,7 +161,7 @@ public class NoticeDao {
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setInt(1, nno);
-			
+			pstmt.setString(2, c_name);
 			
 			result = pstmt.executeUpdate();
 			
@@ -168,6 +172,41 @@ public class NoticeDao {
 		}
 
 		return result;
+	}
+
+	public ArrayList<Notice> selectNoticeList(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rs= null;
+		ArrayList<Notice> arr = new ArrayList<Notice>();
+		String query = prop.getProperty("NoticeAllList");
+		
+		try {
+			arr = new ArrayList<Notice>();
+			pstmt = conn.prepareStatement(query);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Notice no = new Notice(rs.getInt("B_NO"),
+						rs.getInt("B_TYPE"),
+						rs.getString("B_TITLE"),
+						rs.getString("B_TEXT"),
+						rs.getString("USER_ID"),
+						rs.getDate("B_TIME"),
+						rs.getString("B_FLOG")
+						);
+				
+				arr.add(no);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+	
+		return arr;
 	}
 	
 

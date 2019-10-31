@@ -44,10 +44,10 @@ public class ProductDeleteServler extends HttpServlet {
 		String p_code = sub[0];
 		String c_name = sub[1];
 		int result1 = new ProductService().deleteProduct(p_code);
-		int result2 = new ProductService().deleteImgFile(p_code,c_name);
 		
 		
-		if(result1 >0 && result2>0) {
+		if(result1 >0 ) {
+			int result2 = new ProductService().deleteImgFile(p_code,c_name);
 			RequestDispatcher view = request.getRequestDispatcher("views/company/companyMenubar.jsp");
 			view.forward(request, response);
 		}

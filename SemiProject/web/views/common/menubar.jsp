@@ -465,6 +465,9 @@ margin-top: 30px;
       function loginViewPage(){
          location.href= '<%= request.getContextPath() %>/views/member/memberLoginView.jsp';
       }
+      function goBoard() {
+    	  location.href = '<%= request.getContextPath() %>/list.bo';
+	}
 
    </script>
    

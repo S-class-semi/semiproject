@@ -32,27 +32,18 @@ public class BoardListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
-		RequestDispatcher view = null;
 
-		
+		RequestDispatcher view = null;
 		ArrayList<Board> list = new BoardService().selectList();
-		System.out.println(list);
-		
+		System.out.println(list);		
 		if(list !=null) {
 			view = request.getRequestDispatcher("views/board/boardListView.jsp");
-			request.setAttribute("list", list);	
-			
+			request.setAttribute("list", list);		
 		}else {
 			view = request.getRequestDispatcher("/views/common/errorPage.jsp");
 			request.setAttribute("msg", "게시판 리스트 조회 실패!");
-		}
-		
+		}		
 		view.forward(request, response);
-	
-		//boardListView.jsp 페이지 만들러 ㄱㄱ씽
 	}
 
 	/**

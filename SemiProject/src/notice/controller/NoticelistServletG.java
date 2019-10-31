@@ -9,7 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import company.model.vo.Company;
 import notice.model.service.NoticeService;
 import notice.model.vo.Notice;
 
@@ -33,7 +35,11 @@ public class NoticelistServletG extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		ArrayList<Notice> arr = new NoticeService().selectList();
+		HttpSession user = request.getSession();
+		Company cominfo = (Company) user.getAttribute("companyinfo");
+		String c_name = cominfo.getC_name();
+		
+		ArrayList<Notice> arr = new NoticeService().selectNoticeList(c_name);
 		RequestDispatcher view = null;
 		
 		if(arr != null) {	//값이 제대로 넘어 왔다면

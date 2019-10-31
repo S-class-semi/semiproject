@@ -53,7 +53,6 @@
 		<br>
 		
 		<h2 align="center">공지사항</h2>
-		
 		<div class="tableArea">
 			<!-- 조회가 잘 되어 출력되는지 확인 -->
 			<table align="center" id="listArea">
@@ -61,6 +60,7 @@
 					<th>No.</th>
 					<th width="300px">제목</th>
 					<th>조회수</th>
+					<th>작성자</th>
 					<th width="100px">작성일</th>
 				</tr>
 			 	 <%if(list.isEmpty()){ %>
@@ -73,6 +73,7 @@
 						<td><%= no.getB_NO() %></td>
 						<td style="text-align:left"><%= no.getB_TITLE() %></td>
 						<td><%= no.getB_COUNT() %></td>
+						<td><%= no.getUSER_ID() %></td>
 						<td><%= no.getB_TIME() %></td>
 					</tr>
 					<%} %>
@@ -99,27 +100,22 @@
 		 
 		</div>
 	</div>
-	
+	<hr id="footerhr" >
+<%@ include file = "/views/common/footer.jsp" %>
 	<script>
 	$(function(){
 		$("#listArea td").click(function(){
-			var num = $(this).parent().children().eq(0).text();			
-			location.href="<%=request.getContextPath()%>/detail.no?no="+num;
+			var name = $(this).parent().children().eq(3).text();
+			var no = $(this).parent().children().eq(0).text();
+			var info = name +"/" + no;
+			if(name==[]){
+				
+			}else{
+			location.href="<%=request.getContextPath()%>/detail.no?info="+info;
+			}
 		});
 	});
-	
-
 	</script>
-		
-	
-	
-	
-<%-- <%{ %>
-			<button onclick="location.href='views/notice/noticeInsertForm.jsp'">작성하기</button>
-			<%} %> --%>
-	
-	
-	
-	
+
 </body>
 </html>

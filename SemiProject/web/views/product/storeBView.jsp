@@ -86,6 +86,11 @@ font-family: 'Black Han Sans';
 text-align: right;
 margin-left: 150px;
 }
+#category{
+display: inline-block;
+margin-top: 50px;
+margin-left: 300px;
+}
 
 #categorymenu{
 display:inline-block;
@@ -108,11 +113,6 @@ text-align:center;
 	border-bottom-right-radius: 10px;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-}
-#category{
-display: inline-block;
-margin-top: 50px;
-margin-left: 300px;
 }
 
 #categorymenu ul li:hover{

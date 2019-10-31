@@ -13,10 +13,50 @@ public class Payment implements Serializable{
 	private String user_id;
 	private String o_name;
 	private String o_phone;
+	private String p_name;
+	private String p_code;
 	private String Address;
 	private String box;
 	private String email;
 	private String payselect;
+	
+	
+	public Payment(String user_id, String o_name, String o_phone, String p_name, String p_code, String address,
+			String box, String email, String payselect, String totalprice) {
+		super();
+		this.user_id = user_id;
+		this.o_name = o_name;
+		this.o_phone = o_phone;
+		this.p_name = p_name;
+		this.p_code = p_code;
+		Address = address;
+		this.box = box;
+		this.email = email;
+		this.payselect = payselect;
+		this.totalprice = totalprice;
+	}
+
+	public Payment(String user_id, String o_name, String o_phone, String p_name, String address, String box,
+			String email, String payselect, String totalprice) {
+		super();
+		this.user_id = user_id;
+		this.o_name = o_name;
+		this.o_phone = o_phone;
+		this.p_name = p_name;
+		Address = address;
+		this.box = box;
+		this.email = email;
+		this.payselect = payselect;
+		this.totalprice = totalprice;
+	}
+	
+	public String getP_name() {
+		return p_name;
+	}
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+
 	private String totalprice;
 	public Payment() {
 		super();
@@ -84,13 +124,22 @@ public class Payment implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
+	public String getP_code() {
+		return p_code;
+	}
+
+	public void setP_code(String p_code) {
+		this.p_code = p_code;
+	}
+
 	@Override
 	public String toString() {
-		return "Payment [user_id=" + user_id + ", o_name=" + o_name + ", o_phone=" + o_phone + ", Address=" + Address
-				+ ", box=" + box + ", email=" + email + ", payselect=" + payselect + ", totalprice=" + totalprice + "]";
+		return "Payment [user_id=" + user_id + ", o_name=" + o_name + ", o_phone=" + o_phone + ", p_name=" + p_name
+				+ ", p_code=" + p_code + ", Address=" + Address + ", box=" + box + ", email=" + email + ", payselect="
+				+ payselect + ", totalprice=" + totalprice + "]";
 	}
-	
-	
+
 	
 	 
 	 

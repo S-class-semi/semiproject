@@ -1,15 +1,9 @@
-<<<<<<< HEAD
+/board/
+/common/
+/company/
+/filter/
+/member/
 /notice/
 /payment/
 /product/
-/sql/
-/board/
-/filter/
 /wrapper/
-/member/
-=======
-/board/
-/member/
-/product/
-/company/
->>>>>>> branch 'Company' of https://github.com/S-class-semi/semiproject.git

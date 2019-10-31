@@ -137,10 +137,15 @@ input[type=number]::-webkit-inner-spin-button {
    		<div id = "titleArea">
    		<img id = "titleImg" src ="<%=request.getContextPath() %>/images/productimg/<%=titleImg.getChange_name() %>" width="150px" height="150px">
    		<div id = "titleproInfo">
-   			<div class="subinfo" id ="c_namesub"><label>회사명 : <%=productinfo.getC_name() %></label><input type ="hidden" name ="c_namevalue" value ="<%=productinfo.getC_name() %>" readonly><br></div>
-   			<div class="subinfo" id ="p_namesub"><label>상품명 : <%=productinfo.getP_name() %></label><input type = "hidden" name ="p_namevalue" value ="<%=productinfo.getP_name() %>" readonly><br></div>
-   			<div class="subinfo" id ="p_pricesub"><label>상품가격 : <%=productinfo.getP_price() %></label><input type = "hidden" name ="p_pricevalue" value ="<%=productinfo.getP_price() %>" readonly><br></div>
-   			<div class="subinfo" id ="c_countsub"><label>갯수 : <%=int_count%> </label><input type="hidden" id="c_count" name="c_count" value="<%=int_count%>"></div>
+   			<div class="subinfo" id ="c_namesub"><label>회사명 : <%=productinfo.getC_name() %></label>
+   			<input type ="hidden" name ="c_namevalue" value ="<%=productinfo.getC_name() %>" readonly><br></div>
+   			<div class="subinfo" id ="p_namesub"><label>상품명 : <%=productinfo.getP_name() %></label>
+   			<input type = "hidden" name ="p_namevalue" value ="<%=productinfo.getP_name() %>" readonly><br></div>
+   			<div class="subinfo" id ="p_pricesub"><label>상품가격 : <%=productinfo.getP_price() %></label>
+   			<input type = "hidden" name ="p_pricevalue" value ="<%=productinfo.getP_price() %>" readonly><br></div>
+   			<div class="subinfo" id ="c_countsub"><label>갯수 : <%=int_count%> </label>
+   			<input type="hidden" id="c_count" name="c_count" value="<%=int_count%>">
+   			<input type = "hidden" name ="p_codevalue" value ="<%=productinfo.getP_code() %>" readonly></div>
    		</div>
    		</div>
    		</div>

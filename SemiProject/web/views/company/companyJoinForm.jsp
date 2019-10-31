@@ -14,7 +14,7 @@
 <%@ include file = "/views/common/menubar.jsp" %> 
 	<div>
 		<form action="<%=request.getContextPath() %>/insert.com" method="post" onsubmit ="return ifCheck()">
-			<table border="1">
+			<table >
 				<tr>
 				<td><label>사용자 ID : </label></td>
 				<td><label name = "userid"><%=userid %></label>
@@ -225,6 +225,24 @@ function on_click(){
 			c_phoneCK = true;	
 		}
 	});
+	/* 담당자번호 */
+	 c_contactCK = false;
+	$("#c_contact").keyup(function(){
+		var c_contact = $("#c_contact").val();
+		var c_conCheck = /^01(?:0|1|[6-9])[-]?(?:\d{3}|\d{4})[-]?\d{4}$/;
+		
+		if(c_contact == " "){
+			$("#c_contactCheck").html("공백 입력 불가");
+			$("#c_contact").val('');
+			c_contactCK = false;
+		}else if(!c_conCheck.test(c_contact)){
+			$("#c_contactCheck").html("ex) 010-123-4567/010-1234-9900");
+			c_contactCK = false;
+		}else{
+			$("#c_contactCheck").html("담당자 휴대폰 확인");
+			c_contactCK = true;	
+		}
+	});
 	/* 담당자이름 */
 	c_managerCK = false;
 		$("#c_manager").keyup(function(){
@@ -244,24 +262,7 @@ function on_click(){
 			}
 		});
 	
-	/* 담당자번호 */
-	 c_contactCK = false;
-	$("#c_contact").keyup(function(){
-		var c_contact = $("#c_contact").val();
-		var c_conCheck = /^01(?:0|1|[6-9])[-]?(?:\d{3}|\d{4})[-]?\d{4}$/;
-		
-		if(c_contact == " "){
-			$("#c_contactCheck").html("공백 입력 불가");
-			$("#c_contact").val('');
-			c_contactCK = false;
-		}else if(!c_conCheck.test(c_contact)){
-			$("#c_contactCheck").html("ex) 010-123-4567/010-1234-9900");
-			c_contactCK = false;
-		}else{
-			$("#c_contactCheck").html("담당자 휴대폰 확인");
-			c_contactCK = true;	
-		}
-	});
+
 	
 
 	/* 담당자이메일 */

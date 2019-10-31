@@ -43,27 +43,26 @@ tr{
 </head>
 <body>
 <%@include file="../common/menubar.jsp" %>
- <div class="outer">
-<br>
-<h2 align="center">공지사항 상세보기</h2>
-<div class="tableArea">
-<table>
-					<tr>
-						
-						<td><%= n.getB_TITLE() %></td>
-						<td style="text-align:right"><%= n.getB_TIME() %></td>
-					</tr>
-					
-					<tr>
-						<td colspan="4">
-							<textarea name="content" cols="60" rows="15" style="resize:none" readonly><%= n.getB_TEXT() %></textarea>
-						</td>
-					</tr>
-				</table>
-				<br>
+	<div class="outer">
+		<br>
+		<h2 align="center">공지사항 상세보기</h2>
+		<div class="tableArea">
+			<table>
+				<tr>
 
-</div>
-</div> 
+					<td><%=n.getB_TITLE()%></td>
+					<td style="text-align: right"><%=n.getB_TIME()%></td>
+				</tr>
+				<tr>
+					<td colspan="4"><textarea name="content" cols="60" rows="15"
+							style="resize: none" readonly><%=n.getB_TEXT()%></textarea></td>
+				</tr>
+			</table>
+			<br>
 
+		</div>
+	</div>
+	<hr id="footerhr" >
+<%@ include file = "/views/common/footer.jsp" %>
 </body>
 </html>

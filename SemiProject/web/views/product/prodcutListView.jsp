@@ -21,7 +21,6 @@
 	position: relative;
 	width: 85%;
 	height: 100%;
-	border: 1px solid red;
 	margin-left: 250px;
 }
 
@@ -51,12 +50,12 @@
 	<div class = "tableArea">
 		<table align = "center" id = "listArea">
 			<tr>
-				<th width = "100px">번호</th>
-				<th width = "100px">상품코드</th>
-				<th width = "100px">상품카테고리</th>
-				<th width = "100px">상품명</th>
-				<th width = "100px">상품가격</th>
-				<th width = "100px">회사명</th>
+				<th width = "200px">번호</th>
+				<th width = "200px">상품코드</th>
+				<th width = "200px">상품<br>카테고리</th>
+				<th width = "700px">상품명</th>
+				<th width = "200px">상품가격</th>
+				<th width = "200px">회사명</th>
 			</tr>
 			<% if(pList.isEmpty()){%>
 			<tr>
@@ -78,7 +77,7 @@
 			<%} %>
 		</table>
 	</div>
-		<!-- 페이징 처리 시작 -->
+<%-- 		<!-- 페이징 처리 시작 -->
 		<div class = "pagingArea" align= "center">
 			<!-- 맨처음으로 (<<) -->
 			<button onclick = "location.href='<%=request.getContextPath() %>/list.bo?currentPage=1'"> << </button>
@@ -108,7 +107,7 @@
 			
 			<!-- 맨 끝으로(>>) -->
 			<button onclick="location.href='<%=request.getContextPath() %>/list.bo?currentPage=<%=maxPage %>'"> >> </button>
-		</div>
+		</div> --%>
 		
 		<!-- 공지사항 때와 마찬가지로 검색 부분이 있다. 기능 구현은 생략 -->
 		<div class = "searchArea" align="center">

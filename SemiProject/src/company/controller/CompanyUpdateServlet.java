@@ -36,7 +36,7 @@ public class CompanyUpdateServlet extends HttpServlet {
 		Company cominfo = (Company) user.getAttribute("companyinfo");
 		
 		String c_name = cominfo.getC_name();
-		
+		String c_flg = cominfo.getC_flog();
 		String postcode = request.getParameter("postcode");
 		String roadAddress = request.getParameter("roadAddress");
 		String jibunAddress = request.getParameter("jibunAddress");
@@ -49,7 +49,8 @@ public class CompanyUpdateServlet extends HttpServlet {
 		String c_contact = request.getParameter("c_contact");
 		String c_email = request.getParameter("c_email");
 		System.out.println(c_name);
-		Company company = new Company(c_name,Address,c_phone,c_manager,c_contact,c_email);
+		
+		Company company = new Company(c_name,Address,c_phone,c_manager,c_contact,c_email,c_flg);
 		
 		int result = new CompanyService().companyUpdate(company);
 		

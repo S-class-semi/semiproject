@@ -14,15 +14,14 @@
 <head>
 <meta charset="UTF-8">
 <style>
-	.outer{
-		width:800px;
-		height:500px;
-		background:black;
-		color:white;
-		margin-left:auto;
-		margin-right:auto;
-		margin-top:50px;
-	}
+#centerbody {
+	display: inline-block;
+	position: relative;
+	width: 85%;
+	height: 100%;
+	border: 1px solid red;
+	margin-left: 250px;
+}
 	table{
 		border:1px solid white;
 	}
@@ -37,22 +36,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@include file="../common/menubar.jsp" %>
-	<div class="outer">
+<%@ include file = "/views/company/companyMenubar.jsp" %> 
+	<div id="centerbody">
 		<br>
-		<h2 align="center">공지사항 상세보기</h2>
+		<h2 align="center">공지사항 수정하기</h2>
 		<div class="tableArea">
 			<form id="updateForm" method="post">	<!-- table부터 아래 버튼까지 포함하는 form태그 -->
 			<table>
 					<tr>
 						<td>제목</td>
-						
 						<td colspan="3"><input type="text" size="50" name="title" value="<%= n.getB_TITLE() %>"></td>
-						
-<!-- 					servlet에서 이 페이지의 정보중 필요로 하는 것이 있다면 name에 담아서 넘기는데
-						화면에 보여줄 필요가 없다면 hidden 타입 input태그에 실어 보내자 -->
 						<input type="hidden" name="nno" value="<%=n.getB_NO() %>">
-						
+						<input tpye="hidden" name="c_name" value="<%=n.getUSER_ID() %>">
 					</tr>
 					<tr>
 						<td>작성일</td>
@@ -69,13 +64,9 @@
 				</table>
 				<br>
 				<div align="center">
-					<button type="submit" onclick="update()">수정하기</button>
-					
-					<button onclick="nDelete()">삭제하기</button>	 		
-					
+					<button type="submit" onclick="update()">수정완료</button>
+					<button type="submit" onclick="nDelete()">삭제하기</button>	 		
 				</div>
-				<!-- NoticeUpdateViewServlet 만들러 ㄱㄱ씽! -->
-				
 				</form>
 				<script>
 					// 공지사항 수정하기 작업 먼저하기

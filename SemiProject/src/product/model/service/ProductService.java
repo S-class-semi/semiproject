@@ -296,6 +296,16 @@ public class ProductService {
 		return imgList;
 	}
 
+	public ProductImgFile selecttodayimg(String imgnum) {
+		Connection conn = getConnection();
+		
+		ProductImgFile img = new ProductDao().selecttodayimg(conn ,imgnum);
+		
+		close(conn);
+		
+		return img;
+	}
+
 
 
 

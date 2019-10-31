@@ -223,7 +223,7 @@ body {
                </h3>
                <ul>
                   <li onclick = "QnaView()">1:1 QnA 확인</li>
-                  <li>공지사항 등록</li>
+                  <li onclick = "Noticelist()">공지사항 등록</li>
                   <li>블랙컨슈머</li>
                </ul>
             </li>
@@ -269,6 +269,9 @@ body {
       function logout(){
          location.href = '<%= request.getContextPath() %>/logout.me';
       }
+      function Noticelist(){
+	<%-- 		location.href = '<%= request.getContextPath() %>/list.ng'; --%>
+	}
    </script>
    
                

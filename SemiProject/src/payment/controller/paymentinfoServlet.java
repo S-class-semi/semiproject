@@ -39,6 +39,8 @@ public class paymentinfoServlet extends HttpServlet {
 		String userid = loginUser.getUserId();
 		String o_name = request.getParameter("o_name");
 		String o_phone = request.getParameter("o_phone");
+		String p_name = request.getParameter("p_namevalue");
+		String p_code = request.getParameter("p_codevalue");
 		String postcode = request.getParameter("postcode");
 		String roadAddress = request.getParameter("roadAddress");
 		String jibunAddress = request.getParameter("jibunAddress");
@@ -54,7 +56,7 @@ public class paymentinfoServlet extends HttpServlet {
 		String payselect = request.getParameter("paychoose");
 		String totalprice = request.getParameter("totalprice");
 		
-		Payment paymentinfo = new Payment(userid,o_name,o_phone,Address,pPlz,email,payselect,totalprice);
+		Payment paymentinfo = new Payment(userid,o_name,o_phone,p_name,p_code,Address,pPlz,email,payselect,totalprice);
 		System.out.println(paymentinfo);
 		request.setAttribute("paymentinfo", paymentinfo);
 		request.getRequestDispatcher("views/payment/PaymentTest.jsp").forward(request, response);

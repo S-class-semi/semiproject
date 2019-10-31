@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import company.model.vo.Company;
 import member.model.vo.Member;
 import notice.model.service.NoticeService;
 import notice.model.vo.Notice;
@@ -38,23 +39,23 @@ public class InsertNoticeSelvlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		
-		HttpSession session= request.getSession();
-		Member loginUser =(Member)session.getAttribute("loginUser");
+		HttpSession user = request.getSession();
+		Company cominfo = (Company) user.getAttribute("companyinfo");
+		
 		String title =request.getParameter("title");
 		String text =request.getParameter("content");
 		
 		
 
 		
-		String userId= loginUser.getUserId();
+		String c_name= cominfo.getC_name();
 		
-		Notice n = new Notice(userId,title,text);
-		
+		Notice n = new Notice(c_name,title,text);
 		
 		int result = new NoticeService().insertNotice(n);
-		
+		System.out.println(result);
 		if(result>0) {
-			response.sendRedirect("list.no");
+			response.sendRedirect("list.ng");
 		}else {
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			request.setAttribute("msg", "공지사항 등록 실패!");

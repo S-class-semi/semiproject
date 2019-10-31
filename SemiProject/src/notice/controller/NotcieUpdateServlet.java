@@ -8,7 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import company.model.vo.Company;
 import notice.model.service.NoticeService;
 import notice.model.vo.Notice;
 
@@ -32,25 +34,29 @@ public class NotcieUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
+		
+		HttpSession user = request.getSession();
+		Company cominfo = (Company) user.getAttribute("companyinfo");
+		String c_name = cominfo.getC_name();
+		
 		String title =request.getParameter("title");
 		String content = request.getParameter("content");
 		int nno = Integer.parseInt(request.getParameter("nno"));
-		Notice n =new Notice();
-		n.setB_TITLE(title);
-		n.setB_TEXT(content);
-		n.setB_NO(nno);
+		
+		
+		Notice n =new Notice(nno,title,content,c_name);
+		
 		int result =new NoticeService().updateNotice(n);
-		
-		RequestDispatcher view = null;
-		if(result > 0) {
-			view = request.getRequestDispatcher("views/notice/noticeDetailView.jsp");
-			request.setAttribute("notice", new NoticeService().selectNotice(nno));
+		System.out.println(result);
+	
+		RequestDispatcher view =null;
+		if(result>0) {
+			view = request.getRequestDispatcher("views/company/companyMenubar.jsp");
+			view.forward(request, response);
 		}else {
-			view = request.getRequestDispatcher("views/common/errorPage.jsp");
-			request.setAttribute("msg", "공지사항 수정 실패");
+			
 		}
-		
-		view.forward(request, response);
+
 		
 		
 	}

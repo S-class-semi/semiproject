@@ -10,15 +10,14 @@
 
 <title>공지사항 상세</title>
  <style>
-	.outer{
-		width:1000px;
-		height:1000px;
-		background:white;
-		color:black;
-		margin-left:auto;
-		margin-right:auto;
-		margin-top:50px;
-	}
+#centerbody {
+	display: inline-block;
+	position: relative;
+	width: 85%;
+	height: 100%;
+	border: 1px solid red;
+	margin-left: 250px;
+}
 	input {
 	border-radius:5px;
   -webkit-appearance: none;
@@ -42,35 +41,27 @@ tr{
 </style> 
 </head>
 <body>
-<%@include file="../common/menubar.jsp" %>
- <div class="outer">
-<br>
-<h2 align="center">공지사항 상세보기</h2>
-<div class="tableArea">
-<table>
-					<tr>
-						
-						<td><%= n.getB_TITLE() %></td>
-						
-						
-						<td style="text-align:right"><%= n.getB_TIME() %></td>
-					</tr>
-					
-					<tr>
-						<td colspan="4">
-							<textarea name="content" cols="60" rows="15" style="resize:none" readonly><%= n.getB_TEXT() %></textarea>
-						</td>
-					</tr>
-				</table>
-				<br>
-		<div>
-				<%{ %>
-				<button type="submit" onclick="location.href='<%=request.getContextPath()%>/updateView.no?no=<%=n.getB_NO()%>'">수정하기</button>				
-				<%} %>
-				</div>
- 
-</div>
-</div> 
+
+<%@ include file = "/views/company/companyMenubar.jsp" %>
+	<div id="centerbody">
+		<br>
+		<h2 align="center">공지사항 상세보기</h2>
+		<div class="tableArea">
+			<table>
+				<tr>
+					<td><%=n.getB_TITLE()%></td>
+					<td style="text-align: right"><%=n.getB_TIME()%></td>
+				</tr>
+				<tr>
+					<td colspan="4"><textarea name="content" cols="60" rows="15" style="resize: none" readonly><%=n.getB_TEXT()%></textarea></td>
+				</tr>
+			</table>
+			<br>
+			<div>
+				<button type="submit" onclick="location.href='<%=request.getContextPath()%>/updateView.no?no=<%=n.getB_NO()%>'">수정하기</button>
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

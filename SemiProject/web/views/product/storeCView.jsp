@@ -169,6 +169,7 @@ height: 300px;
 	<%} %>
 <%} %>
 </div>
+<hr id="footerhr" >
 <%@ include file = "/views/common/footer.jsp" %>
 <script>
 //의자

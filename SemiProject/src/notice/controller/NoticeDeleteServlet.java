@@ -31,16 +31,21 @@ public class NoticeDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int nno = Integer.parseInt(request.getParameter("nno"));
+		String c_name = request.getParameter("c_name");
+		System.out.println(nno);
+		System.out.println(c_name);
 		
-		int result = new NoticeService().deleteNotice(nno);
+		int result = new NoticeService().deleteNotice(nno,c_name);
 		
-		if(result > 0) {
-			response.sendRedirect("list.no");
-		}else {
+	
+		  if(result > 0) {
+			response.sendRedirect("list.ng");
+		} else {
 			RequestDispatcher view = request.getRequestDispatcher("views/common/errorPage.jsp");
 			request.setAttribute("msg", "공지사항 삭제 실패!");
 			view.forward(request, response);
 		}
+		
 	}
 
 	/**
